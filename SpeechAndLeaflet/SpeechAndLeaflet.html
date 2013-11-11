@@ -4,9 +4,13 @@
     <meta charset="utf-8">
     <title>Speech Map</title>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-	<link rel="stylesheet" href="http://geo-arcgis.uni-muenster.de/iwgi/js/Minimap/Control.MiniMap.css" />
+    <link rel="stylesheet" href="http://geo-arcgis.uni-muenster.de/iwgi/js/Minimap/Control.MiniMap.css" />
+    <link rel="stylesheet" href="http://geo-arcgis.uni-muenster.de/iwgi/js/geosearch/l.geosearch.css" />	
+		
+	
+		
     <style>
     body {
         margin: 0;
@@ -19,115 +23,129 @@
         width: 100%;
     }
     </style>
+	
+	
+	
+	
+		
 </head>
 
 <body>
     <style>
-		#start_button {
-			position: absolute;
-			top: 50px;
-			right: 95px;
-		}
-		
-		#LayerOnStreet {
-			position: absolute;
-			top: 100px;
-			right: 95px;
-		}
-		
-		#LayerOffStreet {
-			position: absolute;
-			top: 150px;
-			right: 95px;
-		}
-		
-		#LayerOnPopStructure {
-			position: absolute;
-			top: 200px;
-			right: 95px;
-		}
-		
-		#LayerOffPopStructure {
-			position: absolute;
-			top: 250px;
-			right: 95px;
-		}
+                #start_button {
+                        position: absolute;
+                        top: 50px;
+                        right: 95px;
+                }
+                
+                #LayerOnStreet {
+                        position: absolute;
+                        top: 100px;
+                        right: 95px;
+                }
+                
+                #LayerOffStreet {
+                        position: absolute;
+                        top: 150px;
+                        right: 95px;
+                }
+                
+                #LayerOnPopStructure {
+                        position: absolute;
+                        top: 200px;
+                        right: 95px;
+                }
+                
+                #LayerOffPopStructure {
+                        position: absolute;
+                        top: 250px;
+                        right: 95px;
+                }
     </style>
-	
+        
     <div id="transcript"></div>
     <div id="interim"></div>
     <div id="map"></div>
 
-	
+        
     <div id="text">
         <button id="start_button" onclick="startButton(event)">
             Click to start speaking with the map!
         </button>
     </div>
-	
-	<!--street Layer-->
-	<div id="text">
+        
+        <!--street Layer-->
+        <div id="text">
         <button id="LayerOnStreet" onclick="streetArcGISServer.setMap(map);" class="btn success">
-		Click to turn the Layer On
+                Click to turn the Layer On
         </button>
     </div>
-	
-	<div id="text">
+        
+        <div id="text">
         <button id="LayeroffStreet" onclick="streetArcGISServer.setMap(null);" class="btn danger">
-		Click to turn the Layer Off
+                Click to turn the Layer Off
         </button>
     </div>
-	
-	<!--pop structure Layer-->
-	<div id="text">
+        
+        <!--pop structure Layer-->
+        <div id="text">
         <button id="LayerOnPopStructure" onclick="popstructureArcGISServer.setMap(map);" class="btn success">
-		Click to turn the Layer On
+                Click to turn the Layer On
         </button>
     </div>
-	
-	<div id="text">
+        
+        <div id="text">
         <button id="LayerOffPopStructure" onclick="popstructureArcGISServer.setMap(null);" class="btn danger">
-		Click to turn the Layer Off
+                Click to turn the Layer Off
         </button>
     </div>
 
 
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="http://geo-arcgis.uni-muenster.de/iwgi/js/lvector/lvector-custom.js"></script>    <!-- To use Vector Layers https://github.com/JasonSanford/leaflet-vector-layers -->
-	<script src="http://geo-arcgis.uni-muenster.de/iwgi/js/Minimap/Control.MiniMap.js"></script>	<!-- Minimap plugin-->
+    <script src="http://geo-arcgis.uni-muenster.de/iwgi/js/lvector/lvector-custom.js"></script> <!-- To use Vector Layers https://github.com/JasonSanford/leaflet-vector-layers -->
+    <script src="http://geo-arcgis.uni-muenster.de/iwgi/js/Minimap/Control.MiniMap.js"></script>        <!-- Minimap plugin-->
+	<script src="http://geo-arcgis.uni-muenster.de/iwgi/js/geosearch/l.control.geosearch.js"></script>   <!-- Geolocate plugin-->
+	<script src="http://geo-arcgis.uni-muenster.de/iwgi/js/geosearch/l.geosearch.provider.google.js"></script>	<!-- Geolocate plugin-->
+		
+
 
     <script>
     var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
     var map = L.map('map', {
-		center: [51.95442, 7.62709],
-		zoom: 13,
-		dragging: true,
-		touchZoom: true,
-		scrollWheelZoom: true,
-		doubleClickZoom: true,
-		boxZoom: true,
-		tap: true,
-		tapTolerance: 15,
-		trackResize: true,
-		worldCopyJump: false,
-		closePopupOnClick: true
-	});
-
-	
-	
+                center: [51.95442, 7.62709],
+                zoom: 13,
+                dragging: true,
+                touchZoom: true,
+                scrollWheelZoom: true,
+                doubleClickZoom: true,
+                boxZoom: true,
+                tap: true,
+                tapTolerance: 15,
+                trackResize: true,
+                worldCopyJump: false,
+                closePopupOnClick: true
+        });
+		
+		
+<!-- uncomment to add Search Bar-->		
+new L.Control.GeoSearch({
+    provider: new L.GeoSearch.Provider.Google()
+	}).addTo(map);
+        
+        
     var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
     }).addTo(map);
-	
+        
     var minimal = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/{styleId}/256/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
         styleId: 22677
     })
 
-	//can be controlled by buttons
+        //can be controlled by buttons
     var streetArcGISServer = new lvector.AGS({
         url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/4",
         fields: "*",
@@ -136,8 +154,8 @@
         popupTemplate: '<div class="iw-content"><h3>{STRASSE}</h3>PLZ:{PLZ}<br>Length: {LENGTH}m</div>',
         singlePopup: true
     });
-	
-	//can be controlled by buttons
+        
+        //can be controlled by buttons
     var popstructureArcGISServer = new lvector.AGS({
         url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/7",
         fields: "*",
@@ -154,16 +172,16 @@
     };
 
 
-	//New overviewmap
-	//Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
-	var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+        //New overviewmap
+        //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+        var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
     })
     var miniMap = new L.Control.MiniMap(overviewMap, { toggleDisplay: true }).addTo(map);
-	
-	
-	//Baselayer controll
+        
+        
+        //Baselayer controll
     L.control.layers(baseLayers, null, {
         collapsed: true
     }).addTo(map);
@@ -189,8 +207,8 @@
             }
         }
 
-        console.log("interim:  " + interim_transcript);
-        console.log("final:    " + final_transcript);
+        console.log("interim: " + interim_transcript);
+        console.log("final: " + final_transcript);
 
         // update the web page
         if (final_transcript.length > 0) {
@@ -242,22 +260,22 @@
             console.log("Panned down");
             final_transcript = '';
         }
-		
-		if (final_transcript.indexOf("adding Street Network") >= 0) {
+                
+                if (final_transcript.indexOf("adding Street Network") >= 0) {
             streetArcGISServer.setMap(map);
             console.log("adding Street Network");
             final_transcript = '';
         }
 
-		if (final_transcript.indexOf("removing Street Network") >= 0) {
+                if (final_transcript.indexOf("removing Street Network") >= 0) {
             streetArcGISServer.setMap(null);
             console.log("removing Street Network");
             final_transcript = '';
         }
     }
 
-	
-	
+        
+        
     function startButton(event) {
         final_transcript = '';
         recognition.start();
