@@ -356,7 +356,7 @@
         // handling commands
 
         if (final_transcript.indexOf("zoom in") >= 0) {
-            $("#command_animation").html("zoom in").css({'fontSize':'12pt'}).animate({fontSize:'13em'},"slow",
+            $("#command_animation").html("zoom in").css({'fontSize':'12pt'}).animate({fontSize:'13em'}, 1100,
               function(){ 
                 $("#command_animation").html("");
             });
@@ -366,7 +366,7 @@
         }
 
         if (final_transcript.indexOf("zoom out") >= 0) {
-            $("#command_animation").html("zoom out").css('fontSize','13em').animate({fontSize:'12pt'},"slow",
+            $("#command_animation").html("zoom out").css('fontSize','13em').animate({fontSize:'12pt'}, 1100,
               function(){ 
                 $("#command_animation").html("");
             });
