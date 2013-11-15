@@ -98,11 +98,20 @@
         top: 250px;
         right: 95px;
     }
+    #command_animation {
+        position: relative;
+        z-index: 20;
+        text-align: center;
+        top: 150pt;
+        font-family: Georgia, serif;
+        font-style: italic;
+    }
     </style>
 
     <div id="transcript"></div>
     <div id="interim"></div>
     <div id="map"></div>
+    <div id="command_animation"></div>
 
     <!--Startbutton for Speech-->
     <div id="text">
@@ -347,12 +356,20 @@
         // handling commands
 
         if (final_transcript.indexOf("zoom in") >= 0) {
+            $("#command_animation").html("zoom in").css({'fontSize':'12pt'}).animate({fontSize:'13em'},"slow",
+              function(){ 
+                $("#command_animation").html("");
+            });
             map.zoomIn(1);
             console.log("Zoomed in");
             final_transcript = '';
         }
 
         if (final_transcript.indexOf("zoom out") >= 0) {
+            $("#command_animation").html("zoom out").css('fontSize','13em').animate({fontSize:'12pt'},"slow",
+              function(){ 
+                $("#command_animation").html("");
+            });
             map.zoomOut(1);
             console.log("Zoomed out");
             final_transcript = '';
