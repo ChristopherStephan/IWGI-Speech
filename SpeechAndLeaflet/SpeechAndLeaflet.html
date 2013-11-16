@@ -15,18 +15,22 @@
     <link rel="stylesheet" href="http://geo-arcgis.uni-muenster.de/iwgi/js/leaflet.locator/L.Control.Locate.css" />
     <link rel="stylesheet" href="http://geo-arcgis.uni-muenster.de/iwgi/js/leaflet.viewcenter/leaflet.viewcenter.css" />
     <link rel="stylesheet" href="http://geo-arcgis.uni-muenster.de/iwgi/js/Leaflet.loading/Control.Loading.css" />
-
+	 <link rel="stylesheet" href="src/sidebar/L.Control.Sidebar.css" />
     <style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    #map {
-        position: absolute;
-        top: 40;
-        bottom: 0;
-        width: 100%;
-    }
+     body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+        }
+	
+	        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+	
     #map.leaflet-fullscreen {
         position: fixed;
         width: 100%;
@@ -73,31 +77,41 @@
 
 <body>
     <style>
-    #start_button {
-        position: absolute;
-        top: 50px;
-        right: 95px;
-    }
-    #LayerOnStreet {
-        position: absolute;
-        top: 100px;
-        right: 95px;
-    }
-    #LayerOffStreet {
-        position: absolute;
-        top: 150px;
-        right: 95px;
-    }
-    #LayerOnPopStructure {
-        position: absolute;
-        top: 200px;
-        right: 95px;
-    }
-    #LayerOffPopStructure {
-        position: absolute;
-        top: 250px;
-        right: 95px;
-    }
+#sidebar_button {
+                      position: absolute;
+                        bottom: 210px;
+                        left: 15px;
+						height: 25px;
+						width: 100px;
+						background-color:GreenYellow;
+                }
+	
+	
+		
+		      #start_button {
+                     float: left;
+                }
+                
+                #LayerOnStreet {
+						
+                         float: left;
+                }
+                
+                #LayerOffStreet {
+                         float: left;
+                }
+                
+                #LayerOnPopStructure {
+                          float: left;
+                }
+                
+                #LayerOffPopStructure {
+                         float: left;
+				
+				    #text {
+                       
+                        float: left;
+                }
     #command_animation {
         position: relative;
         z-index: 20;
@@ -112,13 +126,17 @@
     <div id="interim"></div>
     <div id="map"></div>
     <div id="command_animation"></div>
-
+ <div id="sidebar" >
+        <h1>Multimodal GIS</h1>
     <!--Startbutton for Speech-->
+	<div id="text">
+	 <h3>Controls:</h3>
     <div id="text">
         <button id="start_button" onclick="startButton(event)">
             Click to start speaking with the map!
         </button>
     </div>
+	
 
     <!--street Layer ON-->
     <div id="text">
@@ -147,7 +165,31 @@
             Click to turn the Layer Off
         </button>
     </div>
+   
+  </div>
+	<br><br><br>
+	
+	
+	
+       
 
+        <p class="lorem">Describing text... consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+  
+</div>
+ 
+    <div id="map"></div>
+	
+	<div id="text">
+        <button id="sidebar_button" onclick="sidebar.toggle();" >
+            Speech/Layer 
+        </button>
+    </div>
 
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
     <!-- <script src="http://geo-arcgis.uni-muenster.de/iwgi/js/leaflet/leaflet.js" /> -->
@@ -173,8 +215,8 @@
     <!-- https://github.com/pwldp/leaflet.viewcenter -->
     <script src="http://geo-arcgis.uni-muenster.de/iwgi/js/Leaflet.loading/Control.Loading.js"></script>
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
-
-
+	<script src="src/sidebar/L.Control.Sidebar.js"></script>
+	<script src="src/sidebar/jquery-2.0.3.min.js"></script>
 
 
     <script>
@@ -196,6 +238,20 @@
         loadingControl: true,
         zoomControl: false //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
     });
+	
+	
+	
+	        var sidebar = L.control.sidebar('sidebar', {
+            closeButton: true,
+            position: 'right'
+        });
+        map.addControl(sidebar);
+
+       
+
+        var marker = L.marker([51.2, 7]).addTo(map).on('click', function () {
+            sidebar.toggle();
+        });
 
 
     var locater = L.control.locate({
@@ -232,10 +288,7 @@
     }).addTo(map);
 
 
-    // init ViewCenter plugin
-    var viewCenter = new L.Control.ViewCenter({
-        position: 'topright'
-    }).addTo(map);
+   
 
 
 	
@@ -251,7 +304,10 @@
     map.on('exitFullscreen', function () {
         if (window.console) window.console.log('exitFullscreen');
     });
-
+ // init ViewCenter plugin
+    var viewCenter = new L.Control.ViewCenter({
+        position: 'topright'
+    }).addTo(map);
 
 
     var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
