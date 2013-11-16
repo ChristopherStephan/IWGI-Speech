@@ -377,6 +377,10 @@
 
         if (final_transcript.indexOf("left") >= 0) {
             centerPoint.lng -= 0.08;
+            $("#command_animation").html("left").css('fontSize','13em').animate({'left':'-500px'}, 1100,
+              function(){ 
+                $("#command_animation").html("").css('left','0px');
+            });
             map.panTo(centerPoint);
             console.log("Panned Left");
             final_transcript = '';
@@ -384,6 +388,10 @@
 
         if (final_transcript.indexOf("right") >= 0) {
             centerPoint.lng += 0.08;
+            $("#command_animation").html("right").css({'fontSize':'13em'}).animate({'left':'500px'}, 1100,
+              function(){ 
+                $("#command_animation").html("").css('left','0px');
+            });
             map.panTo(centerPoint);
             console.log("Panned right");
             final_transcript = '';
@@ -391,6 +399,10 @@
 
         if (final_transcript.indexOf("up") >= 0) {
             centerPoint.lat += 0.08;
+            $("#command_animation").html("up").css('fontSize','13em').animate({'top':'-250px'}, 1100,
+              function(){ 
+                $("#command_animation").html("").css('top','150pt');
+            });
             map.panTo(centerPoint);
             console.log("Panned up");
             final_transcript = '';
@@ -398,6 +410,10 @@
 
         if (final_transcript.indexOf("down") >= 0) {
             centerPoint.lat -= 0.08;
+            $("#command_animation").html("down").css('fontSize','13em').animate({'top':'500px'}, 1100,
+              function(){ 
+                $("#command_animation").html("").css('top','150pt');
+            });
             map.panTo(centerPoint);
             console.log("Panned down");
             final_transcript = '';
@@ -415,7 +431,6 @@
             final_transcript = '';
         }
     }
-
 
 
     function startButton(event) {
