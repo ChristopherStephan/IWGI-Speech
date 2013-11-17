@@ -188,10 +188,11 @@
             }
         }
         #command_animation {
-            position: relative;
+            position: absolute;
             z-index: 20;
             text-align: center;
-            top: 150pt;
+            top: 50%;
+            left: 45%;
             font-family: Georgia, serif;
             font-style: italic;
         }
@@ -685,7 +686,7 @@
                         'left': '-500px'
                     }, 1100,
                     function () {
-                        $("#command_animation").html("").css('left', '0px');
+                        $("#command_animation").html("").css('left', '45%');
                     });
                 map.panTo(centerPoint);
                 console.log("Panned Left");
@@ -697,10 +698,10 @@
                 $("#command_animation").html("right").css({
                     'fontSize': '13em'
                 }).animate({
-                        'left': '500px'
+                        'left': '100%'
                     }, 1100,
                     function () {
-                        $("#command_animation").html("").css('left', '0px');
+                        $("#command_animation").html("").css('left', '45%');
                     });
                 map.panTo(centerPoint);
                 console.log("Panned right");
@@ -713,7 +714,7 @@
                         'top': '-250px'
                     }, 1100,
                     function () {
-                        $("#command_animation").html("").css('top', '150pt');
+                        $("#command_animation").html("").css('top', '50%');
                     });
                 map.panTo(centerPoint);
                 console.log("Panned up");
@@ -726,7 +727,7 @@
                         'top': '500px'
                     }, 1100,
                     function () {
-                        $("#command_animation").html("").css('top', '150pt');
+                        $("#command_animation").html("").css('top', '50%');
                     });
                 map.panTo(centerPoint);
                 console.log("Panned down");
