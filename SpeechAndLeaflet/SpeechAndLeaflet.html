@@ -344,7 +344,9 @@
 			panControl: true,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
 			// measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
-			editInOSMControlOptions: {},
+			editInOSMControlOptions: {
+				editors: ["id"]		//no other editors enabled
+				},
 			revealOSMControl: true,		//more options here: https://github.com/yohanboniface/Leaflet.RevealOSM
 				revealOSMControlOptions: {
 					queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
