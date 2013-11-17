@@ -163,7 +163,7 @@
 		.leaflet-control-zoomslider-out {
 			visibility: hidden;
 		}
-		*/
+	*/
         #start_button {
             float: left;
             margin-bottom: 0px;
@@ -292,16 +292,16 @@
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
     <script src="src/sidebar/L.Control.Sidebar.js"></script>
     <script src="src/sidebar/jquery-2.0.3.min.js"></script>
-	<script src="src/leaflet.providers/leaflet-providers.js"></script>
-	<!--https://github.com/leaflet-extras/leaflet-providers -->
-	<script src="src/Leaflet.RevealOSM/Leaflet.RevealOSM.js"></script>
-	<!--https://github.com/yohanboniface/Leaflet.RevealOSM -->
-	<script src="src/Leaflet.EditInOSM/Leaflet.EditInOSM.js"></script>
-	<!--https://github.com/yohanboniface/Leaflet.EditInOSM -->
-	<script src="src/Leaflet.contextmenu/leaflet.contextmenu.js"></script>
-	<!--https://github.com/aratcliffe/Leaflet.contextmenu-->
-	<script src="src/Leaflet.draw/leaflet.draw.js"></script>
-	<!--https://github.com/Leaflet/Leaflet.draw -->
+    <script src="src/leaflet.providers/leaflet-providers.js"></script>
+    <!--https://github.com/leaflet-extras/leaflet-providers -->
+    <script src="src/Leaflet.RevealOSM/Leaflet.RevealOSM.js"></script>
+    <!--https://github.com/yohanboniface/Leaflet.RevealOSM -->
+    <script src="src/Leaflet.EditInOSM/Leaflet.EditInOSM.js"></script>
+    <!--https://github.com/yohanboniface/Leaflet.EditInOSM -->
+    <script src="src/Leaflet.contextmenu/leaflet.contextmenu.js"></script>
+    <!--https://github.com/aratcliffe/Leaflet.contextmenu-->
+    <script src="src/Leaflet.draw/leaflet.draw.js"></script>
+    <!--https://github.com/Leaflet/Leaflet.draw -->
 	
     <script>
 	
@@ -338,7 +338,7 @@
             closePopupOnClick: true,
             zoomsliderControl: true,
             loadingControl: true,
-			panControl: true,
+            panControl: true,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
 			editInOSMControlOptions: {},
 			revealOSMControl: true,		//more options here: https://github.com/yohanboniface/Leaflet.RevealOSM
@@ -417,7 +417,7 @@
 		});
 			
 			
-		//new sidebar	
+	//new sidebar	
         var sidebar = L.control.sidebar('sidebar', {
             closeButton: true,
             position: 'right'
@@ -425,13 +425,13 @@
         map.addControl(sidebar);
 
 
-		//an example marker, which is able to open the popup
+	//an example marker, which is able to open the popup
         var marker = L.marker([51.982, 7.597]).addTo(map).on('click', function () {
             sidebar.toggle();
         });
 
 		
-		//new Geolocation tool
+	//new Geolocation tool
         var locater = L.control.locate({
             position: 'topright', // set the location of the control
             drawCircle: true, // controls whether a circle is drawn that shows the uncertainty about the location
@@ -486,7 +486,7 @@
         }).addTo(map);
 
 
-		//Creating new layers
+	//Creating new layers
         var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
@@ -503,54 +503,54 @@
             "OSM": osm
         };
 		
-		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
-		//More information here: https://github.com/leaflet-extras/leaflet-providers
-		var baseLayers = {
-			'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
-			'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
-			'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
-			'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
-			'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
-			'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
-			'MapQuest OSM': L.tileLayer.provider('MapQuestOpen.OSM'),
-			'MapQuest Aerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
-			'MapBox Example': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
-			'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
-			'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
-			'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
-			'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
-			'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
-			'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
-			'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
-			'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
-			'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
-			'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
-			'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
-			'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
-			'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
-			'Nokia Normal Day': L.tileLayer.provider('Nokia.normalDay'),
-			'Nokia Normal Day Grey': L.tileLayer.provider('Nokia.normalGreyDay'),
-			'Nokia Satellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
-			'Nokia Satellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
-			'Nokia Terrain': L.tileLayer.provider('Nokia.terrainDay'),
-			'Acetate': L.tileLayer.provider('Acetate')
-		};
+	//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
+	//More information here: https://github.com/leaflet-extras/leaflet-providers
+	var baseLayers = {
+		'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
+		'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
+		'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
+		'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
+		'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
+		'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
+		'MapQuest OSM': L.tileLayer.provider('MapQuestOpen.OSM'),
+		'MapQuest Aerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
+		'MapBox Example': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
+		'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
+		'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
+		'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
+		'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
+		'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
+		'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
+		'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
+		'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
+		'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
+		'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
+		'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
+		'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
+		'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
+		'Nokia Normal Day': L.tileLayer.provider('Nokia.normalDay'),
+		'Nokia Normal Day Grey': L.tileLayer.provider('Nokia.normalGreyDay'),
+		'Nokia Satellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
+		'Nokia Satellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
+		'Nokia Terrain': L.tileLayer.provider('Nokia.terrainDay'),
+		'Acetate': L.tileLayer.provider('Acetate')
+	};
 		
 		//new overlay Layers...these layer will be on top of baselayers
-		var overlayLayers = {
-			'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
-			'OpenWeatherMap Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
-			'OpenWeatherMap CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
-			'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
-			'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
-			'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
-			'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
-			'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
-			'OpenWeatherMap PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
-			'OpenWeatherMap Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
-			'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
-			'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
-		};
+	var overlayLayers = {
+		'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
+		'OpenWeatherMap Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
+		'OpenWeatherMap CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
+		'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
+		'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
+		'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+		'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
+		'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
+		'OpenWeatherMap PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
+		'OpenWeatherMap Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
+		'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
+		'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
+	};
 		
 		
 
@@ -565,7 +565,7 @@
         })
 
 
-		//new vector layer
+	//new vector layer
         //can be controlled by buttons
          var popstructureArcGISServer = new lvector.AGS({
             url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/7",
@@ -599,7 +599,7 @@
         }).addTo(map);
 
 
-		//For now we need two L.control.layer elements, because one can only handle two groups
+	//For now we need two L.control.layer elements, because one can only handle two groups
         //Baselayer Controll
         var layerControlBaselayers = L.control.layers(baseLayersown, baseLayers, {
 			collapsed: true
@@ -611,9 +611,9 @@
 		}).addTo(map);
 
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////Voice Recognition Part//////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////Voice Recognition Part//////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         var recognition = new webkitSpeechRecognition();
         var final_transcript = '';
         var interim_transcript = '';
