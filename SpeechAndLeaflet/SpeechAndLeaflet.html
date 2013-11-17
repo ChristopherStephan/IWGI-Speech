@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="src/leaflet.viewcenter/leaflet.viewcenter.css" />
     <link rel="stylesheet" href="src/Leaflet.loading/Control.Loading.css" />
     <link rel="stylesheet" href="src/sidebar/L.Control.Sidebar.css" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="src/Leaflet.RevealOSM/Leaflet.RevealOSM.css" />
     <link rel="stylesheet" href="src/Leaflet.EditInOSM/Leaflet.EditInOSM.css" />
     <link rel="stylesheet" href="src/leaflet.contextmenu/leaflet.contextmenu.css" />
@@ -68,6 +69,64 @@
             }
         }
         ///////////////Bootstrap/////////////////////////
+=======
+	<link rel="stylesheet" href="src/LeafletCoordinates/Leaflet.Coordinates-0.1.4.css"/>
+	
+    <style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    html,
+    body,
+    #map {
+        height: 100%;
+    }
+    .lorem {
+        font-style: italic;
+        color: #AAA;
+    }
+    #map.leaflet-fullscreen {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    .leaflet-control-fullscreen {
+        background-image: url(http://www.geo-arcgis.uni-muenster.de/iwgi/src/leaflet.zoomfs/icon-fullscreen.png);
+        left: 2px;
+    }
+    .leaflet-control-zoom {
+        left: 2px;
+    }
+    .leaflet-control-zoom-in {
+        visibility: hidden;
+    }
+    .leaflet-control-zoom-out {
+        visibility: hidden;
+    }
+    .leaflet-control-zoom {
+        height: 26px;
+        width: 28px;
+    }
+    //uncomment this to hide the zoom in/out part of slider widget
+
+    /*
+	.leaflet-control-zoomslider-in {
+		visibility: hidden;
+	}
+	
+	.leaflet-control-zoomslider-out {
+		visibility: hidden;
+	}
+	*/
+>>>>>>> a01d327eb1b308e5bf0805be33235f3146d685a7
     </style>
 
     <!--Navigationbar (Bootstrap)-->
@@ -292,6 +351,7 @@
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
     <script src="src/sidebar/L.Control.Sidebar.js"></script>
     <script src="src/sidebar/jquery-2.0.3.min.js"></script>
+<<<<<<< HEAD
 	<script src="src/leaflet.providers/leaflet-providers.js"></script>
 	<!--https://github.com/leaflet-extras/leaflet-providers -->
 	<script src="src/Leaflet.RevealOSM/Leaflet.RevealOSM.js"></script>
@@ -367,6 +427,10 @@
 			*/	
 			});
 		
+=======
+	<script type="text/javascript" src="src/LeafletCoordinates/Leaflet.Coordinates-0.1.4.min.js"></script>
+	
+>>>>>>> a01d327eb1b308e5bf0805be33235f3146d685a7
 
 		// Initialize the FeatureGroup to store editable layers for drawing tool
 		var drawnItems = new L.FeatureGroup();
@@ -430,6 +494,7 @@
             sidebar.toggle();
         });
 
+<<<<<<< HEAD
 		
 		//new Geolocation tool
         var locater = L.control.locate({
@@ -598,6 +663,171 @@
             }
         }).addTo(map);
 
+=======
+    <script>
+    var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
+    var map = L.map('map', {
+        center: [51.95442, 7.62709],
+        zoom: 13,
+        dragging: true,
+        touchZoom: true,
+        scrollWheelZoom: true,
+        doubleClickZoom: true,
+        boxZoom: true,
+        tap: true,
+        tapTolerance: 15,
+        trackResize: true,
+        worldCopyJump: false,
+        closePopupOnClick: true,
+        zoomsliderControl: true,
+        loadingControl: true,
+        zoomControl: false //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
+    });
+
+
+
+    var sidebar = L.control.sidebar('sidebar', {
+        closeButton: true,
+        position: 'right'
+    });
+    map.addControl(sidebar);
+
+
+
+    var marker = L.marker([51.2, 7]).addTo(map).on('click', function () {
+        sidebar.toggle();
+    });
+
+
+    var locater = L.control.locate({
+        position: 'topright', // set the location of the control
+        drawCircle: true, // controls whether a circle is drawn that shows the uncertainty about the location
+        follow: true, // follow the location if `watch` and `setView` are set to true in locateOptions
+        stopFollowingOnDrag: false, // stop following when the map is dragged if `follow` is set to true
+        circleStyle: {}, // change the style of the circle around the user's location
+        markerStyle: {},
+        followCircleStyle: {}, // set difference for the style of the circle around the user's location while following
+        followMarkerStyle: {},
+        circlePadding: [0, 0], // padding around accuracy circle, value is passed to setBounds
+        metric: true, // use metric or imperial units
+        watch: true,
+        onLocationError: function (err) {
+            alert(err.message)
+        }, // define an error callback function
+        onLocationOutsideMapBounds: function (context) { // called when outside map boundaries
+            alert(context.options.strings.outsideMapBoundsMsg);
+        },
+        setView: true, // automatically sets the map view to the user's location
+        strings: {
+            title: "Show me where I am", // title of the locat control
+            popup: "You are within {distance} {unit} from this point", // text to appear if user clicks on circle
+            outsideMapBoundsMsg: "You seem located outside the boundaries of the map" // default message for onLocationOutsideMapBounds
+        }
+        //locateOptions: {}  // define location options e.g enableHighAccuracy: true
+    }).addTo(map);
+
+
+    // new search bar			
+    new L.Control.GeoSearch({
+        provider: new L.GeoSearch.Provider.Google()
+    }).addTo(map);
+
+
+
+
+    // create custom zoom control with fullscreen button
+    var zoomFS = new L.Control.ZoomFS({
+        position: 'topright'
+    }).addTo(map);
+    // you can bind to 2 events: enterFullscreen and exitFullscreen
+    // note that these events are on the map object, not the zoomfs object...
+    map.on('enterFullscreen', function () {
+        if (window.console) window.console.log('enterFullscreen');
+    });
+    map.on('exitFullscreen', function () {
+        if (window.console) window.console.log('exitFullscreen');
+    });
+    // init ViewCenter plugin
+    var viewCenter = new L.Control.ViewCenter({
+        position: 'topright'
+    }).addTo(map);
+
+
+    var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+    }).addTo(map);
+
+    var minimal = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/{styleId}/256/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+        styleId: 22677
+    })
+
+
+    //new vector layer
+    var streetArcGISServer = new lvector.AGS({
+        url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/4",
+        fields: "*",
+        uniqueField: "OBJECTID",
+        esriOptions: true,
+        popupTemplate: '<div class="iw-content"><h3>{STRASSE}</h3>PLZ:{PLZ}<br>Length: {LENGTH}m</div>',
+        singlePopup: true
+    })
+
+
+    //can be controlled by buttons
+    var popstructureArcGISServer = new lvector.AGS({
+        url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/7",
+        fields: "*",
+        uniqueField: "NAME",
+        esriOptions: true,
+        popupTemplate: '<div class="iw-content"><h3>Population structure in {NAME}</h3>Area:{FLAECHE_QM}m²<br>Overal population structure: {GES_BEV}<br>0-17: {GES_0_17}<br>18-64: {GES_18_64}<br>65-x: {GES_65_} </div>',
+        singlePopup: true
+    })
+
+
+    var baseLayers = {
+        "Minimal": minimal,
+        "OSM": osm
+    };
+
+    var operationalLayer = {
+        "Streets": streetArcGISServer,
+        "Population and PLZ": popstructureArcGISServer
+    };
+
+
+    //New minimap
+    //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+    var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+    })
+    var miniMap = new L.Control.MiniMap(overviewMap, {
+        toggleDisplay: true,
+        mapOptions: {
+            panControl: false,
+            zoomsliderControl: false,
+            crs: L.CRS.Simple,
+        }
+    }).addTo(map);
+	
+	
+	
+	//display mouse coodinates on left bottom 
+	L.control.coordinates({
+    position:"bottomleft", //optional default "bootomright"
+    decimals:2, //optional default 4
+    decimalSeperator:".", //optional default "."
+    labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+    labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
+    enableUserInput:true, //optional default true
+    useDMS:false, //optional default false
+    useLatLngOrder: true //ordering of labels, default false-> lng-lat
+}).addTo(map);
+	
+>>>>>>> a01d327eb1b308e5bf0805be33235f3146d685a7
 
 		//For now we need two L.control.layer elements, because one can only handle two groups
         //Baselayer Controll
