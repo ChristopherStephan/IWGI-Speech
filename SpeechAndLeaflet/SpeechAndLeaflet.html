@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="src/leaflet.viewcenter/leaflet.viewcenter.css" />
     <link rel="stylesheet" href="src/Leaflet.loading/Control.Loading.css" />
     <link rel="stylesheet" href="src/sidebar/L.Control.Sidebar.css" />
-	
+	<link rel="stylesheet" href="src/LeafletCoordinates/Leaflet.Coordinates-0.1.4.css"/>
 	
     <style>
     body {
@@ -213,6 +213,8 @@
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
     <script src="src/sidebar/L.Control.Sidebar.js"></script>
     <script src="src/sidebar/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="src/LeafletCoordinates/Leaflet.Coordinates-0.1.4.min.js"></script>
+	
 
 
     <script>
@@ -363,7 +365,21 @@
             crs: L.CRS.Simple,
         }
     }).addTo(map);
-
+	
+	
+	
+	//add configured controls
+	L.control.coordinates({
+    position:"bottomleft", //optional default "bootomright"
+    decimals:2, //optional default 4
+    decimalSeperator:".", //optional default "."
+    labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+    labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
+    enableUserInput:true, //optional default true
+    useDMS:false, //optional default false
+    useLatLngOrder: true //ordering of labels, default false-> lng-lat
+}).addTo(map);
+	
 
     //Baselayer controll
     var layersControl = L.control.layers(baseLayers, operationalLayer, {
