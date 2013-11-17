@@ -1,6 +1,6 @@
 L.Control.Pan = L.Control.extend({
 	options: {
-		position: 'topleft',
+		position: 'bottomleft',
 		panOffset: 500
 	},
 

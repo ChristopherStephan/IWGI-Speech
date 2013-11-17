@@ -2,11 +2,14 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <title>Speech Map</title>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
     <!-- link rel="stylesheet" href=src/leaflet/leaflet/css" /> -->
     <!--Leaflet 0.7-->
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
     <link rel="stylesheet" href="src/Minimap/Control.MiniMap.css" />
     <link rel="stylesheet" href="src/geosearch/l.geosearch.css" />
     <link rel="stylesheet" href="src/zoomslider/L.Control.Zoomslider.css" />
@@ -16,170 +19,244 @@
     <link rel="stylesheet" href="src/leaflet.viewcenter/leaflet.viewcenter.css" />
     <link rel="stylesheet" href="src/Leaflet.loading/Control.Loading.css" />
     <link rel="stylesheet" href="src/sidebar/L.Control.Sidebar.css" />
-	
-	
-    <style>
-    body {
-        padding: 0;
-        margin: 0;
-    }
-    html,
-    body,
-    #map {
-        height: 100%;
-    }
-    .lorem {
-        font-style: italic;
-        color: #AAA;
-    }
-    #map.leaflet-fullscreen {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: 0;
-        padding: 0;
-        border: 0;
-    }
-    .leaflet-control-fullscreen {
-        background-image: url(http://www.geo-arcgis.uni-muenster.de/iwgi/src/leaflet.zoomfs/icon-fullscreen.png);
-        left: 2px;
-    }
-    .leaflet-control-zoom {
-        left: 2px;
-    }
-    .leaflet-control-zoom-in {
-        visibility: hidden;
-    }
-    .leaflet-control-zoom-out {
-        visibility: hidden;
-    }
-    .leaflet-control-zoom {
-        height: 26px;
-        width: 28px;
-    }
-    //uncomment this to hide the zoom in/out part of slider widget
+    <link rel="stylesheet" href="src/Leaflet.RevealOSM/Leaflet.RevealOSM.css" />
+    <link rel="stylesheet" href="src/Leaflet.EditInOSM/Leaflet.EditInOSM.css" />
+    <link rel="stylesheet" href="src/leaflet.contextmenu/leaflet.contextmenu.css" />
+    <link rel="stylesheet" href="src/leaflet.draw/leaflet.draw.css" />
 
-    /*
-	.leaflet-control-zoomslider-in {
-		visibility: hidden;
-	}
-	
-	.leaflet-control-zoomslider-out {
-		visibility: hidden;
-	}
-	*/
+
+    <style type="text/css">
+        #header {
+            position: static !important;
+            margin-bottom: 50;
+        }
+        footer {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        ///////////////Bootstrap/////////////////////////
+
+        /*       * Off Canvas       * --------------------------------------------------       */
+        @media screen and(max-width: 768px) {
+            .row-offcanvas {
+                position: relative;
+                -webkit-transition: all 0.25s ease-out;
+                -moz-transition: all 0.25s ease-out;
+                transition: all 0.25s ease-out;
+            }
+            .row-offcanvas-right .sidebar-offcanvas {
+                right: -50%;
+                /* 6 columns */
+            }
+            .row-offcanvas-left .sidebar-offcanvas {
+                left: -50%;
+                /* 6 columns */
+            }
+            .row-offcanvas-right.active {
+                right: 50%;
+                /* 6 columns */
+            }
+            .row-offcanvas-left.active {
+                left: 50%;
+                /* 6 columns */
+            }
+            .sidebar-offcanvas {
+                position: absolute;
+                top: 0;
+                width: 50%;
+                /* 6 columns */
+            }
+        }
+        ///////////////Bootstrap/////////////////////////
     </style>
 
+    <!--Navigationbar (Bootstrap)-->
+    <div id="header">
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://geo-arcgis.uni-muenster.de/iwgi/index.html">IWGI Speech</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://geo-arcgis.uni-muenster.de/iwgi/index.html">Home</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://geo-arcgis.uni-muenster.de/iwgi/speechandleaflet.html">Map</a>
+                        </li>
+                        <li>
+                            <a href="http://geo-arcgis.uni-muenster.de/iwgi/HelpAbout.html">Help&amp;About</a>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </head>
 
 <body>
     <style>
-    #sidebar_button {
-        position: absolute;
-        bottom: 210px;
-        left: 15px;
-        height: 25px;
-        width: 100px;
-        background-color: GreenYellow;
-    }
-    #start_button {
-        float: left;
-    }
-    #LayerOnStreet {
-        float: left;
-    }
-    #LayerOffStreet {
-        float: left;
-    }
-    #LayerOnPopStructure {
-        float: left;
-    }
-    #LayerOffPopStructure {
-        float: left;
-        #text {
-            float: left;
+		#sidebar_button {
+            position: fixed;
+            bottom: 210px;
+            left: 15px;
+            height: 25px;
+            width: 100px;
+            background-color: GreenYellow;
         }
-    #command_animation {
-        position: relative;
-        z-index: 20;
-        text-align: center;
-        top: 150pt;
-        font-family: Georgia, serif;
-        font-style: italic;
-    }
+        #map {
+            height: 95%;
+        }
+        #description {
+            font-style: italic;
+            color: #AAA;
+            margin-bottom: 30px;
+        }
+        #map.leaflet-fullscreen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .leaflet-control-zoomslider-body {
+            width: 20px;
+            border: solid #fff;
+            border-width: 0px 9px 0px 9px;
+            background-color: black;
+            margin: 0 auto;
+        }
+        .leaflet-control-fullscreen {
+            background-image: url(http://www.geo-arcgis.uni-muenster.de/iwgi/src/leaflet.zoomfs/icon-fullscreen.png);
+            left: 2px;
+        }
+        .leaflet-control-zoom {
+            left: 2px;
+        }
+        .leaflet-control-zoom-in {
+            visibility: hidden;
+        }
+        .leaflet-control-zoom-out {
+            visibility: hidden;
+        }
+        .leaflet-control-zoom {
+            height: 26px;
+            width: 28px;
+        }
+		
+        //uncomment this to hide the zoom in/out part of slider widget
+        /*
+		.leaflet-control-zoomslider-in {
+			visibility: hidden;
+		}
+		
+		.leaflet-control-zoomslider-out {
+			visibility: hidden;
+		}
+		*/
+        #start_button {
+            float: left;
+            margin-bottom: 0px;
+        }
+        #LayerOnStreet {
+            float: left;
+            margin-bottom: 10px;
+        }
+        #LayerOffStreet {
+            float: left;
+            margin-bottom: 10px;
+        }
+        #LayerOnPopStructure {
+            float: left;
+            margin-bottom: 10px;
+        }
+        #LayerOffPopStructure {
+            float: left;
+            margin-bottom: 10px;
+            #text {
+                float: left;
+            }
+        }
+        #command_animation {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            top: 150pt;
+            font-family: Georgia, serif;
+            font-style: italic;
+        }
     </style>
 
-    
+
     <div id="map"></div>
     <div id="command_animation"></div>
     <div id="sidebar">
-        <h1>Multimodal GIS</h1>
-        <!--Startbutton for Speech-->
-        <div id="buttons">
-            <h3>Controls:</h3>
-            <div id="text">
-                <button id="start_button" onclick="startButton(event)">
-                    Click to start speaking with the map!
-                </button>
-            </div>
+        <p>
+            <h1>Multimodal GIS</h1>
+            <!--Startbutton for Speech-->
+            <div id="buttons">
+                <h3>Controls:</h3>
+                <div id="text" style="margin-bottom: 10px;">
+                    <button id="start_button" class="btn btn-primary" onclick="startButton(event);" class="btn success">
+                        Click to start speaking with the map!
+                    </button>
+                </div>
 
-            <!--street Layer ON-->
-            <div id="text">
-                <button id="LayerOnStreet" onclick="streetArcGISServer.setMap(map);" class="btn success">
-                    Click to turn the Street-Layer On
-                </button>
-            </div>
+                <!--street Layer ON-->
+                <div id="text">
+                    <button id="LayerOnStreet" class="btn btn-primary" onclick="streetArcGISServer.setMap(map);" class="btn success">
+                        Click to turn the Street-Layer On
+                    </button>
+                </div>
 
-            <!--street Layer OFF-->
-            <div id="text">
-                <button id="LayeroffStreet" onclick="streetArcGISServer.setMap(null);" class="btn danger">
-                    Click to turn the Street-Layer Off
-                </button>
-            </div>
+                <!--street Layer OFF-->
+                <div id="text">
+                    <button id="LayeroffStreet" class="btn btn-primary" onclick="streetArcGISServer.setMap(null);" class="btn danger">
+                        Click to turn the Street-Layer Off
+                    </button>
+                </div>
 
-            <!--popstructure Layer ON-->
-            <div id="text">
-                <button id="LayerOnPopStructure" onclick="popstructureArcGISServer.setMap(map);" class="btn success">
-                    Click to turn the Popstructure-Layer On
-                </button>
-            </div>
+                <!--popstructure Layer ON-->
+                <div id="text">
+                    <button id="LayerOnPopStructure" class="btn btn-primary" onclick="popstructureArcGISServer.setMap(map);" class="btn success">
+                        Click to turn the Popstructure-Layer On
+                    </button>
+                </div>
 
-            <!--popstructure Layer OFF-->
-            <div id="text">
-                <button id="LayerOffPopStructure" onclick="popstructureArcGISServer.setMap(null);" class="btn danger">
-                    Click to turn the Popstructure-Layer Off
-                </button>
+                <!--popstructure Layer OFF-->
+                <div id="text">
+                    <button id="LayerOffPopStructure" class="btn btn-primary" onclick="popstructureArcGISServer.setMap(null);" class="btn danger">
+                        Click to turn the Popstructure-Layer Off
+                    </button>
+                </div>
             </div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
+        </p>
+
+        <div id="console" style="margin: 0; top:20px;">
+            <h3>Console:</h3>
+            <div id="transcript"></div>
+            <div id="interim"></div>
         </div>
-		
-		<div id="console">
-			<h3>Console:</h3>
-			<div id="transcript"></div>
-			<div id="interim"></div>
-		</div>
-		
-		<div id="description">
-        <p class="lorem">Describing text... consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-		
-		<p class="lorem">Describing text... consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-		 
-		<p class="lorem">Describing text... consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-		</div>
-		
+
+        <div id="description">
+            <p class="description">To test it you need to run the html site within a web server. Browse the site with Chrome. To start interacting with the map by speech, first click the button, allow microphone access from browser and then you can use "zoom out", "zoom in", "up", "down", "left", "right" as commands to control the map's state.
+            <br>You can also use "Adding Street Network" and "Removing Street Network" to add and remove the corresponding layer.<b>
+			Webpage uses ArcGIS Services. Functionality to use CartoDB Layer is also supported by the LVector library.</p>
+        </div>
+
     </div>
 
-    <div id="map"></div>
+    <div id="map" style="position: fixed;></div>
 
     <div id="text">
         <button id="sidebar_button" onclick="sidebar.toggle();">
@@ -191,6 +268,8 @@
     <!-- <script src="src/leaflet/leaflet.js" /> -->
     <!--Leaflet 0.7-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="src/lvector/lvector-custom.js"></script>
     <!--https://github.com/JasonSanford/leaflet-vector-layers -->
     <script src="src/Minimap/Control.MiniMap.js"></script>
@@ -213,296 +292,460 @@
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
     <script src="src/sidebar/L.Control.Sidebar.js"></script>
     <script src="src/sidebar/jquery-2.0.3.min.js"></script>
-
-
+	<script src="src/leaflet.providers/leaflet-providers.js"></script>
+	<!--https://github.com/leaflet-extras/leaflet-providers -->
+	<script src="src/Leaflet.RevealOSM/Leaflet.RevealOSM.js"></script>
+	<!--https://github.com/yohanboniface/Leaflet.RevealOSM -->
+	<script src="src/Leaflet.EditInOSM/Leaflet.EditInOSM.js"></script>
+	<!--https://github.com/yohanboniface/Leaflet.EditInOSM -->
+	<script src="src/Leaflet.contextmenu/leaflet.contextmenu.js"></script>
+	<!--https://github.com/aratcliffe/Leaflet.contextmenu-->
+	<script src="src/Leaflet.draw/leaflet.draw.js"></script>
+	<!--https://github.com/Leaflet/Leaflet.draw -->
+	
     <script>
-    var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
-    var map = L.map('map', {
-        center: [51.95442, 7.62709],
-        zoom: 13,
-        dragging: true,
-        touchZoom: true,
-        scrollWheelZoom: true,
-        doubleClickZoom: true,
-        boxZoom: true,
-        tap: true,
-        tapTolerance: 15,
-        trackResize: true,
-        worldCopyJump: false,
-        closePopupOnClick: true,
-        zoomsliderControl: true,
-        loadingControl: true,
-        zoomControl: false //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
-    });
+	
+		//four functions to handle operations in context menue
+        function showCoordinates (e) {
+            alert(e.latlng);
+		}
+		function centerMap (e) {
+            map.panTo(e.latlng);
+		}
+
+		function zoomIn (e) {
+			map.zoomIn();
+		}
+
+		function zoomOut (e) {
+		    map.zoomOut();
+		}
+		
+		//new map with map options
+		var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
+        var map = L.map('map', {
+            center: [51.95442, 7.62709],
+            zoom: 13,
+            dragging: true,
+            touchZoom: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: true,
+            boxZoom: true,
+            tap: true,
+            tapTolerance: 15,
+            trackResize: true,
+            worldCopyJump: false,
+            closePopupOnClick: true,
+            zoomsliderControl: true,
+            loadingControl: true,
+			panControl: true,
+            zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
+			editInOSMControlOptions: {},
+			revealOSMControl: true,		//more options here: https://github.com/yohanboniface/Leaflet.RevealOSM
+				revealOSMControlOptions: {
+					queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
+				},
+			//more options here: https://github.com/aratcliffe/Leaflet.contextmenu
+			/*
+			contextmenu: true,
+				contextmenuWidth: 140,
+				contextmenuItems: [{
+					text: 'Show coordinates',
+					callback: showCoordinates
+				}, {
+					text: 'Center map here',
+					callback: centerMap
+				}, '-', {
+					text: 'Zoom in',
+					icon: 'src/Leaflet.contextmenu/images/zoom-in.png',
+					callback: zoomIn
+				}, {
+					text: 'Zoom out',
+					icon: 'src/Leaflet.contextmenu/images/zoom-out.png',
+					callback: zoomOut
+				}]
+			*/	
+			});
+		
+
+		// Initialize the FeatureGroup to store editable layers for drawing tool
+		var drawnItems = new L.FeatureGroup();
+		map.addLayer(drawnItems);
+
+		// Initialize the draw control and pass it the FeatureGroup of editable layers
+		var drawControl = new L.Control.Draw({
+			draw: {
+				position: 'topleft',
+				polygon: {
+					metric: true,
+					title: 'Draw a sexy polygon!',
+					allowIntersection: true,
+					drawError: {
+						color: '#b00b00',
+						timeout: 1000
+					},
+					shapeOptions: {
+						color: '#bada55'
+					},
+					showArea: true
+				},
+				polyline: {
+					metric: true
+				},
+				circle: {
+					metric: true,
+					shapeOptions: {
+						color: '#662d91'
+					}
+				}
+			},
+			edit: {
+				featureGroup: drawnItems
+			}
+		});
+		map.addControl(drawControl);
+
+		map.on('draw:created', function (e) {
+			var type = e.layerType,
+				layer = e.layer;
+
+			if (type === 'marker') {
+				layer.bindPopup('A popup!');
+			}
+
+			drawnItems.addLayer(layer);
+		});
+			
+			
+		//new sidebar	
+        var sidebar = L.control.sidebar('sidebar', {
+            closeButton: true,
+            position: 'right'
+        });
+        map.addControl(sidebar);
+
+
+		//an example marker, which is able to open the popup
+        var marker = L.marker([51.982, 7.597]).addTo(map).on('click', function () {
+            sidebar.toggle();
+        });
+
+		
+		//new Geolocation tool
+        var locater = L.control.locate({
+            position: 'topright', // set the location of the control
+            drawCircle: true, // controls whether a circle is drawn that shows the uncertainty about the location
+            follow: true, // follow the location if `watch` and `setView` are set to true in locateOptions
+            stopFollowingOnDrag: false, // stop following when the map is dragged if `follow` is set to true
+            circleStyle: {}, // change the style of the circle around the user's location
+            markerStyle: {},
+            followCircleStyle: {}, // set difference for the style of the circle around the user's location while following
+            followMarkerStyle: {},
+            circlePadding: [0, 0], // padding around accuracy circle, value is passed to setBounds
+            metric: true, // use metric or imperial units
+            watch: true,
+            onLocationError: function (err) {
+                alert(err.message)
+            }, // define an error callback function
+            onLocationOutsideMapBounds: function (context) { // called when outside map boundaries
+                alert(context.options.strings.outsideMapBoundsMsg);
+            },
+            setView: true, // automatically sets the map view to the user's location
+            strings: {
+                title: "Show me where I am", // title of the locat control
+                popup: "You are within {distance} {unit} from this point", // text to appear if user clicks on circle
+                outsideMapBoundsMsg: "You seem located outside the boundaries of the map" // default message for onLocationOutsideMapBounds
+            }
+            //locateOptions: {}  // define location options e.g enableHighAccuracy: true
+        }).addTo(map);
+
+
+        // new Geoseach Bar			
+        new L.Control.GeoSearch({
+            provider: new L.GeoSearch.Provider.Google(),
+			position: 'topcenter',
+			showMarker: true
+        }).addTo(map);
+
+
+        // create custom zoom control with fullscreen button
+        var zoomFS = new L.Control.ZoomFS({
+            position: 'topright'
+        }).addTo(map);
+         // you can bind to 2 events: enterFullscreen and exitFullscreen
+         // note that these events are on the map object, not the zoomfs object...
+        map.on('enterFullscreen', function () {
+            if (window.console) window.console.log('enterFullscreen');
+        });
+        map.on('exitFullscreen', function () {
+            if (window.console) window.console.log('exitFullscreen');
+        });
+         // init ViewCenter plugin
+        var viewCenter = new L.Control.ViewCenter({
+            position: 'topright'
+        }).addTo(map);
+
+
+		//Creating new layers
+        var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        }).addTo(map);
+
+        var minimal = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/{styleId}/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+            styleId: 22677
+        })
+
+		var baseLayersown = {
+            "Minimal": minimal,
+            "OSM": osm
+        };
+		
+		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
+		//More information here: https://github.com/leaflet-extras/leaflet-providers
+		var baseLayers = {
+			'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
+			'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
+			'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
+			'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
+			'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
+			'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
+			'MapQuest OSM': L.tileLayer.provider('MapQuestOpen.OSM'),
+			'MapQuest Aerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
+			'MapBox Example': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
+			'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
+			'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
+			'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
+			'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
+			'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
+			'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
+			'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
+			'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
+			'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
+			'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
+			'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
+			'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
+			'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
+			'Nokia Normal Day': L.tileLayer.provider('Nokia.normalDay'),
+			'Nokia Normal Day Grey': L.tileLayer.provider('Nokia.normalGreyDay'),
+			'Nokia Satellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
+			'Nokia Satellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
+			'Nokia Terrain': L.tileLayer.provider('Nokia.terrainDay'),
+			'Acetate': L.tileLayer.provider('Acetate')
+		};
+		
+		//new overlay Layers...these layer will be on top of baselayers
+		var overlayLayers = {
+			'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
+			'OpenWeatherMap Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
+			'OpenWeatherMap CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
+			'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
+			'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
+			'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+			'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
+			'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
+			'OpenWeatherMap PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
+			'OpenWeatherMap Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
+			'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
+			'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
+		};
+		
+		
+
+        //new vector layer
+         var streetArcGISServer = new lvector.AGS({
+            url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/4",
+            fields: "*",
+            uniqueField: "OBJECTID",
+            esriOptions: true,
+            popupTemplate: '<div class="iw-content"><h3>{STRASSE}</h3>PLZ:{PLZ}<br>Length: {LENGTH}m</div>',
+            singlePopup: true
+        })
+
+
+		//new vector layer
+        //can be controlled by buttons
+         var popstructureArcGISServer = new lvector.AGS({
+            url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/7",
+            fields: "*",
+            uniqueField: "NAME",
+            esriOptions: true,
+            popupTemplate: '<div class="iw-content"><h3>Population structure in {NAME}</h3>Area:{FLAECHE_QM}m²<br>Overal population structure: {GES_BEV}<br>0-17: {GES_0_17}<br>18-64: {GES_18_64}<br>65-x: {GES_65_} </div>',
+            singlePopup: true
+        })
+
+        var operationalLayer = {
+            "Streets": streetArcGISServer,
+            "Population and PLZ": popstructureArcGISServer
+        };
 
 
 
-    var sidebar = L.control.sidebar('sidebar', {
-        closeButton: true,
-        position: 'right'
-    });
-    map.addControl(sidebar);
+        //New minimap
+        //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+        var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        })
+         var miniMap = new L.Control.MiniMap(overviewMap, {
+            toggleDisplay: true,
+            mapOptions: {
+                panControl: false,
+                zoomsliderControl: false,
+                crs: L.CRS.Simple,
+            }
+        }).addTo(map);
 
 
+		//For now we need two L.control.layer elements, because one can only handle two groups
+        //Baselayer Controll
+        var layerControlBaselayers = L.control.layers(baseLayersown, baseLayers, {
+			collapsed: true
+		}).addTo(map);
 
-    var marker = L.marker([51.2, 7]).addTo(map).on('click', function () {
-        sidebar.toggle();
-    });
+		//OverlayLayers Control 
+		var layerControlOverlayLayers = L.control.layers(overlayLayers, operationalLayer, {
+			collapsed: true
+		}).addTo(map);
 
+		
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////Voice Recognition Part//////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        var recognition = new webkitSpeechRecognition();
+        var final_transcript = '';
+        var interim_transcript = '';
+        var language = 'en-US'; // TODO: fetch language as option value from drop down box
+         // en-GB
 
-    var locater = L.control.locate({
-        position: 'topright', // set the location of the control
-        drawCircle: true, // controls whether a circle is drawn that shows the uncertainty about the location
-        follow: true, // follow the location if `watch` and `setView` are set to true in locateOptions
-        stopFollowingOnDrag: false, // stop following when the map is dragged if `follow` is set to true
-        circleStyle: {}, // change the style of the circle around the user's location
-        markerStyle: {},
-        followCircleStyle: {}, // set difference for the style of the circle around the user's location while following
-        followMarkerStyle: {},
-        circlePadding: [0, 0], // padding around accuracy circle, value is passed to setBounds
-        metric: true, // use metric or imperial units
-        watch: true,
-        onLocationError: function (err) {
-            alert(err.message)
-        }, // define an error callback function
-        onLocationOutsideMapBounds: function (context) { // called when outside map boundaries
-            alert(context.options.strings.outsideMapBoundsMsg);
-        },
-        setView: true, // automatically sets the map view to the user's location
-        strings: {
-            title: "Show me where I am", // title of the locat control
-            popup: "You are within {distance} {unit} from this point", // text to appear if user clicks on circle
-            outsideMapBoundsMsg: "You seem located outside the boundaries of the map" // default message for onLocationOutsideMapBounds
-        }
-        //locateOptions: {}  // define location options e.g enableHighAccuracy: true
-    }).addTo(map);
+        recognition.continuous = true; // keep processing input until stopped
+        recognition.interimResults = true; // show interim results
+        recognition.lang = language; // specify the language
 
+        recognition.onresult = function (event) {
+            // Assemble the transcript from the array of results
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    final_transcript = event.results[i][0].transcript;
+                } else {
+                    interim_transcript = event.results[i][0].transcript;
+                }
+            }
 
-    // new search bar			
-    new L.Control.GeoSearch({
-        provider: new L.GeoSearch.Provider.Google()
-    }).addTo(map);
+            console.log("interim: " + interim_transcript);
+            console.log("final: " + final_transcript);
 
+            // update the web page
+            if (final_transcript.length > 0) {
+                $('#transcript').html(final_transcript);
+            }
 
+            if (interim_transcript.length > 0) {
+                $('#interim').html(interim_transcript);
+            }
 
+            // handling commands
 
-    // create custom zoom control with fullscreen button
-    var zoomFS = new L.Control.ZoomFS({
-        position: 'topright'
-    }).addTo(map);
-    // you can bind to 2 events: enterFullscreen and exitFullscreen
-    // note that these events are on the map object, not the zoomfs object...
-    map.on('enterFullscreen', function () {
-        if (window.console) window.console.log('enterFullscreen');
-    });
-    map.on('exitFullscreen', function () {
-        if (window.console) window.console.log('exitFullscreen');
-    });
-    // init ViewCenter plugin
-    var viewCenter = new L.Control.ViewCenter({
-        position: 'topright'
-    }).addTo(map);
+            if (final_transcript.indexOf("zoom in") >= 0) {
+                $("#command_animation").html("zoom in").css({
+                    'fontSize': '12pt'
+                }).animate({
+                        fontSize: '13em'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("");
+                    });
+                map.zoomIn(1);
+                console.log("Zoomed in");
+                final_transcript = '';
+            }
 
+            if (final_transcript.indexOf("zoom out") >= 0) {
+                $("#command_animation").html("zoom out").css('fontSize', '13em').animate({
+                        fontSize: '12pt'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("");
+                    });
+                map.zoomOut(1);
+                console.log("Zoomed out");
+                final_transcript = '';
+            }
 
-    var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-    }).addTo(map);
+            if (final_transcript.indexOf("left") >= 0) {
+                centerPoint.lng -= 0.08;
+                $("#command_animation").html("left").css('fontSize', '13em').animate({
+                        'left': '-500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('left', '0px');
+                    });
+                map.panTo(centerPoint);
+                console.log("Panned Left");
+                final_transcript = '';
+            }
 
-    var minimal = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/{styleId}/256/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
-        styleId: 22677
-    })
+            if (final_transcript.indexOf("right") >= 0) {
+                centerPoint.lng += 0.08;
+                $("#command_animation").html("right").css({
+                    'fontSize': '13em'
+                }).animate({
+                        'left': '500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('left', '0px');
+                    });
+                map.panTo(centerPoint);
+                console.log("Panned right");
+                final_transcript = '';
+            }
 
+            if (final_transcript.indexOf("up") >= 0) {
+                centerPoint.lat += 0.08;
+                $("#command_animation").html("up").css('fontSize', '13em').animate({
+                        'top': '-250px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('top', '150pt');
+                    });
+                map.panTo(centerPoint);
+                console.log("Panned up");
+                final_transcript = '';
+            }
 
-    //new vector layer
-    var streetArcGISServer = new lvector.AGS({
-        url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/4",
-        fields: "*",
-        uniqueField: "OBJECTID",
-        esriOptions: true,
-        popupTemplate: '<div class="iw-content"><h3>{STRASSE}</h3>PLZ:{PLZ}<br>Length: {LENGTH}m</div>',
-        singlePopup: true
-    })
+            if (final_transcript.indexOf("down") >= 0) {
+                centerPoint.lat -= 0.08;
+                $("#command_animation").html("down").css('fontSize', '13em').animate({
+                        'top': '500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('top', '150pt');
+                    });
+                map.panTo(centerPoint);
+                console.log("Panned down");
+                final_transcript = '';
+            }
 
+            if (final_transcript.indexOf("adding Street Network") >= 0) {
+                streetArcGISServer.setMap(map);
+                console.log("adding Street Network");
+                final_transcript = '';
+            }
 
-    //can be controlled by buttons
-    var popstructureArcGISServer = new lvector.AGS({
-        url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/7",
-        fields: "*",
-        uniqueField: "NAME",
-        esriOptions: true,
-        popupTemplate: '<div class="iw-content"><h3>Population structure in {NAME}</h3>Area:{FLAECHE_QM}m²<br>Overal population structure: {GES_BEV}<br>0-17: {GES_0_17}<br>18-64: {GES_18_64}<br>65-x: {GES_65_} </div>',
-        singlePopup: true
-    })
-
-
-    var baseLayers = {
-        "Minimal": minimal,
-        "OSM": osm
-    };
-
-    var operationalLayer = {
-        "Streets": streetArcGISServer,
-        "Population and PLZ": popstructureArcGISServer
-    };
-
-
-    //New minimap
-    //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
-    var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-    })
-    var miniMap = new L.Control.MiniMap(overviewMap, {
-        toggleDisplay: true,
-        mapOptions: {
-            panControl: false,
-            zoomsliderControl: false,
-            crs: L.CRS.Simple,
-        }
-    }).addTo(map);
-
-
-    //Baselayer controll
-    var layersControl = L.control.layers(baseLayers, operationalLayer, {
-        collapsed: true
-    }).addTo(map);
-
-
-    var recognition = new webkitSpeechRecognition();
-    var final_transcript = '';
-    var interim_transcript = '';
-    var language = 'en-US'; // TODO: fetch language as option value from drop down box
-    // en-GB
-
-    recognition.continuous = true; // keep processing input until stopped
-    recognition.interimResults = true; // show interim results
-    recognition.lang = language; // specify the language
-
-    recognition.onresult = function (event) {
-        // Assemble the transcript from the array of results
-        for (var i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-                final_transcript = event.results[i][0].transcript;
-            } else {
-                interim_transcript = event.results[i][0].transcript;
+            if (final_transcript.indexOf("removing Street Network") >= 0) {
+                streetArcGISServer.setMap(null);
+                console.log("removing Street Network");
+                final_transcript = '';
             }
         }
 
-        console.log("interim: " + interim_transcript);
-        console.log("final: " + final_transcript);
 
-        // update the web page
-        if (final_transcript.length > 0) {
-            $('#transcript').html(final_transcript);
-        }
-
-        if (interim_transcript.length > 0) {
-            $('#interim').html(interim_transcript);
-        }
-
-        // handling commands
-
-        if (final_transcript.indexOf("zoom in") >= 0) {
-            $("#command_animation").html("zoom in").css({
-                'fontSize': '12pt'
-            }).animate({
-                    fontSize: '13em'
-                }, 1100,
-                function () {
-                    $("#command_animation").html("");
-                });
-            map.zoomIn(1);
-            console.log("Zoomed in");
+        function startButton(event) {
             final_transcript = '';
+            recognition.start();
         }
-
-        if (final_transcript.indexOf("zoom out") >= 0) {
-            $("#command_animation").html("zoom out").css('fontSize', '13em').animate({
-                    fontSize: '12pt'
-                }, 1100,
-                function () {
-                    $("#command_animation").html("");
-                });
-            map.zoomOut(1);
-            console.log("Zoomed out");
-            final_transcript = '';
-        }
-
-        if (final_transcript.indexOf("left") >= 0) {
-            centerPoint.lng -= 0.08;
-            $("#command_animation").html("left").css('fontSize', '13em').animate({
-                    'left': '-500px'
-                }, 1100,
-                function () {
-                    $("#command_animation").html("").css('left', '0px');
-                });
-            map.panTo(centerPoint);
-            console.log("Panned Left");
-            final_transcript = '';
-        }
-
-        if (final_transcript.indexOf("right") >= 0) {
-            centerPoint.lng += 0.08;
-            $("#command_animation").html("right").css({
-                'fontSize': '13em'
-            }).animate({
-                    'left': '500px'
-                }, 1100,
-                function () {
-                    $("#command_animation").html("").css('left', '0px');
-                });
-            map.panTo(centerPoint);
-            console.log("Panned right");
-            final_transcript = '';
-        }
-
-        if (final_transcript.indexOf("up") >= 0) {
-            centerPoint.lat += 0.08;
-            $("#command_animation").html("up").css('fontSize', '13em').animate({
-                    'top': '-250px'
-                }, 1100,
-                function () {
-                    $("#command_animation").html("").css('top', '150pt');
-                });
-            map.panTo(centerPoint);
-            console.log("Panned up");
-            final_transcript = '';
-        }
-
-        if (final_transcript.indexOf("down") >= 0) {
-            centerPoint.lat -= 0.08;
-            $("#command_animation").html("down").css('fontSize', '13em').animate({
-                    'top': '500px'
-                }, 1100,
-                function () {
-                    $("#command_animation").html("").css('top', '150pt');
-                });
-            map.panTo(centerPoint);
-            console.log("Panned down");
-            final_transcript = '';
-        }
-
-        if (final_transcript.indexOf("adding Street Network") >= 0) {
-            streetArcGISServer.setMap(map);
-            console.log("adding Street Network");
-            final_transcript = '';
-        }
-
-        if (final_transcript.indexOf("removing Street Network") >= 0) {
-            streetArcGISServer.setMap(null);
-            console.log("removing Street Network");
-            final_transcript = '';
-        }
-    }
-
-
-    function startButton(event) {
-        final_transcript = '';
-        recognition.start();
-    }
     </script>
 </body>
 
