@@ -24,51 +24,9 @@
     <link rel="stylesheet" href="src/Leaflet.contextmenu/leaflet.contextmenu.css" />
     <link rel="stylesheet" href="src/Leaflet.draw/leaflet.draw.css" />
     <link rel="stylesheet" href="src/Leaflet.MeasureControl/leaflet.measurecontrol.css" />
+	<link rel="stylesheet" href="src/css/custom_css.css"/>
 
-    <style type="text/css">
-        #header {
-            position: static !important;
-            margin-bottom: 50;
-        }
-        footer {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        ///////////////Bootstrap/////////////////////////
-
-        /*       * Off Canvas       * --------------------------------------------------       */
-        @media screen and(max-width: 768px) {
-            .row-offcanvas {
-                position: relative;
-                -webkit-transition: all 0.25s ease-out;
-                -moz-transition: all 0.25s ease-out;
-                transition: all 0.25s ease-out;
-            }
-            .row-offcanvas-right .sidebar-offcanvas {
-                right: -50%;
-                /* 6 columns */
-            }
-            .row-offcanvas-left .sidebar-offcanvas {
-                left: -50%;
-                /* 6 columns */
-            }
-            .row-offcanvas-right.active {
-                right: 50%;
-                /* 6 columns */
-            }
-            .row-offcanvas-left.active {
-                left: 50%;
-                /* 6 columns */
-            }
-            .sidebar-offcanvas {
-                position: absolute;
-                top: 0;
-                width: 50%;
-                /* 6 columns */
-            }
-        }
-        ///////////////Bootstrap/////////////////////////
-    </style>
+    
 
     <!--Navigationbar (Bootstrap)-->
     <div id="header">
@@ -100,114 +58,7 @@
 </head>
 
 <body>
-    <style>
-		#sidebar_button {
-            position: fixed;
-            bottom: 210px;
-            left: 15px;
-            height: 25px;
-            width: 100px;
-            background-color: GreenYellow;
-        }
-        #map {
-            height: 95%;
-        }
-        #description {
-            font-style: italic;
-            color: #AAA;
-            margin-bottom: 30px;
-        }
-        #map.leaflet-fullscreen {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
-        
-        .leaflet-control-layers {
-		box-shadow: 0 1px 7px rgba(0,0,0,0.4);
-		background: #f8f8f9;
-		-webkit-border-radius: 5px;
-		border-radius: 5px;
-		overflow: overlay;
-		max-height: 200px;
-	}
-        
-        .leaflet-control-zoomslider-body {
-            width: 20px;
-            border: solid #fff;
-            border-width: 0px 9px 0px 9px;
-            background-color: black;
-            margin: 0 auto;
-        }
-        .leaflet-control-fullscreen {
-            background-image: url(src/leaflet.zoomfs/icon-fullscreen.png);
-            left: 2px;
-        }
-        .leaflet-control-zoom {
-            left: 2px;
-        }
-        .leaflet-control-zoom-in {
-            visibility: hidden;
-        }
-        .leaflet-control-zoom-out {
-            visibility: hidden;
-        }
-        .leaflet-control-zoom {
-            height: 26px;
-            width: 28px;
-        }
-		
-        //uncomment this to hide the zoom in/out part of slider widget
-        /*
-		.leaflet-control-zoomslider-in {
-			visibility: hidden;
-		}
-		
-		.leaflet-control-zoomslider-out {
-			visibility: hidden;
-		}
-		*/
-        #start_button {
-            float: left;
-            margin-bottom: 0px;
-        }
-        #LayerOnStreet {
-            float: left;
-            margin-bottom: 10px;
-        }
-        #LayerOffStreet {
-            float: left;
-            margin-bottom: 10px;
-        }
-        #LayerOnPopStructure {
-            float: left;
-            margin-bottom: 10px;
-        }
-        #LayerOffPopStructure {
-            float: left;
-            margin-bottom: 10px;
-            #text {
-                float: left;
-            }
-        }
-        #command_animation {
-            position: absolute;
-            z-index: 20;
-            text-align: center;
-            top: 50%;
-            left: 45%;
-            font-family: Georgia, serif;
-            font-style: italic;
-        }
-    </style>
-
+  
 
     <div id="map"></div>
     <div id="command_animation"></div>
@@ -217,35 +68,35 @@
             <!--Startbutton for Speech-->
             <div id="buttons">
                 <h3>Controls:</h3>
-                <div id="text" style="margin-bottom: 10px;">
+                <div id="text" >
                     <button id="start_button" class="btn btn-primary" onclick="startButton(event);" class="btn success">
                         Click to start speaking with the map!
                     </button>
                 </div>
 
                 <!--street Layer ON-->
-                <div id="text">
+                <div id="text" style="margin-top: 10px;>
                     <button id="LayerOnStreet" class="btn btn-primary" onclick="streetArcGISServer.setMap(map);" class="btn success">
                         Click to turn the Street-Layer On
                     </button>
                 </div>
 
                 <!--street Layer OFF-->
-                <div id="text">
+                <div id="text" style="margin-top: 10px;>
                     <button id="LayeroffStreet" class="btn btn-primary" onclick="streetArcGISServer.setMap(null);" class="btn danger">
                         Click to turn the Street-Layer Off
                     </button>
                 </div>
 
                 <!--popstructure Layer ON-->
-                <div id="text">
+                <div id="text" style="margin-top: 10px;>
                     <button id="LayerOnPopStructure" class="btn btn-primary" onclick="popstructureArcGISServer.setMap(map);" class="btn success">
                         Click to turn the Popstructure-Layer On
                     </button>
                 </div>
 
                 <!--popstructure Layer OFF-->
-                <div id="text">
+                <div id="text" style="margin-top: 10px;>
                     <button id="LayerOffPopStructure" class="btn btn-primary" onclick="popstructureArcGISServer.setMap(null);" class="btn danger">
                         Click to turn the Popstructure-Layer Off
                     </button>
