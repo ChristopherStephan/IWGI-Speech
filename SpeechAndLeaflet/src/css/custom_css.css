@@ -51,7 +51,7 @@
     ------------------------- */
 	
         #map {
-            height: 95%;
+            height: calc(100% - 50px);
         }
         #description {
             font-style: italic;
@@ -88,7 +88,7 @@
             margin: 0 auto;
         }
         .leaflet-control-fullscreen {
-            background-image: url(src/leaflet.zoomfs/icon-fullscreen.png);
+            background-image: url(../leaflet.zoomfs/icon-fullscreen.png);
             left: 2px;
         }
         .leaflet-control-zoom {
