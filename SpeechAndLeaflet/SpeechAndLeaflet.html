@@ -292,7 +292,6 @@
         });
         map.addControl(sidebar);
 
-
 		//an example marker, which is able to open the popup
         var marker = L.marker([51.982, 7.597]).addTo(map).on('click', function () {
             sidebar.toggle();
@@ -608,6 +607,14 @@
                 console.log("removing Street Network");
                 final_transcript = '';
             }
+
+            if (final_transcript.indexOf("draw point") >= 0) {
+                L.marker(map.getCenter()).addTo(map);
+                console.log("added marker");
+                final_transcript = '';
+            }
+
+                    
         }
 
 
