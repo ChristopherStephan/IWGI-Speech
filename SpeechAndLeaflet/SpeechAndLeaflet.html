@@ -614,6 +614,13 @@
                 final_transcript = '';
             }
 
+            if (final_transcript.indexOf("show me where I am") >= 0) {
+                map.fire('click', L.control.locate)
+                //map.locate({setView: true, maxZoom: 16});
+                console.log("located user");
+                final_transcript = '';
+            }           
+
                     
         }
 
