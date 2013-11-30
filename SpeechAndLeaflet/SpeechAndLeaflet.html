@@ -481,7 +481,7 @@
         var recognition = new webkitSpeechRecognition();
         var final_transcript = '';
         var interim_transcript = '';
-        var language = 'en-US'; // TODO: fetch language as option value from drop down box
+        var language = 'en-GB'; // TODO: fetch language as option value from drop down box
          // en-GB
 
         recognition.continuous = true; // keep processing input until stopped
@@ -604,15 +604,54 @@
                 final_transcript = '';
             }
 
-            if (final_transcript.indexOf("draw point") >= 0) {
+            if (final_transcript.indexOf("point") >= 0) {
                 L.marker(map.getCenter()).addTo(map);
                 console.log("added marker");
                 final_transcript = '';
             }
 
-            if (final_transcript.indexOf("show me where I am") >= 0) {
-                map.fire('click', L.control.locate)
-                //map.locate({setView: true, maxZoom: 16});
+            if (final_transcript.indexOf("large circle") >= 0) {
+                L.circle(map.getCenter(), 400).addTo(map);
+                console.log("added large circle");
+                final_transcript = '';
+            }
+
+            if (final_transcript.indexOf("medium circle") >= 0) {
+                L.circle(map.getCenter(), 200).addTo(map);
+                console.log("added medium circle");
+                final_transcript = '';
+            }
+
+            if (final_transcript.indexOf("small circle") >= 0) {
+                L.circle(map.getCenter(), 100).addTo(map);
+                console.log("added small circle");
+                final_transcript = '';
+            }
+
+            if (final_transcript.indexOf("large rectangle") >= 0) {
+                L.rectangle([[map.getCenter().lat - 0.01, map.getCenter().lng - 0.01],[map.getCenter().lat + 0.01, map.getCenter().lng + 0.01]]).addTo(map);
+                console.log("added rectangle");
+                final_transcript = '';
+            }
+
+
+            if (final_transcript.indexOf("medium rectangle") >= 0) {
+                L.rectangle([[map.getCenter().lat - 0.005, map.getCenter().lng - 0.005],[map.getCenter().lat + 0.005, map.getCenter().lng + 0.005]]).addTo(map);
+                console.log("added rectangle");
+                final_transcript = '';
+            }
+
+
+            if (final_transcript.indexOf("small rectangle") >= 0) {
+                L.rectangle([[map.getCenter().lat - 0.0025, map.getCenter().lng - 0.0025],[map.getCenter().lat + 0.0025, map.getCenter().lng + 0.0025]]).addTo(map);
+                console.log("added rectangle");
+                final_transcript = '';
+            }
+
+
+
+           if (final_transcript.indexOf("show me where I am") >= 0) {
+                map.locate({setView: true, maxZoom: 16});
                 console.log("located user");
                 final_transcript = '';
             }           
