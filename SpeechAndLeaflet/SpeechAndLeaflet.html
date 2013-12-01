@@ -666,7 +666,6 @@
             }
 
 
-
            if (final_transcript.indexOf("show me where I am") >= 0) {
                 map.locate({setView: true, maxZoom: 16});
                 console.log("located user");
@@ -681,6 +680,7 @@
             final_transcript = '';
             recognition.start();
         }
+		//document.findElementById("leaflet-control-geosearch-qry").value = "penis";
     </script>
 </body>
 

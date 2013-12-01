@@ -39,9 +39,9 @@ function addPoint(){
 		var coord=coordinates.toString();
 	lastID=(lastID+1);
 	
-		// 2 options to call the edit function, option 1: using prompt window ,, option 2 : using new form window .... option 1 is disactivated,, option 2 acitivated
+	// 2 options to call the edit function, option 1: using prompt window ,, option 2 : using new form window .... option 1 is disactivated,, option 2 acitivated
 	//container.html('Coordination of Point Name: <br> ('+ coord+') <br>'+"<a href='#' font-size=30 > Website</a>"+ '&#09' +"<a href='#' font-size=30  onClick='confirmation()'> Delete</a>"+ '&#09' +"<a href='#' onClick=Editing() font-size=30 >  Edit</a>" );
-	container.html('Coordination of '+pointname +' is: <br> ('+ coord+') <br>'+"<a href='#' font-size=30 > Website</a>"+ '&#09' +"<button type='button' onclick='deleting("+lastID+''+")' style='align:left;'>Delete</button>"+ '&#09' +"<a href='#' onClick=window.open('editform.html','mywindow','width=400,height=250,left=200,top=100') font-size=30 >  Edit</a>" );
+	container.html('Coordination of '+pointname +' is: <br> ('+ coord+') <br>'+"<a href='#' font-size=30 > Website</a>"+ '&#09' +"<button type='button' onclick='deleting("+lastID+''+")' style='align:left;'>Delete</button>"+ '&#09' +"<a href='#' onClick=window.open('src/custom/editform.html','mywindow','width=400,height=250,left=200,top=100') font-size=30 >  Edit</a>" );
 	
    marker.bindPopup(container[0]);
    save(pointname,"Description","{Comment1,Comment2}",coordinates,1);
@@ -52,47 +52,38 @@ function addPoint(){
 };
 
 var icon = L.icon({
-    iconUrl: 'punkt.png',
+    iconUrl: 'src/custom/marker-icon.png',
     iconSize:     [20, 20], // size of the icon
 });
 
 function save(name,des,com,coordinates){
-	$.post(
-		"database_insert.php?",
+$.post("src/custom/database_insert.php?",
 		{	
-		Name:name,
-		Description:des,
-		Comments:com,
-		Coordinates:coordinates
+			Name:name,
+			Description:des,
+			Comments:com,
+			Coordinates:coordinates
 		},
-		function(){callPoints()}	
+			function(){callPoints()}	
 		);		
 }
 
 function deleting(id){
-$.post("database_delete.php?",
+$.post("src/custom/database_delete.php?",
 		{ID: id},
 		function(){javascript:location.reload()}
 		);
 }
 
+//http://stackoverflow.com/questions/18904023/how-to-get-json-string-into-javascript-from-responsetext
 function callPoints(){
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-	//document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-	var obj = jQuery.parseJSON(xmlhttp.responseText);
-    for(var i in obj)
+$.ajax({
+    url: "src/custom/database_select.php",
+    dataType: "json",
+    success: function(response) {
+        alert(response.length);
+    
+
 	{
 		var coordinates = obj[i].Coord.split(',');
 	
@@ -102,19 +93,13 @@ xmlhttp.onreadystatechange=function()
 			.setIcon(icon)				
 			.addTo(map)
 		var container = $('<div />');	
-	  		container.html('Coordination of '+obj[i].Name+' is: <br> '+obj[i].Coord+' <br>'+' Description: <br> '+obj[i].Description+' <br>'+"<a href='#' font-size=30 > Website</a>"+ '&#09' +"<button type='button' onclick='confirmation("+obj[i].ID+")' style='align:left;'>Delete</button>"+ '&#09' +"<a href='#' onClick=window.open('editform.html','mywindow','width=400,height=250,left=200,top=100') font-size=30 >  Edit</a>");
+	  		container.html('Coordination of '+obj[i].Name+' is: <br> '+obj[i].Coord+' <br>'+' Description: <br> '+obj[i].Description+' <br>'+"<a href='#' font-size=30 > Website</a>"+ '&#09' +"<button type='button' onclick='confirmation("+obj[i].ID+")' style='align:left;'>Delete</button>"+ '&#09' +"<a href='#' onClick=window.open('src/custom/editform.html','mywindow','width=400,height=250,left=200,top=100') font-size=30 >  Edit</a>");
 			marker.bindPopup(container[0]);
 		lastID=parseInt(obj[i].ID);
-		
+	}	
 	}
-	//document.getElementById("myDiv").innerHTML=obj;
-    }
-  }
-  //If data needs to be processed, "Post"
-	xmlhttp.open("GET","database_select.php",true);
-	xmlhttp.send();
+});
 }
-
 
 function up(){
 var latln=marker.getLatLng();

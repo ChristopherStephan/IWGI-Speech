@@ -1,0 +1,15 @@
+CREATE TABLE "features_iwgi"
+(
+  "ID" serial NOT NULL,
+  "Name" text NOT NULL,
+  "Description" text NOT NULL,
+  "Comments" text[],
+  "Point" point,
+  "number" integer,
+  CONSTRAINT "Feature_pkey" PRIMARY KEY ("ID")
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "features_iwgi"
+  OWNER TO postgres;
