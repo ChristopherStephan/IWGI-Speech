@@ -199,6 +199,11 @@
 		    map.zoomOut();
 		}
 		
+		//Set Focus to Search Box
+		function setFocusToTextBox(){
+			document.getElementById("leaflet-control-geosearch-qry").focus();
+		}
+		
 		//new map with map options
 		var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
         var map = L.map('map', {
@@ -347,6 +352,9 @@
 			position: 'topcenter',
 			showMarker: true
         }).addTo(map);
+		
+		
+
 
 
         // create custom zoom control with fullscreen button
@@ -672,7 +680,16 @@
                 final_transcript = '';
             }           
 
-                    
+
+		if (final_transcript.indexOf("search") >= 0) {
+				setFocusToTextBox();
+				console.log("search");
+                final_transcript = '';
+		};
+
+
+
+			
         }
 
 
