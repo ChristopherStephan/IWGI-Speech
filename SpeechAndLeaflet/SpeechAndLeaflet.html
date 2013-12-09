@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Speech Map</title>
     <!--CartoDB<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />-->
-    <link rel="stylesheet" href="src/leaflet-0.7/leaflet.css" />
+	<link rel="stylesheet" href="src/leaflet-0.7/leaflet.css" />
     <link rel="stylesheet" href="src/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="src/bootstrap/font-awesome.css" />
     <link rel="stylesheet" href="src/Minimap/Control.MiniMap.css" />
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="src/Leaflet.draw/leaflet.draw.css" />
     <link rel="stylesheet" href="src/Leaflet.MeasureControl/leaflet.measurecontrol.css" />
 	<link rel="stylesheet" href="src/custom/custom_css.css"/>
-
+	<link rel="stylesheet" href="src/Leaflet.Measure2points/Control.Measure.css"/>
     
 
     <!--Navigationbar (Bootstrap)-->
@@ -87,7 +87,43 @@
                         Click to turn the Street-Layer Off
                     </button>
                 </div>
-
+				
+				<!--Locator -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="Locaterbutton" class="btn btn-primary" onclick="locater.locate();" class="btn danger">
+                        Click to locate yourself on the map
+                    </button>
+                </div>
+				
+				<!--Reveal OSM -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="revealOSM" class="btn btn-primary" onclick="map.revealOSMControl.toggle();" class="btn danger">
+                        Click to toggle RevealOSM Plugin
+                    </button>
+                </div>
+				
+				<!--Home Extend -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="homeExtend" class="btn btn-primary" onclick="map.setView(new L.LatLng(51.95442, 7.62709), 13)" class="btn danger">
+                        Click to switch to home extend
+                    </button>
+                </div>
+				
+				<!--Enable Measurement Tool -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="homeExtend" class="btn btn-primary" onclick="map.measureControl._enable();" class="btn danger">
+                        Click to Enable Measurement Tool
+                    </button>
+                </div>
+				
+				<!--Disable Measurement Tool -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="homeExtend" class="btn btn-primary" onclick="map.measureControl._disable();" class="btn danger">
+                        Click to Disable Measurement Tool
+                    </button>
+                </div>
+				
+				
                 <!--popstructure Layer ON-->
                 <div id="text" style="margin-top: 10px;>
                     <button id="LayerOnPopStructure" class="btn btn-primary" onclick="popstructureArcGISServer.setMap(map);" class="btn success">
@@ -99,6 +135,47 @@
                 <div id="text" style="margin-top: 10px;>
                     <button id="LayerOffPopStructure" class="btn btn-primary" onclick="popstructureArcGISServer.setMap(null);" class="btn danger">
                         Click to turn the Popstructure-Layer Off
+                    </button>
+                </div>
+				
+				<p></p>
+				Drawing tools
+				<p></p>
+				
+				
+				<!--Drawing Tool - Marker 
+				https://github.com/Leaflet/Leaflet.draw/issues/179 -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="markerdraw" class="btn btn-primary" onclick="new L.Draw.Marker(map).enable();" class="btn danger">
+                        Click to place a Marker on the map
+                    </button>
+                </div>
+				
+				<!--Drawing Tool - Line -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="linedraw" class="btn btn-primary" onclick="new L.Draw.Polyline(map).enable();" class="btn danger">
+                        Click to start drawing a line
+                    </button>
+                </div>
+				
+				<!--Drawing Tool - Circle -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="circledraw" class="btn btn-primary" onclick="new L.Draw.Circle(map).enable();" class="btn danger">
+                        Click to start drawing a circle
+                    </button>
+                </div>
+				
+				<!--Drawing Tool - Polygon -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="circledraw" class="btn btn-primary" onclick="new L.Draw.Polygon(map).enable();" class="btn danger">
+                        Click to start drawing a polygon
+                    </button>
+                </div>
+				
+				<!--Drawing Tool - Rectangle -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="rectangledraw" class="btn btn-primary" onclick="new L.Draw.Rectangle(map).enable();" class="btn danger">
+                        Click to start drawing a rectangle
                     </button>
                 </div>
             </div>
@@ -180,6 +257,9 @@
     <!--https://github.com/Leaflet/Leaflet.draw -->
     <script src="src/Leaflet.MeasureControl/leaflet.measurecontrol.js"></script>
     <!--https://github.com/makinacorpus/Leaflet.MeasureControl-->
+	<script src="src/Leaflet.Measure2points/Control.Measure.js"></script>
+    <!--https://github.com/jbelien/Leaflet.Measure-->
+	
 	
     <script>
 	
@@ -197,11 +277,6 @@
 
 		function zoomOut (e) {
 		    map.zoomOut();
-		}
-		
-		//Set Focus to Search Box
-		function setFocusToTextBox(){
-			document.getElementById("leaflet-control-geosearch-qry").focus();
 		}
 		
 		//new map with map options
@@ -222,6 +297,7 @@
             zoomsliderControl: true,
             loadingControl: true,
 			panControl: true,
+			measureControl: true,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
 			// measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
 			editInOSMControlOptions: {
@@ -352,9 +428,6 @@
 			position: 'topcenter',
 			showMarker: true
         }).addTo(map);
-		
-		
-
 
 
         // create custom zoom control with fullscreen button
@@ -629,6 +702,12 @@
                 final_transcript = '';
             }
 
+			
+			//////////////////////////////////////////////////////////
+			/////Start using leaflets integrated drawing tool/////////
+			//////////////////////////////////////////////////////////
+			
+			
             if (final_transcript.indexOf("point") >= 0) {
                 L.marker(map.getCenter()).addTo(map);
                 console.log("added marker");
@@ -674,30 +753,89 @@
             }
 
 
+			//////////////////////////////////////////////////////////
+			/////End using leaflets integrated drawing tool///////////
+			//////////////////////////////////////////////////////////
+			
+			
+			
            if (final_transcript.indexOf("show me where I am") >= 0) {
-                map.locate({setView: true, maxZoom: 16});
+                locater.locate();
                 console.log("located user");
                 final_transcript = '';
             }           
 
-
-		if (final_transcript.indexOf("search") >= 0) {
-				setFocusToTextBox();
-				console.log("search");
-                final_transcript = '';
-		};
-
-
-
 			
+            if (final_transcript.indexOf("show me additional information") >= 0) {
+                map.revealOSMControl.toggle();
+                console.log("show me additional information");
+                final_transcript = '';
+            }
+
+
+			if (final_transcript.indexOf("go back to home") >= 0) {
+                map.setView(new L.LatLng(51.95442, 7.62709), 13);
+                console.log("go back to home");
+                final_transcript = '';
+            }	
+			
+			
+			if (final_transcript.indexOf("start measurement") >= 0) {
+                map.measureControl._enable();
+                console.log("start measurement");
+                final_transcript = '';
+            }
+	
+			
+			if (final_transcript.indexOf("end measurement") >= 0) {
+                map.measureControl._disable();
+                console.log("end measurement");
+                final_transcript = '';
+            }
+			
+			//////////////////////////////////////////////////////////
+			/////Start using drawing plugin tool//////////////////////
+			//////////////////////////////////////////////////////////
+			
+			if (final_transcript.indexOf("start marker drawing") >= 0) {
+                L.Draw.Marker(map).enable();
+                console.log("start marker drawing");
+                final_transcript = '';
+            }
+			
+			if (final_transcript.indexOf("start line drawing") >= 0) {
+                L.Draw.Polyline(map).enable();
+                console.log("start line drawing");
+                final_transcript = '';
+            }
+			
+			if (final_transcript.indexOf("start circle drawing") >= 0) {
+                L.Draw.Circle(map).enable();
+                console.log("start circle drawing");
+                final_transcript = '';
+            }
+			
+			if (final_transcript.indexOf("start polygon drawing") >= 0) {
+               L.Draw.Polygon(map).enable();
+                console.log("start polygon drawing");
+                final_transcript = '';
+            }
+			
+			if (final_transcript.indexOf("start rectangle drawing") >= 0) {
+                L.Draw.Rectangle(map).enable();
+                console.log("start rectangle drawing");
+                final_transcript = '';
+            }
         }
 
+			//////////////////////////////////////////////////////////
+			/////End using drawing plugin tool////////////////////////
+			//////////////////////////////////////////////////////////
 
         function startButton(event) {
             final_transcript = '';
             recognition.start();
         }
-		//document.findElementById("leaflet-control-geosearch-qry").value = "hierkommteinvaluehin";
     </script>
 </body>
 
