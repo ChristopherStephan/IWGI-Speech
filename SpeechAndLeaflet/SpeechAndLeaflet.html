@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="src/Leaflet.contextmenu/leaflet.contextmenu.css" />
     <link rel="stylesheet" href="src/Leaflet.draw/leaflet.draw.css" />
     <link rel="stylesheet" href="src/Leaflet.MeasureControl/leaflet.measurecontrol.css" />
-	<link rel="stylesheet" href="src/custom/custom_css.css"/>
 	<link rel="stylesheet" href="src/Leaflet.Measure2points/Control.Measure.css"/>
+	<link rel="stylesheet" href="src/custom/custom_css.css"/>
     
 
     <!--Navigationbar (Bootstrap)-->
@@ -47,7 +47,6 @@
                         <li>
                             <a href="Help&About.html">Help&amp;About</a>
                         </li>
-                        <li></li>
                     </ul>
                 </div>
             </div>
@@ -68,6 +67,7 @@
             <!--Startbutton for Speech-->
             <div id="buttons">
                 <h3>Controls:</h3>
+				
                 <div id="text" >
                     <button id="start_button" class="btn btn-primary" onclick="startButton(event);" class="btn success">
                         Click to start speaking with the map!
@@ -75,7 +75,7 @@
                 </div>
 
                 <!--street Layer ON-->
-                <div id="text" style="margin-top: 10px;>
+                <div id="text" style="margin-top: 10px; >
                     <button id="LayerOnStreet" class="btn btn-primary" onclick="streetArcGISServer.setMap(map);" class="btn success">
                         Click to turn the Street-Layer On
                     </button>
@@ -95,10 +95,17 @@
                     </button>
                 </div>
 				
-				<!--Reveal OSM -->
+				 <!--Reveal OSM activate-->
+                <div id="text " style="margin-top: 10px;>
+                    <button id="revealOSMactivate" class="btn btn-primary" onclick="map.revealOSMControl.activate();" class="btn danger">
+                        Click to activate RevealOSM Plugin
+                    </button>
+                </div>
+
+                <!--Reveal OSM -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="revealOSM" class="btn btn-primary" onclick="map.revealOSMControl.toggle();" class="btn danger">
-                        Click to toggle RevealOSM Plugin
+                    <button id="revealOSMdeactivate" class="btn btn-primary" onclick="map.revealOSMControl.deactivate();" class="btn danger">
+                        Click to disable RevealOSM Plugin
                     </button>
                 </div>
 				
@@ -244,7 +251,6 @@
     <script src="src/Leaflet.loading/Control.Loading.js"></script>
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
     <script src="src/sidebar/L.Control.Sidebar.js"></script>
-    <script src="src/sidebar/jquery-2.0.3.min.js"></script>
     <script src="src/leaflet.providers/leaflet-providers.js"></script>
     <!--https://github.com/leaflet-extras/leaflet-providers -->
     <script src="src/Leaflet.RevealOSM/Leaflet.RevealOSM.js"></script>
@@ -766,9 +772,16 @@
             }           
 
 			
-            if (final_transcript.indexOf("show me additional information") >= 0) {
-                map.revealOSMControl.toggle();
-                console.log("show me additional information");
+            if (final_transcript.indexOf("enable additional information ") >= 0) {
+                map.revealOSMControl.activate();
+                console.log("enable additional information ");
+                final_transcript = '';
+            }
+
+			
+			if (final_transcript.indexOf("disable additional information ") >= 0) {
+                map.revealOSMControl.deactivate();
+                console.log("disable additional information ");
                 final_transcript = '';
             }
 
