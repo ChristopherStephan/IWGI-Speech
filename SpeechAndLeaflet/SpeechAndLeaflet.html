@@ -94,6 +94,14 @@
                         Click to locate yourself on the map
                     </button>
                 </div>
+                
+                <!--Locator -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="Locaterbutton" class="btn btn-primary" onclick="locater.stopLocate();" class="btn danger">
+                        Click to locate yourself on the map
+                    </button>
+                </div>
+                
 				
 		<!--Reveal OSM activate-->
                 <div id="text " style="margin-top: 10px;>
@@ -769,7 +777,14 @@
                 locater.locate();
                 console.log("located user");
                 final_transcript = '';
-            }           
+            }
+            
+            
+            if (final_transcript.indexOf("end show me where I am") >= 0) {
+                locater.stopLocate();
+                console.log("end located user");
+                final_transcript = '';
+            }
 
 			
             if (final_transcript.indexOf("enable additional information ") >= 0) {
