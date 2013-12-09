@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Speech Map</title>
     <!--CartoDB<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />-->
-	<link rel="stylesheet" href="src/leaflet-0.7/leaflet.css" />
+    <link rel="stylesheet" href="src/leaflet-0.7/leaflet.css" />
     <link rel="stylesheet" href="src/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="src/bootstrap/font-awesome.css" />
     <link rel="stylesheet" href="src/Minimap/Control.MiniMap.css" />
@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="src/Leaflet.contextmenu/leaflet.contextmenu.css" />
     <link rel="stylesheet" href="src/Leaflet.draw/leaflet.draw.css" />
     <link rel="stylesheet" href="src/Leaflet.MeasureControl/leaflet.measurecontrol.css" />
-	<link rel="stylesheet" href="src/Leaflet.Measure2points/Control.Measure.css"/>
-	<link rel="stylesheet" href="src/custom/custom_css.css"/>
+    <link rel="stylesheet" href="src/Leaflet.Measure2points/Control.Measure.css"/>
+    <link rel="stylesheet" href="src/custom/custom_css.css"/>
     
 
     <!--Navigationbar (Bootstrap)-->
@@ -88,14 +88,14 @@
                     </button>
                 </div>
 				
-				<!--Locator -->
+		<!--Locator -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="Locaterbutton" class="btn btn-primary" onclick="locater.locate();" class="btn danger">
                         Click to locate yourself on the map
                     </button>
                 </div>
 				
-				 <!--Reveal OSM activate-->
+		<!--Reveal OSM activate-->
                 <div id="text " style="margin-top: 10px;>
                     <button id="revealOSMactivate" class="btn btn-primary" onclick="map.revealOSMControl.activate();" class="btn danger">
                         Click to activate RevealOSM Plugin
@@ -109,21 +109,21 @@
                     </button>
                 </div>
 				
-				<!--Home Extend -->
+		<!--Home Extend -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="homeExtend" class="btn btn-primary" onclick="map.setView(new L.LatLng(51.95442, 7.62709), 13)" class="btn danger">
                         Click to switch to home extend
                     </button>
                 </div>
 				
-				<!--Enable Measurement Tool -->
+		<!--Enable Measurement Tool -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="homeExtend" class="btn btn-primary" onclick="map.measureControl._enable();" class="btn danger">
                         Click to Enable Measurement Tool
                     </button>
                 </div>
 				
-				<!--Disable Measurement Tool -->
+		<!--Disable Measurement Tool -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="homeExtend" class="btn btn-primary" onclick="map.measureControl._disable();" class="btn danger">
                         Click to Disable Measurement Tool
@@ -179,7 +179,7 @@
                     </button>
                 </div>
 				
-				<!--Drawing Tool - Rectangle -->
+		<!--Drawing Tool - Rectangle -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="rectangledraw" class="btn btn-primary" onclick="new L.Draw.Rectangle(map).enable();" class="btn danger">
                         Click to start drawing a rectangle
@@ -263,7 +263,7 @@
     <!--https://github.com/Leaflet/Leaflet.draw -->
     <script src="src/Leaflet.MeasureControl/leaflet.measurecontrol.js"></script>
     <!--https://github.com/makinacorpus/Leaflet.MeasureControl-->
-	<script src="src/Leaflet.Measure2points/Control.Measure.js"></script>
+    <script src="src/Leaflet.Measure2points/Control.Measure.js"></script>
     <!--https://github.com/jbelien/Leaflet.Measure-->
 	
 	
@@ -777,30 +777,30 @@
                 console.log("enable additional information ");
                 final_transcript = '';
             }
-
-			
-			if (final_transcript.indexOf("disable additional information ") >= 0) {
+            
+            
+            if (final_transcript.indexOf("disable additional information ") >= 0) {
                 map.revealOSMControl.deactivate();
                 console.log("disable additional information ");
                 final_transcript = '';
             }
-
-
-			if (final_transcript.indexOf("go back to home") >= 0) {
+            
+            
+            if (final_transcript.indexOf("go back to home") >= 0) {
                 map.setView(new L.LatLng(51.95442, 7.62709), 13);
                 console.log("go back to home");
                 final_transcript = '';
-            }	
-			
-			
-			if (final_transcript.indexOf("start measurement") >= 0) {
+            }
+            
+            
+            if (final_transcript.indexOf("start measurement") >= 0) {
                 map.measureControl._enable();
                 console.log("start measurement");
                 final_transcript = '';
             }
-	
-			
-			if (final_transcript.indexOf("end measurement") >= 0) {
+            
+            
+            if (final_transcript.indexOf("end measurement") >= 0) {
                 map.measureControl._disable();
                 console.log("end measurement");
                 final_transcript = '';
@@ -810,31 +810,35 @@
 			/////Start using drawing plugin tool//////////////////////
 			//////////////////////////////////////////////////////////
 			
-			if (final_transcript.indexOf("start marker drawing") >= 0) {
+	if (final_transcript.indexOf("start marker drawing") >= 0) {
                 L.Draw.Marker(map).enable();
                 console.log("start marker drawing");
                 final_transcript = '';
             }
-			
-			if (final_transcript.indexOf("start line drawing") >= 0) {
+            
+            
+            if (final_transcript.indexOf("start line drawing") >= 0) {
                 L.Draw.Polyline(map).enable();
                 console.log("start line drawing");
                 final_transcript = '';
             }
-			
-			if (final_transcript.indexOf("start circle drawing") >= 0) {
+            
+            
+            if (final_transcript.indexOf("start circle drawing") >= 0) {
                 L.Draw.Circle(map).enable();
                 console.log("start circle drawing");
                 final_transcript = '';
             }
-			
-			if (final_transcript.indexOf("start polygon drawing") >= 0) {
+            
+            
+            if (final_transcript.indexOf("start polygon drawing") >= 0) {
                L.Draw.Polygon(map).enable();
                 console.log("start polygon drawing");
                 final_transcript = '';
             }
-			
-			if (final_transcript.indexOf("start rectangle drawing") >= 0) {
+            
+            
+            if (final_transcript.indexOf("start rectangle drawing") >= 0) {
                 L.Draw.Rectangle(map).enable();
                 console.log("start rectangle drawing");
                 final_transcript = '';
