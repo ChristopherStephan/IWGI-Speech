@@ -90,14 +90,14 @@
 				
 		<!--Locator -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="Locaterbutton" class="btn btn-primary" onclick="locater.locate();" class="btn danger">
+                    <button id="Locaterbutton_start" class="btn btn-primary" onclick="locater.locate();" class="btn danger">
                         Click to locate yourself on the map
                     </button>
                 </div>
                 
                 <!--Locator -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="Locaterbutton" class="btn btn-primary" onclick="locater.stopLocate();" class="btn danger">
+                    <button id="Locaterbutton_end" class="btn btn-primary" onclick="locater.stopLocate();" class="btn danger">
                         Click to locate yourself on the map
                     </button>
                 </div>
@@ -105,14 +105,14 @@
 				
 		<!--Reveal OSM activate-->
                 <div id="text " style="margin-top: 10px;>
-                    <button id="revealOSMactivate" class="btn btn-primary" onclick="map.revealOSMControl.activate();" class="btn danger">
+                    <button id="revealOSM_activate" class="btn btn-primary" onclick="map.revealOSMControl.activate();" class="btn danger">
                         Click to activate RevealOSM Plugin
                     </button>
                 </div>
 
                 <!--Reveal OSM -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="revealOSMdeactivate" class="btn btn-primary" onclick="map.revealOSMControl.deactivate();" class="btn danger">
+                    <button id="revealOSM_deactivate" class="btn btn-primary" onclick="map.revealOSMControl.deactivate();" class="btn danger">
                         Click to disable RevealOSM Plugin
                     </button>
                 </div>
@@ -126,18 +126,33 @@
 				
 		<!--Enable Measurement Tool -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="homeExtend" class="btn btn-primary" onclick="map.measureControl._enable();" class="btn danger">
+                    <button id="measureControl_enable" class="btn btn-primary" onclick="map.measureControl._enable();" class="btn danger">
                         Click to Enable Measurement Tool
                     </button>
                 </div>
 				
 		<!--Disable Measurement Tool -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="homeExtend" class="btn btn-primary" onclick="map.measureControl._disable();" class="btn danger">
+                    <button id="measureControl_disable" class="btn btn-primary" onclick="map.measureControl._disable();" class="btn danger">
                         Click to Disable Measurement Tool
                     </button>
                 </div>
-				
+		
+		
+		<!--Minimize Minimap  -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="minimizeMinimap" class="btn btn-primary" onclick="minimap._minimize();" class="btn danger">
+                        Click to Minimize Minimap
+                    </button>
+                </div>	
+                
+                
+                <!--Restore Minimap  -->
+                <div id="text" style="margin-top: 10px;>
+                    <button id="resoreMinimap" class="btn btn-primary" onclick="minimap.restore();" class="btn danger">
+                        Click to Resore Minimap
+                    </button>
+                </div>
 				
                 <!--popstructure Layer ON-->
                 <div id="text" style="margin-top: 10px;>
@@ -182,7 +197,7 @@
 				
 				<!--Drawing Tool - Polygon -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="circledraw" class="btn btn-primary" onclick="new L.Draw.Polygon(map).enable();" class="btn danger">
+                    <button id="polygondraw" class="btn btn-primary" onclick="new L.Draw.Polygon(map).enable();" class="btn danger">
                         Click to start drawing a polygon
                     </button>
                 </div>
@@ -277,7 +292,7 @@
 	
     <script>
 	
-		//four functions to handle operations in context menue
+	//four functions to handle operations in context menue
         function showCoordinates (e) {
             alert(e.latlng);
 		}
@@ -293,8 +308,8 @@
 		    map.zoomOut();
 		}
 		
-		//new map with map options
-		var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
+	//new map with map options
+	var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
         var map = L.map('map', {
             center: [51.95442, 7.62709],
             zoom: 13,
@@ -310,17 +325,17 @@
             closePopupOnClick: true,
             zoomsliderControl: true,
             loadingControl: true,
-			panControl: true,
-			measureControl: true,
+            panControl: true,
+            measureControl: true,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
-			// measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
-			editInOSMControlOptions: {
-				editors: ["id"]		//no other editors enabled
-				},
-			revealOSMControl: true,		//more options here: https://github.com/yohanboniface/Leaflet.RevealOSM
-				revealOSMControlOptions: {
-					queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
-				},
+            // measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
+            editInOSMControlOptions: {
+		editors: ["id"]		//no other editors enabled
+		},
+	revealOSMControl: true,		//more options here: https://github.com/yohanboniface/Leaflet.RevealOSM
+		revealOSMControlOptions: {
+			queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
+		},
 			//more options here: https://github.com/aratcliffe/Leaflet.contextmenu
 			/*
 			contextmenu: true,
@@ -393,20 +408,20 @@
 		});
 			
 			
-		//new sidebar	
+	//new sidebar	
         var sidebar = L.control.sidebar('sidebar', {
             closeButton: true,
             position: 'right'
         });
         map.addControl(sidebar);
 
-		//an example marker, which is able to open the popup
+	//an example marker, which is able to open the popup
         var marker = L.marker([51.982, 7.597]).addTo(map).on('click', function () {
             sidebar.toggle();
         });
 
 		
-		//new Geolocation tool
+	//new Geolocation tool
         var locater = L.control.locate({
             position: 'topright', // set the location of the control
             drawCircle: true, // controls whether a circle is drawn that shows the uncertainty about the location
@@ -431,10 +446,10 @@
                 popup: "You are within {distance} {unit} from this point", // text to appear if user clicks on circle
                 outsideMapBoundsMsg: "You seem located outside the boundaries of the map" // default message for onLocationOutsideMapBounds
             }
-            //locateOptions: {}  // define location options e.g enableHighAccuracy: true
+        //locateOptions: {}  // define location options e.g enableHighAccuracy: true
         }).addTo(map);
 
-		L.Control.measureControl().addTo(map);
+	L.Control.measureControl().addTo(map);
 
         // new Geoseach Bar			
         new L.Control.GeoSearch({
@@ -462,7 +477,7 @@
         }).addTo(map);
 
 
-		//Creating new layers
+	//Creating new layers
         var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
@@ -474,59 +489,59 @@
             styleId: 22677
         })
 
-		var baseLayersown = {
+	var baseLayersown = {
             "Minimal": minimal,
             "OSM": osm
         };
 		
-		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
-		//More information here: https://github.com/leaflet-extras/leaflet-providers
-		var baseLayers = {
-			'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
-			'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
-			'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
-			'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
-			'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
-			'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
-			'MapQuest OSM': L.tileLayer.provider('MapQuestOpen.OSM'),
-			'MapQuest Aerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
-			'MapBox Example': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
-			'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
-			'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
-			'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
-			'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
-			'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
-			'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
-			'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
-			'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
-			'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
-			'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
-			'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
-			'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
-			'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
-			'Nokia Normal Day': L.tileLayer.provider('Nokia.normalDay'),
-			'Nokia Normal Day Grey': L.tileLayer.provider('Nokia.normalGreyDay'),
-			'Nokia Satellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
-			'Nokia Satellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
-			'Nokia Terrain': L.tileLayer.provider('Nokia.terrainDay'),
-			'Acetate': L.tileLayer.provider('Acetate')
-		};
+	//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
+	//More information here: https://github.com/leaflet-extras/leaflet-providers
+	var baseLayers = {
+		'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
+		'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
+		'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
+		'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
+		'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
+		'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
+		'MapQuest OSM': L.tileLayer.provider('MapQuestOpen.OSM'),
+		'MapQuest Aerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
+		'MapBox Example': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
+		'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
+		'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
+		'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
+		'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
+		'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
+		'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
+		'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
+		'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
+		'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
+		'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
+		'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
+		'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
+		'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
+		'Nokia Normal Day': L.tileLayer.provider('Nokia.normalDay'),
+		'Nokia Normal Day Grey': L.tileLayer.provider('Nokia.normalGreyDay'),
+		'Nokia Satellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
+		'Nokia Satellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
+		'Nokia Terrain': L.tileLayer.provider('Nokia.terrainDay'),
+		'Acetate': L.tileLayer.provider('Acetate')
+	};
 		
-		//new overlay Layers...these layer will be on top of baselayers
-		var overlayLayers = {
-			'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
-			'OpenWeatherMap Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
-			'OpenWeatherMap CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
-			'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
-			'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
-			'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
-			'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
-			'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
-			'OpenWeatherMap PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
-			'OpenWeatherMap Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
-			'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
-			'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
-		};
+	//new overlay Layers...these layer will be on top of baselayers
+	var overlayLayers = {
+		'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
+		'OpenWeatherMap Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
+		'OpenWeatherMap CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
+		'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
+		'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
+		'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+		'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
+		'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
+		'OpenWeatherMap PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
+		'OpenWeatherMap Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
+		'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
+		'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
+	};
 		
 		
 
@@ -541,7 +556,7 @@
         })
 
 
-		//new vector layer
+	//new vector layer
         //can be controlled by buttons
          var popstructureArcGISServer = new lvector.AGS({
             url: "http://giv-buerger1.uni-muenster.de/arcgis/rest/services/eGovernance/basic_muenster_map/MapServer/7",
@@ -575,7 +590,7 @@
         }).addTo(map);
 
 
-		//For now we need two L.control.layer elements, because one can only handle two groups
+	//For now we need two L.control.layer elements, because one can only handle two groups
         //Baselayer Controll
         var layerControlBaselayers = L.control.layers(baseLayersown, baseLayers, {
 			collapsed: true
@@ -587,9 +602,9 @@
 		}).addTo(map);
 
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////Voice Recognition Part//////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////Voice Recognition Part//////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         var recognition = new webkitSpeechRecognition();
         var final_transcript = '';
         var interim_transcript = '';
@@ -717,9 +732,9 @@
             }
 
 			
-			//////////////////////////////////////////////////////////
-			/////Start using leaflets integrated drawing tool/////////
-			//////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////
+	/////Start using leaflets integrated drawing tool/////////
+	//////////////////////////////////////////////////////////
 			
 			
             if (final_transcript.indexOf("point") >= 0) {
@@ -767,9 +782,9 @@
             }
 
 
-			//////////////////////////////////////////////////////////
-			/////End using leaflets integrated drawing tool///////////
-			//////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////
+	/////End using leaflets integrated drawing tool///////////
+	//////////////////////////////////////////////////////////
 			
 			
 			
@@ -820,10 +835,24 @@
                 console.log("end measurement");
                 final_transcript = '';
             }
+            
+            
+            if (final_transcript.indexOf("minimize minimap") >= 0) {
+                miniMap._minimize();
+                console.log("minimize minimap");
+                final_transcript = '';
+            }
+            
+            
+            if (final_transcript.indexOf("maximize minimap") >= 0) {
+                miniMap._restore();
+                console.log("maximize minimap");
+                final_transcript = '';
+            }
 			
-			//////////////////////////////////////////////////////////
-			/////Start using drawing plugin tool//////////////////////
-			//////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////
+	/////Start using drawing plugin tool//////////////////////
+	//////////////////////////////////////////////////////////
 			
 	if (final_transcript.indexOf("start marker drawing") >= 0) {
                 L.Draw.Marker(map).enable();
@@ -860,9 +889,9 @@
             }
         }
 
-			//////////////////////////////////////////////////////////
-			/////End using drawing plugin tool////////////////////////
-			//////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////
+	/////End using drawing plugin tool////////////////////////
+	//////////////////////////////////////////////////////////
 
         function startButton(event) {
             final_transcript = '';
