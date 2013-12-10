@@ -7,6 +7,4 @@ To test it you need to run the html site within a web server. Browse the site wi
 You can also use "Adding Street Network" and "Removing Street Network" to add and remove the corresponding layer.  
 All sources come from geo-arcgis server...will be changed later on.  
 Webpage uses ArcGIS Services. Functionality to use CartoDB Layer is also supported by the LVector library.  
-  
-  
-  http://geo-arcgis.uni-muenster.de/iwgi/SpeechAndLeaflet.html
+See code to get an overview about implemented speech commands.
