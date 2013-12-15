@@ -702,20 +702,24 @@
             }
 
             if (final_transcript.indexOf("left") >= 0) {
-                centerPoint.lng -= 0.08;
-                $("#command_animation").html("left").css('fontSize', '13em').animate({
+				centerPoint = map.getCenter();
+				var m = (map.getBounds().getEast()- map.getBounds().getWest())/4;
+                centerPoint.lng -= Math.abs(m);
+                $("#command_animation").html("left ").css('fontSize', '13em').animate({
                         'left': '-500px'
                     }, 1100,
                     function () {
                         $("#command_animation").html("").css('left', '45%');
                     });
                 map.panTo(centerPoint);
-                console.log("Panned Left");
+                console.log("Panned Left by " + Math.abs(m));
                 final_transcript = '';
             }
 
             if (final_transcript.indexOf("right") >= 0) {
-                centerPoint.lng += 0.08;
+				centerPoint = map.getCenter();
+				var m = (map.getBounds().getEast()- map.getBounds().getWest())/4;
+                centerPoint.lng += Math.abs(m);
                 $("#command_animation").html("right").css({
                     'fontSize': '13em'
                 }).animate({
@@ -725,12 +729,14 @@
                         $("#command_animation").html("").css('left', '45%');
                     });
                 map.panTo(centerPoint);
-                console.log("Panned right");
+                console.log("Panned right by " + Math.abs(m));
                 final_transcript = '';
             }
 
             if (final_transcript.indexOf("up") >= 0) {
-                centerPoint.lat += 0.08;
+                centerPoint = map.getCenter();
+				var m = (map.getBounds().getNorth() - map.getBounds().getSouth())/4;
+                centerPoint.lat += m;
                 $("#command_animation").html("up").css('fontSize', '13em').animate({
                         'top': '-250px'
                     }, 1100,
@@ -738,12 +744,14 @@
                         $("#command_animation").html("").css('top', '50%');
                     });
                 map.panTo(centerPoint);
-                console.log("Panned up");
+                console.log("Panned up by " + Math.abs(m));
                 final_transcript = '';
             }
 
             if (final_transcript.indexOf("down") >= 0) {
-                centerPoint.lat -= 0.08;
+				centerPoint = map.getCenter();
+				var m = (map.getBounds().getNorth() - map.getBounds().getSouth())/4;
+                centerPoint.lat -= m;
                 $("#command_animation").html("down").css('fontSize', '13em').animate({
                         'top': '500px'
                     }, 1100,
@@ -751,7 +759,7 @@
                         $("#command_animation").html("").css('top', '50%');
                     });
                 map.panTo(centerPoint);
-                console.log("Panned down");
+                console.log("Panned down by "+ Math.abs(m));
                 final_transcript = '';
             }
 			
