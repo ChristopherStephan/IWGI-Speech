@@ -28,7 +28,7 @@ To test it, you need to run the .html site within a web server like apache or to
      - **"Start polygon drawing"**, 
      - **"Start rectangle drawing"** 
  - Locate yourself using the Geolocate Tool
-     - **"Show me where I am**,
+     - **"Show me where I am"**,
      - **"End show me where I am"**  
  - To control the Reveal OSM Plugin, which provides additional information via OSM features say:
      - **"Enable additional information"**,
