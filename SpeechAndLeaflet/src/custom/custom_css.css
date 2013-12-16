@@ -121,6 +121,24 @@
             width: 28px;
         }
 		
+		
+		.leaflet-control-measure a {
+			display: block;
+			text-align: center;
+			text-decoration: none;
+			width: 26px;
+			height: 26px;
+			display: block;
+			text-align: center;
+			color: #ccc;
+			text-decoration: none;
+			font: bold 25px/25px Arial,Helvetica,sans-serif;
+			-webkit-border-radius: 4px;
+			border-radius: 4px;
+		}
+		
+		
+		
          /*uncomment this to hide the zoom in/out part of slider widget
         /*
 		.leaflet-control-zoomslider-in {
@@ -180,3 +198,10 @@
             font-family: Georgia, serif;
             font-style: italic;
         }
+		
+	hr {
+		margin-top: 5px;
+		margin-bottom: 5px;
+		border: 0;
+		border-top: 1px solid #eee;
+		}

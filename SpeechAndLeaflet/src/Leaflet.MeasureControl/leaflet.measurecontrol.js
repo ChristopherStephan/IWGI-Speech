@@ -4,7 +4,6 @@ L.Polyline.Measure = L.Draw.Polyline.extend({
         if (this._map) {
             this._markerGroup = new L.LayerGroup();
             this._map.addLayer(this._markerGroup);
-
             this._markers = [];
             this._map.on('click', this._onClick, this);
             this._startShape();

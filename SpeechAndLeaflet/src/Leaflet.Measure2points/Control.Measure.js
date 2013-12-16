@@ -1,6 +1,6 @@
 L.Control.Measure = L.Control.extend({
     options: {
-        position: 'topleft'
+        position: 'topright'
     },
 
     initialize: function (options) {

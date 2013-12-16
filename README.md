@@ -1,16 +1,62 @@
-IWGI-Speech
-===========
+## IWGI - Interaction with Geographic Information ##
+### Speech And Leaflet ###
+----------
+![Speech][1]        ![enter image description here][2]   ![enter image description here][3]
 
-SpeechAndLeaflet
+To test it, you need to run the .html site within a web server like apache or tomcat. For an easy installation you could use packages like XAMPP. 
 
-To test it you need to run the html site within a web server. Browse the site with Chrome. To start interacting with the map by speech, first click the button, allow microphone access from browser and then you can use "zoom out", "zoom in", "up", "down", "left", "right" as commands to control the map's state.  
-You can also use "Adding Street Network" and "Removing Street Network" to add and remove the corresponding layer.  
-You can use "point, large/medium/small circle/rectangle", which places fixed-scale geometry objects on the map.  
-You can use "start marker drawing / start line drawing /start circle drawing / start polygone drawing / start rectangle drawing" to control the drawing control plugin.  
-You can use "Show me where I am / End show me where I am" to geolocate yourself.  
-You can use "Enable additional information/Disable additional information" to control the Reveal OSM PLugin, which provides additional information via OSM features.  
-You can use "Go back to home" to switch back to the home extend (Münster).  
-You can use "start measurement/end measurement" to control the measurement tool.  
-You can use "minimize minimap / maximize minimap" to control the minimap.
+ 1. Clone the repository 
+ 2. Copy all files to the htcdocs of your installed webserver. 
+ 3. Browse the site with Google Chrome. Other Browser are not supported, because the application uses heavily Googles WebSpeech API, which only works with Google Chrome. We're currently investigating other options using PocketSphinx or other libs.
+ 4. To start interacting with the map by speech, first click the green button, allow microphone access from browser. There you have the following options:
+
+ - Basic Map Navigation
+     - **"Zoom out"**, 
+     - **"Zoom in"**, 
+     - **"Up"**, 
+     - **"Down"**,
+     - **"Left"**, 
+     - **"Right"** 
+ - Place fixed-scale geometry objects on the map
+     - **"Point"**, 
+     - **"Large/medium/small circle"**,
+     - **"Large/medium/small rectangle"**
+ - Control the drawing control plugin (enable drawing functionalities)
+     - **"Start marker drawing"**,
+     - **"Start line drawing"**,
+     - **"Start circle drawing"**, 
+     - **"Start polygon drawing"**, 
+     - **"Start rectangle drawing"** 
+ - Locate yourself using the Geolocate Tool
+     - **"Show me where I am**,
+     - **"End show me where I am"**  
+ - To control the Reveal OSM Plugin, which provides additional information via OSM features say:
+     - **"Enable additional information"**,
+     - **"Disable additional information"** 
+ - To switch back to the home extend (Münster): 
+     - **"Go back to home"** 
+ - To Enable or Disable the measurement tool, say
+     - **"Start measurement"**,
+     - **"End measurement"**
+ - To control the minimap.
+     - **"Minimize minimap"**,
+     - **"Maximize minimap"**
+ - To enable a temperature layer. More layers will follow
+     - **"Enable temperature map"**,
+     - **"Disable temperature map"**
 
 
+----------
+To-DOs
+
+ - Issue list: https://github.com/ChristopherStephan/IWGI-Speech/issues
+ - Mainly: 
+     - Sphinx Integration, 
+     - Timeout for WebSpeech API
+     - Gesture Integration
+     - Backend Stuff
+
+
+  [1]: http://megaicons.net/static/img/icons_sizes/8/60/96/basic-speech-bubble-icon.png
+  [2]: http://www.ipart.nsw.gov.au/files/1/209/plus-sign.jpg
+  [3]: http://leafletjs.com/docs/images/logo.png
