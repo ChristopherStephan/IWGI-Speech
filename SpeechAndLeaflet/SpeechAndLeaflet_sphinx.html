@@ -61,7 +61,15 @@
         <div id="horizontal"></div>
     </div>
     
-    <div id="command_animation"></div>
+  
+	
+	
+    <div id="sidebar">
+        <p>
+            <h1>Multimodal GIS</h1>
+            <!--Startbutton for Speech-->
+          
+			  <div id="command_animation"></div>
 	
 	
 	 <select id="grammars"></select>
@@ -73,20 +81,6 @@
     </div>
     <h2>Status</h2>
     <div id="current-status">Loading page</div>
-	
-	
-    <div id="sidebar">
-        <p>
-            <h1>Multimodal GIS</h1>
-            <!--Startbutton for Speech-->
-            <div id="buttons">
-                <h3>Controls:</h3>
-                <div id="text" >
-                    <button id="start_button" class="btn btn-primary" onclick="startButton(event);" class="btn success">
-                        Click to start speaking with the map!
-                    </button>
-                </div>
-
                 <!--street Layer ON-->
                 <div id="text" style="margin-top: 10px;>
                     <button id="LayerOnStreet" class="btn btn-primary" onclick="streetArcGISServer.setMap(map);" class="btn success">
@@ -551,16 +545,26 @@
 	  
         if (outputContainer) outputContainer.innerHTML = hyp;
 		
-		 //if(hyp=="PARIS")
-		 if (document.getElementById("output").innerHTML = "PARIS")
+		if(hyp=="PARIS")
+		//if (document.getElementById('output').innerHTML = "PARIS")
 		 
 		 {
-				  move(hyp);
-				 // if document.getElementById('output').innerHTML = "";
-				  
-				  }
+		//Not the best solution for refreshing the hyp and output elements
+		// --> Improve
+				  move();
+				  stopRecording();
+				  startRecording();
+				
+				 
+				
+					
+				} 
+				
+				//
+				//startRecording();
+				  document.getElementById('output').innerHTML == "";
       };
-	  function move(hyp) {
+	  function move() {
 	    
                 centerPoint.lng -= 0.08;
                 $("#command_animation").html("left").css('fontSize', '13em').animate({
@@ -570,6 +574,10 @@
                         $("#command_animation").html("").css('left', '45%');
                     });
                 map.panTo(centerPoint);
+				
+				//Try to empty the output div:
+				 //outputContainer.innerHTML = "";
+				//if (outputContainer) outputContainer.innerHTML = "";
 				//document.getElementById("output").innerHTML = "";
 	  
 	   };
@@ -580,6 +588,9 @@
       // Only when both recorder and recognizer are ready do we enable the buttons
       function updateUI() {
         if (recorderReady && recognizerReady) startBtn.disabled = stopBtn.disabled = false;
+		
+		
+
       };
 
       // This is just a logging window where we display the status
@@ -692,8 +703,6 @@
                   updateHyp(newHyp);
 				  
                 }
-				
-				
 				
 				
                 // This is the case when we have an error
