@@ -556,45 +556,13 @@ words.delete()*/
 
       // To display the hypothesis sent by the recognizer
       function updateHyp(hyp) {
-	  
+	    //This displays the hyp
         if (outputContainer) outputContainer.innerHTML = hyp;
 		
-		if(hyp=="LEFT")
-		//if (document.getElementById('output').innerHTML = "PARIS")
-		 
-		 {
-		 //hyp=="Next:";
-				  move();
-				 stopRecording();
-				  startRecording();
-				// document.getElementById('output').innerHTML = "";
-				 // document.getElementById("output").innerHTML == "";
-				 
-				
-					
-				} 
-				
-				//
-				//startRecording();
-				  document.getElementById('output').innerHTML == "";
+		// This checks the hyp and executes a function according the command
+		checkHyp(hyp);				
+			
       };
-	  function move() {
-	    
-                centerPoint.lng -= 0.08;
-                $("#command_animation").html("left").css('fontSize', '13em').animate({
-                        'left': '-500px'
-                    }, 1100,
-                    function () {
-                        $("#command_animation").html("").css('left', '45%');
-                    });
-                map.panTo(centerPoint);
-				
-				 //outputContainer.innerHTML = "";
-				//if (outputContainer) outputContainer.innerHTML = "";
-				//document.getElementById("output").innerHTML = "";
-	  
-	   };
-	  
 	  
 
       // This updates the UI when the app might get ready
@@ -751,13 +719,11 @@ words.delete()*/
       };
 
 	  
-	
+
 	  
-	  
-	  
-	  
-	  
-	  
+	//////////////////////////////////////////////////////////
+	/////Grammar and vocabulary //////////////////////////////
+	//////////////////////////////////////////////////////////
 	  
 	  
 	  
@@ -766,19 +732,145 @@ words.delete()*/
 	  
        // This is the list of words that need to be added to the recognizer
        // This follows the CMU dictionary format
-      var wordList = [["ONE", "W AH N"], ["TWO", "T UW"], ["THREE", "TH R IY"], ["FOUR", "F AO R"], ["FIVE", "F AY V"], ["SIX", "S IH K S"], ["SEVEN", "S EH V AH N"], ["EIGHT", "EY T"], ["NINE", "N AY N"], ["ZERO", "Z IH R OW"], ["NEW-YORK", "N UW Y AO R K"], ["NEW-YORK-CITY", "N UW Y AO R K S IH T IY"], ["PARIS", "P AE R IH S"] , ["PARIS(2)", "P EH R IH S"], ["SHANGHAI", "SH AE NG HH AY"], ["SAN-FRANCISCO", "S AE N F R AE N S IH S K OW"], ["LONDON", "L AH N D AH N"], ["BERLIN", "B ER L IH N"], ["LEFT", "L EH F T"], ["SUCKS", "S AH K S"], ["ROCKS", "R AA K S"], ["IS", "IH Z"], ["NOT", "N AA T"], ["GOOD", "G IH D"], ["GOOD(2)", "G UH D"], ["GREAT", "G R EY T"], ["WINDOWS", "W IH N D OW Z"], ["LINUX", "L IH N AH K S"], ["UNIX", "Y UW N IH K S"], ["MAC", "M AE K"], ["AND", "AE N D"], ["AND(2)", "AH N D"], ["O", "OW"], ["S", "EH S"], ["X", "EH K S"]];
+      var wordList = [["ONE", "W AH N"], ["TWO", "T UW"], ["THREE", "TH R IY"], ["FOUR", "F AO R"], ["FIVE", "F AY V"], ["SIX", "S IH K S"], ["SEVEN", "S EH V AH N"], ["EIGHT", "EY T"], ["NINE", "N AY N"], ["ZERO", "Z IH R OW"], ["NEW-YORK", "N UW Y AO R K"], ["NEW-YORK-CITY", "N UW Y AO R K S IH T IY"], ["PARIS", "P AE R IH S"] , ["PARIS(2)", "P EH R IH S"], ["SHANGHAI", "SH AE NG HH AY"], ["SAN-FRANCISCO", "S AE N F R AE N S IH S K OW"], ["LONDON", "L AH N D AH N"], ["BERLIN", "B ER L IH N"], ["LEFT", "L EH F T"], ["SUCKS", "S AH K S"], ["ROCKS", "R AA K S"], ["IS", "IH Z"], ["NOT", "N AA T"], ["GOOD", "G IH D"], ["GOOD(2)", "G UH D"], ["GREAT", "G R EY T"], ["WINDOWS", "W IH N D OW Z"], ["LINUX", "L IH N AH K S"], ["UNIX", "Y UW N IH K S"], ["MAC", "M AE K"], ["AND", "AE N D"], ["AND(2)", "AH N D"], ["O", "OW"], ["S", "EH S"], ["X", "EH K S"],
+	                    ["RIGHT", "R AY T"], ["UP", "AH P"],["DOWN", "D AW N"],["ZOOM", "Z UW M"],["IN", "IH N"],["OUT", "AW T"]];
       // This grammar recognizes digits
       var grammarDigits = {numStates: 1, start: 0, end: 0, transitions: [{from: 0, to: 0, word: "ONE"},{from: 0, to: 0, word: "TWO"},{from: 0, to: 0, word: "THREE"},{from: 0, to: 0, word: "FOUR"},{from: 0, to: 0, word: "FIVE"},{from: 0, to: 0, word: "SIX"},{from: 0, to: 0, word: "SEVEN"},{from: 0, to: 0, word: "EIGHT"},{from: 0, to: 0, word: "NINE"},{from: 0, to: 0, word: "ZERO"}]};
       // This grammar recognizes a few cities names
-      var grammarCities = {numStates: 1, start: 0, end: 0, transitions: [{from: 0, to: 0, word: "NEW-YORK"}, {from: 0, to: 0, word: "NEW-YORK-CITY"}, {from: 0, to: 0, word: "LEFT"}, {from: 0, to: 0, word: "SHANGHAI"}, {from: 0, to: 0, word: "SAN-FRANCISCO"}, {from: 0, to: 0, word: "LONDON"}, {from: 0, to: 0, word: "BERLIN"}]};
-      // This is to play with beloved or belated OSes
-      var grammarOses = {numStates: 7, start: 0, end: 6, transitions: [{from: 0, to: 1, word: "WINDOWS"}, {from: 0, to: 1, word: "LINUX"}, {from: 0, to: 1, word: "UNIX"}, {from: 1, to: 2, word: "IS"}, {from: 2, to: 2, word: "NOT"}, {from: 2, to: 6, word: "GOOD"}, {from: 2, to: 6, word: "GREAT"}, {from: 1, to: 6, word: "ROCKS"}, {from: 1, to: 6, word: "SUCKS"}, {from: 0, to: 4, word: "MAC"}, {from: 4, to: 5, word: "O"}, {from: 5, to: 3, word: "S"}, {from: 3, to: 1, word: "X"}, {from: 6, to: 0, word: "AND"}]};
-      var grammars = [{title: "OSes", g: grammarOses}, {title: "Digits", g: grammarDigits}, {title: "Cities", g: grammarCities}];
+      var grammarPAN = {numStates: 1, start: 0, end: 0, transitions: [{from: 0, to: 0, word: "UP"}, {from: 0, to: 0, word: "DOWN"}, {from: 0, to: 0, word: "LEFT"}, {from: 0, to: 0, word: "RIGHT"}, {from: 0, to: 0, word: "SAN-FRANCISCO"}, {from: 0, to: 0, word: "LONDON"}, {from: 0, to: 0, word: "BERLIN"}]};     
+      
+	  var grammarZOOM = {numStates: 7, start: 0, end: 6, transitions: [{from: 0, to: 1, word: "ZOOM"}, {from: 1, to: 2, word: "IN"},  {from: 1, to: 2, word: "OUT"}]};
+	  
+	  var grammars = [ {title: "ZOOM", g: grammarZOOM}, {title: "PAN", g: grammarPAN}];
       var grammarIds = [];
 	  
 	  
+	//////////////////////////////////////////////////////////
+	/////Check the Recognition hyp ///////////////////////////
+	//////////////////////////////////////////////////////////  
+
+
+    function checkHyp(hyp) {
+	    if(hyp=="LEFT"){
+		 				 
+	    stopRecording();
+		startRecording();
+		pan_left();	
+				 
+	  }
+	   if(hyp=="RIGHT"){
+		 				 
+	    stopRecording();
+		startRecording();
+		pan_right();	
+				 
+	  }
+	  if(hyp=="UP"){
+		 				 
+	    stopRecording();
+		startRecording();
+		pan_up();	
+				 
+	  }
+	   if(hyp=="DOWN"){
+		 				 
+	    stopRecording();
+		startRecording();
+		pan_down();	
+				} 
 	  
 	  
+	  if(hyp=="ZOOM IN"){
+		 				 
+	    stopRecording();
+		startRecording();
+		map.zoomIn();	
+				} 
+	 
+	  
+	  if(hyp=="ZOOM OUT"){
+		 				 
+	    stopRecording();
+		startRecording();
+		map.zoomOut();	
+				} 
+   };
+	  
+
+
+
+
+
+
+
+
+
+
+
+
+	  
+	//////////////////////////////////////////////////////////
+	/////Functions ///////////////////////////////////////////
+	//////////////////////////////////////////////////////////  
+	  
+	//PAN
+	  function pan_left() {
+	    
+               centerPoint = map.getCenter();
+				var m = (map.getBounds().getEast()- map.getBounds().getWest())/4;
+                centerPoint.lng -= Math.abs(m);
+                $("#command_animation").html("left ").css('fontSize', '13em').animate({
+                        'left': '-500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('left', '45%');
+                    });
+                map.panTo(centerPoint);
+				
+				 //outputContainer.innerHTML = "";
+				//if (outputContainer) outputContainer.innerHTML = "";
+				//document.getElementById("output").innerHTML = "";
+	  
+	   };
+	    function pan_right() {
+	  centerPoint = map.getCenter();
+				var m = (map.getBounds().getEast()- map.getBounds().getWest())/4;
+                centerPoint.lng += Math.abs(m);
+                $("#command_animation").html("right").css({
+                    'fontSize': '13em'
+                }).animate({
+                        'left': '100%'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('left', '45%');
+                    });
+                map.panTo(centerPoint);
+	  };
+	   function pan_up() {
+	  centerPoint = map.getCenter();
+				var m = (map.getBounds().getNorth() - map.getBounds().getSouth())/4;
+                centerPoint.lat += m;
+                $("#command_animation").html("up").css('fontSize', '13em').animate({
+                        'top': '-250px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('top', '50%');
+                    });
+                map.panTo(centerPoint);
+	  };
+	  
+	   function pan_down() {
+	  centerPoint = map.getCenter();
+				var m = (map.getBounds().getNorth() - map.getBounds().getSouth())/4;
+                centerPoint.lat -= m;
+                $("#command_animation").html("down").css('fontSize', '13em').animate({
+                        'top': '500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('top', '50%');
+                    });
+                map.panTo(centerPoint);
+	  };  
 	  
     </script>
 </body>
