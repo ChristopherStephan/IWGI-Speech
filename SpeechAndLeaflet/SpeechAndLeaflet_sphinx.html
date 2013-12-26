@@ -733,7 +733,8 @@ words.delete()*/
        // This is the list of words that need to be added to the recognizer
        // This follows the CMU dictionary format
       var wordList = [["ONE", "W AH N"], ["TWO", "T UW"], ["THREE", "TH R IY"], ["FOUR", "F AO R"], ["FIVE", "F AY V"], ["SIX", "S IH K S"], ["SEVEN", "S EH V AH N"], ["EIGHT", "EY T"], ["NINE", "N AY N"], ["ZERO", "Z IH R OW"], ["NEW-YORK", "N UW Y AO R K"], ["NEW-YORK-CITY", "N UW Y AO R K S IH T IY"], ["PARIS", "P AE R IH S"] , ["PARIS(2)", "P EH R IH S"], ["SHANGHAI", "SH AE NG HH AY"], ["SAN-FRANCISCO", "S AE N F R AE N S IH S K OW"], ["LONDON", "L AH N D AH N"], ["BERLIN", "B ER L IH N"], ["LEFT", "L EH F T"], ["SUCKS", "S AH K S"], ["ROCKS", "R AA K S"], ["IS", "IH Z"], ["NOT", "N AA T"], ["GOOD", "G IH D"], ["GOOD(2)", "G UH D"], ["GREAT", "G R EY T"], ["WINDOWS", "W IH N D OW Z"], ["LINUX", "L IH N AH K S"], ["UNIX", "Y UW N IH K S"], ["MAC", "M AE K"], ["AND", "AE N D"], ["AND(2)", "AH N D"], ["O", "OW"], ["S", "EH S"], ["X", "EH K S"],
-	                  ["RIGHT", "R AY T"], ["UP", "AH P"],["DOWN", "D AW N"],["ZOOM", "Z UW M"],["IN", "IH N"],["OUT", "AW T"],["LOCATE", "L OW K EY T"],["STOP", "S T AA P"],["SHOW", "SH OW"],["INFORMATION", "IH N F AO R M EY SH AH N"],["INFORMATION(2)", "IH N F ER M EY SH AH N"],["HIDE", "HH AY D"],["START", "S T AA R T"],["MEASUREMENT", "M EH ZH ER M AH N T"]];
+	                  ["RIGHT", "R AY T"], ["UP", "AH P"],["DOWN", "D AW N"],["ZOOM", "Z UW M"],["IN", "IH N"],["OUT", "AW T"],["LOCATE", "L OW K EY T"],["STOP", "S T AA P"],["SHOW", "SH OW"],["INFORMATION", "IH N F AO R M EY SH AH N"],["INFORMATION(2)", "IH N F ER M EY SH AH N"],["HIDE", "HH AY D"],["START", "S T AA R T"],
+					  ["MEASUREMENT", "M EH ZH ER M AH N T"],["POINT", "P OY N T"],["CIRCLE", "S ER K AH L"],["RECTANGLE", "R EH K T AE NG G AH L"],["SMALL", "S M AO L"], ["MEDIUM", "M IY D IY AH M"], ["LARGE", "L AA R JH"]];
       // This grammar recognizes digits
       var grammarDigits = {numStates: 1, start: 0, end: 0, transitions: [{from: 0, to: 0, word: "ONE"},{from: 0, to: 0, word: "TWO"},{from: 0, to: 0, word: "THREE"},{from: 0, to: 0, word: "FOUR"},{from: 0, to: 0, word: "FIVE"},{from: 0, to: 0, word: "SIX"},{from: 0, to: 0, word: "SEVEN"},{from: 0, to: 0, word: "EIGHT"},{from: 0, to: 0, word: "NINE"},{from: 0, to: 0, word: "ZERO"}]};
       // This grammar recognizes a few cities names
@@ -741,8 +742,8 @@ words.delete()*/
       
 	  var grammarZOOM = {numStates: 7, start: 0, end: 6, transitions: [{from: 0, to: 1, word: "ZOOM"}, {from: 1, to: 2, word: "IN"},  {from: 1, to: 2, word: "OUT"}]};
 	  var grammarTOOLS = {numStates: 7, start: 0, end: 2, transitions: [{from: 0, to: 1, word: "LOCATE"},{from: 0, to: 1, word: "SHOW"}, {from: 0, to: 1, word: "MEASUREMENT"}, {from: 0, to: 1, word: "HIDE"}, {from: 1, to: 2, word: "STOP"}, {from: 1, to: 2, word: "START"}, {from: 1, to: 2, word: "INFORMATION"}]};
-	 // var grammarDRAW = {numStates: 6, start: 0, end: 2, transitions: [{from: 0, to: 1, word: "LOCATE"},{from: 0, to: 1, word: "SHOW"}, {from: 0, to: 1, word: "HIDE"}, {from: 1, to: 2, word: "STOP"}, {from: 1, to: 2, word: "START"}, {from: 1, to: 2, word: "INFORMATION"}]};
-	  var grammars = [ {title: "ZOOM", g: grammarZOOM}, {title: "PAN", g: grammarPAN},{title: "TOOLS", g: grammarTOOLS}];
+	  var grammarDRAW = {numStates: 6, start: 0, end: 2, transitions: [{from: 0, to: 0, word: "POINT"},{from: 0, to: 1, word: "LARGE"}, {from: 0, to: 1, word: "MEDIUM"}, {from: 0, to: 1, word: "SMALL"}, {from: 1, to: 2, word: "CIRCLE"}, {from: 1, to: 2, word: "RECTANGLE"}]};
+	  var grammars = [ {title: "ZOOM", g: grammarZOOM}, {title: "PAN", g: grammarPAN},{title: "TOOLS", g: grammarTOOLS},{title: "DRAW", g: grammarDRAW}];
       var grammarIds = [];
 	  
 	  
@@ -835,6 +836,59 @@ words.delete()*/
 	    stopRecording();
 		startRecording();
 		map.measureControl._disable();	
+				} 
+				
+	if(hyp=="POINT"){
+		 				 
+	    stopRecording();
+		startRecording();
+		L.marker(map.getCenter()).addTo(map);	
+				} 
+	if(hyp=="MEASUREMENT STOP"){
+		 				 
+	    stopRecording();
+		startRecording();
+		map.measureControl._disable();	
+				} 
+	if(hyp=="LARGE CIRCLE"){
+		 				 
+	    stopRecording();
+		startRecording();
+		L.circle(map.getCenter(), 400).addTo(map);	
+				} 
+	if(hyp=="MEDIUM CIRCLE"){
+		 				 
+	    stopRecording();
+		startRecording();
+		L.circle(map.getCenter(), 200).addTo(map);	
+				} 
+				
+	if(hyp=="SMALL CIRCLE"){
+		 				 
+	    stopRecording();
+		startRecording();
+		L.circle(map.getCenter(), 100).addTo(map);	
+				} 
+				
+				
+		if(hyp=="LARGE RECTANGLE"){
+		 				 
+	    stopRecording();
+		startRecording();
+		L.rectangle([[map.getCenter().lat - 0.01, map.getCenter().lng - 0.01],[map.getCenter().lat + 0.01, map.getCenter().lng + 0.01]]).addTo(map);
+				} 
+	if(hyp=="MEDIUM RECTANGLE"){
+		 				 
+	    stopRecording();
+		startRecording();
+		L.rectangle([[map.getCenter().lat - 0.005, map.getCenter().lng - 0.005],[map.getCenter().lat + 0.005, map.getCenter().lng + 0.005]]).addTo(map);	
+				} 
+				
+	if(hyp=="SMALL RECTANGLE"){
+		 				 
+	    stopRecording();
+		startRecording();
+		L.rectangle([[map.getCenter().lat - 0.0025, map.getCenter().lng - 0.0025],[map.getCenter().lat + 0.0025, map.getCenter().lng + 0.0025]]).addTo(map);	
 				} 
 	
    };
