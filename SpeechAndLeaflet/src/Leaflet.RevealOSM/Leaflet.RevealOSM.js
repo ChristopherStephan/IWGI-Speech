@@ -2,7 +2,7 @@ L.Control.RevealOSM = L.Control.extend({
     includes: L.Mixin.Events,
 
     options: {
-        position: 'topright',
+        position: 'topleft',
         apiUrl: 'http://overpass-api.de/api/interpreter?data=',
         queryTemplate: '[out:json];node(around:{radius},{lat},{lng})[name];out body qt 1;',
         helpText: "Click on names to get more infos",

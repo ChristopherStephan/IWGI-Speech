@@ -81,7 +81,7 @@ L.Control.MeasureControl = L.Control.extend({
         TITLE: 'Measure distances'
     },
     options: {
-        position: 'topright',
+        position: 'topleft',
         handler: {}
     },
 

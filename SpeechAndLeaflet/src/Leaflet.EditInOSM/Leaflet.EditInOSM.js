@@ -130,7 +130,7 @@
     L.Control.EditInOSM = L.Control.extend({
 
         options: {
-            position: "topright",
+            position: "topleft",
             zoomThreshold: 0,
             widget: "multiButton",
             editors: ["id", "josm"]
