@@ -277,13 +277,13 @@
 			
 		<!--Measurement Tool -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="measureControl_enable" class="btn btn-primary" onclick="map.measureControl._enable();" class="btn danger">
+                    <button id="measureControl_enable" class="btn btn-primary" onclick="map.measureControl.toggle();" class="btn danger">
                         Click to Enable Measurement Tool
                     </button>
                 </div>
 				
                 <div id="text" style="margin-top: 10px;>
-                    <button id="measureControl_disable" class="btn btn-primary" onclick="map.measureControl._disable();" class="btn danger">
+                    <button id="measureControl_disable" class="btn btn-primary" onclick="map.measureControl.toggle();" class="btn danger">
                         Click to Disable Measurement Tool
                     </button>
                 </div>
@@ -293,13 +293,13 @@
 		<!--Minimap  -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="minimizeMinimap" class="btn btn-primary" onclick="miniMap._minimize();" class="btn danger">
-                        Click to Enable the Overview Minimap
+                        Click to minimize the Overview Minimap
                     </button>
                 </div>	
                 
                 <div id="text" style="margin-top: 10px;>
                     <button id="resoreMinimap" class="btn btn-primary" onclick="miniMap._restore();" class="btn danger">
-                        Click to Disable Overview Minimap
+                        Click to restore Overview Minimap
                     </button>
                 </div>
 
@@ -516,6 +516,7 @@
             worldCopyJump: false,
             closePopupOnClick: true,
             zoomsliderControl: true,
+			measureControl: true,
             loadingControl: true,
 			panControl: false,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
@@ -648,50 +649,50 @@
 		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
 		//More information here: https://github.com/leaflet-extras/leaflet-providers
 		var baseLayers = {
-			'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
-			'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
-			'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
-			'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
-			'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
-			'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
-			'MapQuest OSM': L.tileLayer.provider('MapQuestOpen.OSM'),
-			'MapQuest Aerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
-			'MapBox Example': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
-			'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
-			'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
-			'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
-			'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
-			'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
-			'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
-			'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
-			'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
-			'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
-			'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
-			'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
-			'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
-			'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
-			'Nokia Normal Day': L.tileLayer.provider('Nokia.normalDay'),
-			'Nokia Normal Day Grey': L.tileLayer.provider('Nokia.normalGreyDay'),
-			'Nokia Satellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
-			'Nokia Satellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
-			'Nokia Terrain': L.tileLayer.provider('Nokia.terrainDay'),
+			'OpenStreetMapGermanStyle': L.tileLayer.provider('OpenStreetMap.DE'),
+			'OpenStreetMapBlackandWhite': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
+			'OpenStreetMapH.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
+			'ThunderforestOpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
+			'ThunderforestTransport': L.tileLayer.provider('Thunderforest.Transport'),
+			'ThunderforestLandscape': L.tileLayer.provider('Thunderforest.Landscape'),
+			'MapQuestOSM': L.tileLayer.provider('MapQuestOpen.OSM'),
+			'MapQuestAerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
+			'MapBoxExample': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
+			'StamenToner': L.tileLayer.provider('Stamen.Toner'),
+			'StamenTerrain': L.tileLayer.provider('Stamen.Terrain'),
+			'StamenWatercolor': L.tileLayer.provider('Stamen.Watercolor'),
+			'EsriWorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
+			'EsriDeLorme': L.tileLayer.provider('Esri.DeLorme'),
+			'EsriWorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
+			'EsriWorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
+			'EsriWorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
+			'EsriWorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
+			'EsriWorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
+			'EsriOceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
+			'EsriNatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
+			'EsriWorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
+			'NokiaNormalDay': L.tileLayer.provider('Nokia.normalDay'),
+			'NokiaNormalDayGrey': L.tileLayer.provider('Nokia.normalGreyDay'),
+			'NokiaSatellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
+			'NokiaSatellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
+			'NokiaTerrain': L.tileLayer.provider('Nokia.terrainDay'),
 			'Acetate': L.tileLayer.provider('Acetate')
 		};
 		
 		//new overlay Layers...these layer will be on top of baselayers
 		var overlayLayers = {
 			'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
-			'OpenWeatherMap Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
-			'OpenWeatherMap CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
-			'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
-			'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
-			'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
-			'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
-			'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
-			'OpenWeatherMap PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
-			'OpenWeatherMap Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
-			'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
-			'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
+			'OpenWeatherMap_Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
+			'OpenWeatherMap_CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
+			'OpenWeatherMap_Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
+			'OpenWeatherMap_PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
+			'OpenWeatherMap_Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+			'OpenWeatherMap_RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
+			'OpenWeatherMap_Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
+			'OpenWeatherMap_PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
+			'OpenWeatherMap_Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
+			'OpenWeatherMap_Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
+			'OpenWeatherMap_Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
 		};
 		
 
@@ -803,13 +804,7 @@
 	
 		// Add Draw control 
 		map.addControl(drawControl);	
-		//measure Control 
-		L.Control.measureControl().addTo(map);
-		/*miniMap
-			var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 13, attribution: osmAttrib });
-			var miniMap = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
-		*/       
-		//=================================================
+		
   
 		var circle = L.circleMarker([0, 0], {radius: 5, fillColor: 'white', fillOpacity: 1});
 		var previousColor;	

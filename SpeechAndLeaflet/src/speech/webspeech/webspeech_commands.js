@@ -223,14 +223,14 @@
             
             
             if (final_transcript.indexOf("start measurement") >= 0) {
-                map.measureControl._enable();
+                map.measureControl.toggle();
                 console.log("start measurement");
                 final_transcript = '';
             }
             
             
             if (final_transcript.indexOf("end measurement") >= 0) {
-                map.measureControl._disable();
+                map.measureControl.toggle();
                 console.log("end measurement");
                 final_transcript = '';
             }
