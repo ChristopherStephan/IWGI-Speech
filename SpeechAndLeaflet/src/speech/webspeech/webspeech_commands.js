@@ -136,47 +136,47 @@
 	//////////////////////////////////////////////////////////
 			
 			
-            if (final_transcript.indexOf("point") >= 0) {
+            if (final_transcript.indexOf("place marker") >= 0) {
                 L.marker(map.getCenter()).addTo(map);
-                console.log("added marker");
+                console.log("place marker");
                 final_transcript = '';
             }
 
-            if (final_transcript.indexOf("large circle") >= 0) {
+            if (final_transcript.indexOf("place large circle") >= 0) {
                 L.circle(map.getCenter(), 400).addTo(map);
-                console.log("added large circle");
+                console.log("place large circle");
                 final_transcript = '';
             }
 
-            if (final_transcript.indexOf("medium circle") >= 0) {
+            if (final_transcript.indexOf("place medium circle") >= 0) {
                 L.circle(map.getCenter(), 200).addTo(map);
-                console.log("added medium circle");
+                console.log("place medium circle");
                 final_transcript = '';
             }
 
-            if (final_transcript.indexOf("small circle") >= 0) {
+            if (final_transcript.indexOf("place small circle") >= 0) {
                 L.circle(map.getCenter(), 100).addTo(map);
-                console.log("added small circle");
+                console.log("place small circle");
                 final_transcript = '';
             }
 
-            if (final_transcript.indexOf("large rectangle") >= 0) {
+            if (final_transcript.indexOf("place large rectangle") >= 0) {
                 L.rectangle([[map.getCenter().lat - 0.01, map.getCenter().lng - 0.01],[map.getCenter().lat + 0.01, map.getCenter().lng + 0.01]]).addTo(map);
-                console.log("added rectangle");
+                console.log("place large rectangle");
                 final_transcript = '';
             }
 
 
-            if (final_transcript.indexOf("medium rectangle") >= 0) {
+            if (final_transcript.indexOf("place medium rectangle") >= 0) {
                 L.rectangle([[map.getCenter().lat - 0.005, map.getCenter().lng - 0.005],[map.getCenter().lat + 0.005, map.getCenter().lng + 0.005]]).addTo(map);
-                console.log("added rectangle");
+                console.log("place medium rectangle");
                 final_transcript = '';
             }
 
 
-            if (final_transcript.indexOf("small rectangle") >= 0) {
+            if (final_transcript.indexOf("place small rectangle") >= 0) {
                 L.rectangle([[map.getCenter().lat - 0.0025, map.getCenter().lng - 0.0025],[map.getCenter().lat + 0.0025, map.getCenter().lng + 0.0025]]).addTo(map);
-                console.log("added rectangle");
+                console.log("place small rectangle");
                 final_transcript = '';
             }
 
@@ -187,30 +187,30 @@
 			
 			
 			
-           if (final_transcript.indexOf("show me where i am") >= 0) {
+           if (final_transcript.indexOf("enable location function") >= 0) {
                 locater.locate();
-                console.log("located user");
+                console.log("enable location function");
                 final_transcript = '';
             }
             
             
-            if (final_transcript.indexOf("end show me where i am") >= 0) {
+            if (final_transcript.indexOf("disable location function") >= 0) {
                 locater.stopLocate();
-                console.log("end located user");
+                console.log("disable location function");
                 final_transcript = '';
             }
 
 			
-            if (final_transcript.indexOf("enable additional information ") >= 0) {
+            if (final_transcript.indexOf("enable additional information") >= 0) {
                 map.revealOSMControl.activate();
-                console.log("enable additional information ");
+                console.log("enable additional information");
                 final_transcript = '';
             }
             
             
-            if (final_transcript.indexOf("disable additional information ") >= 0) {
+            if (final_transcript.indexOf("disable additional information") >= 0) {
                 map.revealOSMControl.deactivate();
-                console.log("disable additional information ");
+                console.log("disable additional information");
                 final_transcript = '';
             }
             
@@ -222,68 +222,68 @@
             }
             
             
-            if (final_transcript.indexOf("start measurement") >= 0) {
+            if (final_transcript.indexOf("enable measurement") >= 0) {
                 map.measureControl.toggle();
-                console.log("start measurement");
+                console.log("enable measurement");
                 final_transcript = '';
             }
             
             
-            if (final_transcript.indexOf("end measurement") >= 0) {
+            if (final_transcript.indexOf("disable measurement") >= 0) {
                 map.measureControl.toggle();
-                console.log("end measurement");
+                console.log("disable measurement");
                 final_transcript = '';
             }
             
-            
-            if (final_transcript.indexOf("minimize minimap") >= 0) {
-                miniMap._minimize();
-                console.log("minimize minimap");
-                final_transcript = '';
-            }
-            
-            
-            if (final_transcript.indexOf("maximize minimap") >= 0) {
+			if (final_transcript.indexOf("enable minimap") >= 0) {
                 miniMap._restore();
-                console.log("maximize minimap");
+                console.log("enable mini map");
                 final_transcript = '';
             }
+            
+            if (final_transcript.indexOf("disable minimap") >= 0) {
+                miniMap._minimize();
+                console.log("disable mini map");
+                final_transcript = '';
+            }
+            
 			
 	//////////////////////////////////////////////////////////
 	/////Start using drawing plugin tool//////////////////////
 	//////////////////////////////////////////////////////////
 			
-	if (final_transcript.indexOf("start marker drawing") >= 0) {
+	if (final_transcript.indexOf("place a point project") >= 0) {
                 L.Draw.Marker(map).enable();
-                console.log("start marker drawing");
+				//or this way: L.Draw.Marker(map, drawControl.options.marker).enable();    https://github.com/Leaflet/Leaflet.draw/issues/179#issuecomment-26500042
+                console.log("place a point project");
                 final_transcript = '';
             }
             
             
-            if (final_transcript.indexOf("start line drawing") >= 0) {
+            if (final_transcript.indexOf("place a street project") >= 0) {
                 L.Draw.Polyline(map).enable();
-                console.log("start line drawing");
+                console.log("place a street project");
                 final_transcript = '';
             }
             
             
-            if (final_transcript.indexOf("start circle drawing") >= 0) {
+            if (final_transcript.indexOf("enable circle drawing") >= 0) {
                 L.Draw.Circle(map).enable();
-                console.log("start circle drawing");
+                console.log("enable circle drawing");
                 final_transcript = '';
             }
             
             
-            if (final_transcript.indexOf("start polygon drawing") >= 0) {
+            if (final_transcript.indexOf("enable polygon drawing") >= 0) {
                L.Draw.Polygon(map).enable();
-                console.log("start polygon drawing");
+                console.log("enable polygon drawing");
                 final_transcript = '';
             }
             
             
-            if (final_transcript.indexOf("start rectangle drawing") >= 0) {
+            if (final_transcript.indexOf("enable rectangle drawing") >= 0) {
                 L.Draw.Rectangle(map).enable();
-                console.log("start rectangle drawing");
+                console.log("enable rectangle drawing");
                 final_transcript = '';
             }
         

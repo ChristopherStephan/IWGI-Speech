@@ -146,11 +146,11 @@
 				Place fixed-scale geometry objects on the map
 				<ul>
 					<li>
-						&quot;Point&quot;,&nbsp;</li>
+						&quot; Place Marker&quot;,&nbsp;</li>
 					<li>
-						&quot;Large/medium/small circle&quot;,</li>
+						&quot; Place Large/medium/small circle&quot;,</li>
 					<li>
-						&quot;Large/medium/small rectangle&quot;</li>
+						&quot; Place Large/medium/small rectangle&quot;</li>
 				</ul>
 			</li>
 		</ul>
@@ -159,9 +159,9 @@
 				Control the drawing control plugin (enable drawing functionalities)
 				<ul>
 					<li>
-						&quot;Start marker drawing&quot;,</li>
+						&quot;Place a point project&quot;,</li>
 					<li>
-						&quot;Start line drawing&quot;,</li>
+						&quot;Place a street project&quot;,</li>
 					<li>
 						&quot;Start circle drawing&quot;,&nbsp;</li>
 					<li>
@@ -176,9 +176,9 @@
 				Locate yourself using the Geolocate Tool
 				<ul>
 					<li>
-						&quot;Show me where I am,</li>
+						&quot;Enable location function,</li>
 					<li>
-						&quot;End show me where I am&quot; &nbsp;</li>
+						&quot;Disable location function&quot; &nbsp;</li>
 				</ul>
 			</li>
 		</ul>
@@ -207,9 +207,9 @@
 				To Enable or Disable the measurement tool, say
 				<ul>
 					<li>
-						&quot;Start measurement&quot;,</li>
+						&quot;Enable measurement&quot;,</li>
 					<li>
-						&quot;End measurement&quot;</li>
+						&quot;Disable measurement&quot;</li>
 				</ul>
 			</li>
 		</ul>
@@ -218,9 +218,9 @@
 				To control the minimap.
 				<ul>
 					<li>
-						&quot;Minimize minimap&quot;,</li>
+						&quot;Enable minimap&quot;,</li>
 					<li>
-						&quot;Maximize minimap&quot;</li>
+						&quot;Disable minimap&quot;</li>
 				</ul>
 			</li>
 		</ul>
@@ -247,14 +247,14 @@
 		<!--Locator -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="Locaterbutton_start" class="btn btn-primary" onclick="locater.locate();" class="btn danger">
-                        Click to Enable Locate-Me Tool
+                        Click to Enable Locate function
                     </button>
                 </div>
                 
                 <!--Locator -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="Locaterbutton_end" class="btn btn-primary" onclick="locater.stopLocate();" class="btn danger">
-                        Click to Disable Locate-Me Tool
+                        Clock to Disable Locate function
                     </button>
                 </div>
 
@@ -293,13 +293,13 @@
 		<!--Minimap  -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="minimizeMinimap" class="btn btn-primary" onclick="miniMap._minimize();" class="btn danger">
-                        Click to minimize the Overview Minimap
+                        Click to Disable the Overview Minimap
                     </button>
                 </div>	
                 
                 <div id="text" style="margin-top: 10px;>
                     <button id="resoreMinimap" class="btn btn-primary" onclick="miniMap._restore();" class="btn danger">
-                        Click to restore Overview Minimap
+                        Click to Enable Overview Minimap
                     </button>
                 </div>
 
@@ -322,14 +322,15 @@
 				https://github.com/Leaflet/Leaflet.draw/issues/179 -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="markerdraw" class="btn btn-primary" onclick="new L.Draw.Marker(map).enable();" class="btn danger">
-                        Click to place a Marker on the map
+					<!-- or this way: L.Draw.Marker(map, drawControl.options.marker).enable();    https://github.com/Leaflet/Leaflet.draw/issues/179#issuecomment-26500042 -->
+                        Click to place a point project
                     </button>
                 </div>
 				
 			<!--Drawing Tool - Line -->
                 <div id="text" style="margin-top: 10px;>
                     <button id="linedraw" class="btn btn-primary" onclick="new L.Draw.Polyline(map).enable();" class="btn danger">
-                        Click to start drawing a line
+                        Click place a street project
                     </button>
                 </div>
 				

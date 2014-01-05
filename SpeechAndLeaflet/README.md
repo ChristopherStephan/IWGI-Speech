@@ -18,29 +18,29 @@ To test it, you need to run the .html site within a web server like apache or to
      - **"Left"**, 
      - **"Right"** 
  - Place fixed-scale geometry objects on the map
-     - **"Point"**, 
-     - **"Large/medium/small circle"**,
-     - **"Large/medium/small rectangle"**
+     - **"Place Marker"**, 
+     - **"Place Large/medium/small circle"**,
+     - **"Place Large/medium/small rectangle"**
  - Control the drawing control plugin (enable drawing functionalities)
-     - **"Start marker drawing"**,
-     - **"Start line drawing"**,
+     - **"Place a point project"**,
+     - **"Place a street project"**,
      - **"Start circle drawing"**, 
      - **"Start polygon drawing"**, 
      - **"Start rectangle drawing"** 
  - Locate yourself using the Geolocate Tool
-     - **"Show me where I am"**,
-     - **"End show me where I am"**  
+     - **"Enable location function"**,
+     - **"Disable location function"**  
  - To control the Reveal OSM Plugin, which provides additional information via OSM features say:
      - **"Enable additional information"**,
      - **"Disable additional information"** 
  - To switch back to the home extend (Münster): 
      - **"Go back to home"** 
  - To Enable or Disable the measurement tool, say
-     - **"Start measurement"**,
-     - **"End measurement"**
+     - **"Enable measurement"**,
+     - **"Disable measurement"**
  - To control the minimap.
-     - **"Minimize minimap"**,
-     - **"Maximize minimap"**
+     - **"Disable minimap"**,
+     - **"Enable minimap"**
  - To enable a temperature layer. More layers will follow
      - **"Enable temperature map"**,
      - **"Disable temperature map"**
