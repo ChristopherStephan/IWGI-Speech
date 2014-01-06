@@ -253,7 +253,7 @@
 	//////////////////////////////////////////////////////////
 			
 	if (final_transcript.indexOf("place a point project") >= 0) {
-                L.Draw.Marker(map).enable();
+                new L.Draw.Marker(map).enable();
 				//or this way: L.Draw.Marker(map, drawControl.options.marker).enable();    https://github.com/Leaflet/Leaflet.draw/issues/179#issuecomment-26500042
                 console.log("place a point project");
                 final_transcript = '';
@@ -261,28 +261,28 @@
             
             
             if (final_transcript.indexOf("place a street project") >= 0) {
-                L.Draw.Polyline(map).enable();
+                new L.Draw.Polyline(map).enable();
                 console.log("place a street project");
                 final_transcript = '';
             }
             
             
             if (final_transcript.indexOf("enable circle drawing") >= 0) {
-                L.Draw.Circle(map).enable();
+                new L.Draw.Circle(map).enable();
                 console.log("enable circle drawing");
                 final_transcript = '';
             }
             
             
             if (final_transcript.indexOf("enable polygon drawing") >= 0) {
-               L.Draw.Polygon(map).enable();
+                new L.Draw.Polygon(map).enable();
                 console.log("enable polygon drawing");
                 final_transcript = '';
             }
             
             
             if (final_transcript.indexOf("enable rectangle drawing") >= 0) {
-                L.Draw.Rectangle(map).enable();
+                new L.Draw.Rectangle(map).enable();
                 console.log("enable rectangle drawing");
                 final_transcript = '';
             }
