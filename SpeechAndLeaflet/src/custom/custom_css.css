@@ -123,9 +123,7 @@ footer {
 
 .leaflet-control-layers-group label {
       padding-left: .5em;
-    }	
-
-
+    }		
 
 
 .leaflet-control-zoomslider-body {
@@ -161,8 +159,8 @@ footer {
 }
 
 .leaflet-control-zoom {
-    height: 26px;
-    width: 28px;
+	height: 24px;
+	width: 24px;
 }
 
 .leaflet-control-measure a {

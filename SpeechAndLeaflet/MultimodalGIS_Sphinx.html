@@ -487,6 +487,7 @@
 	
 	<script>
 		
+
 		 var sidebarPoint = L.control.sidebar('sidebarPoint', {
 			position: 'right'
 		});
@@ -501,32 +502,13 @@
 
 		 var sidebarComments = L.control.sidebar('sidebarComments', {
 			position: 'right'
-		});
+		});	
 		
-
-		
-	
-		//four functions to handle operations in context menue
-        function showCoordinates (e) {
-            alert(e.latlng);
-		}
-		function centerMap (e) {
-            map.panTo(e.latlng);
-		}
-
-		function zoomIn (e) {
-			map.zoomIn();
-		}
-
-		function zoomOut (e) {
-		    map.zoomOut();
-		}
 		
 		//Set Focus to Search Box
 		function setFocusToTextBox(){
 			document.getElementById("leaflet-control-geosearch-qry").focus();
 		}
-		
 		
 		
 		//new map with map options
@@ -551,35 +533,12 @@
 			panControl: false,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice	
 			// measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
-			editInOSMControlOptions: {
-				editors: ["id"]		//no other editors enabled
-				},
 			revealOSMControl: true,		//more options here: https://github.com/yohanboniface/Leaflet.RevealOSM
 				revealOSMControlOptions: {
 					queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
-				},
-			//more options here: https://github.com/aratcliffe/Leaflet.contextmenu
-			/*
-			contextmenu: true,
-				contextmenuWidth: 140,
-				contextmenuItems: [{
-					text: 'Show coordinates',
-					callback: showCoordinates
-				}, {
-					text: 'Center map here',
-					callback: centerMap
-				}, '-', {
-					text: 'Zoom in',
-					icon: 'src/Leaflet.contextmenu/images/zoom-in.png',
-					callback: zoomIn
-				}, {
-					text: 'Zoom out',
-					icon: 'src/Leaflet.contextmenu/images/zoom-out.png',
-					callback: zoomOut
-				}]
-			*/
-			//layers: [osm2, osmDE, osmCycle]
+				}
 			});
+			
 			
 		var scalebar = L.control.scale({
 			position: 'bottomleft',
@@ -607,8 +566,7 @@
 		var osmCycle = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-        });
-		
+        });	
 			
 		
 		//Layers of Geobasis NRW: http://www.bezreg-koeln.nrw.de/brk_internet/organisation/abteilung07/produkte/nrwatlas/index.html 
@@ -682,8 +640,6 @@
 		
 		//Map control: Layer switcher		  
 		var LayerSwitcher=L.control.groupedLayers(baseLayers,groupedOverLayers,{position:'topright'}).addTo(map);
-
-		
 		
 		
 		//New minimap
@@ -700,8 +656,7 @@
                 crs: L.CRS.Simple,
             }
         }).addTo(map);
-		
-		
+			
 		
 		map.addControl(sidebarPoint);
 		map.addControl(sidebarLine); 
@@ -821,6 +776,7 @@
 			//drawnItems.addLayer(layer);
 		});
 
+		
 		map.on('draw:edited', function (e) {
 			var layers = e.layers;
 			var countOfEditedLayers = 0;
@@ -830,6 +786,7 @@
 			});
 			
 		});
+	
 	
 		// Add Draw control 
 		map.addControl(drawControl);	
@@ -856,33 +813,6 @@
 			e.layer.setStyle({});	
 		});  
 		  
-		var isCtrl = false;
-		$(document).keyup(function (e) {
-		if(e.which == 17) 
-			isCtrl=false;
-		}).keydown(function (e) {
-		if(e.which == 17) 
-			isCtrl=true;
-		if(e.which == 81 && isCtrl == true) {
-			alert('One possible shortcut');
-		return false;
-		}
-		});
-
-		var isCtrl = false;
-		$(document).keyup(function (e) {
-		if(e.which == 17) 
-			isCtrl=false;
-		}).keydown(function (e) {
-		if(e.which == 17) 
-			isCtrl=true;
-		if(e.which == 83 && isCtrl == true) {
-			alert('Another possible shortcut');
-		return false;
-		}
-		});
-		
-	
 							
 
 		//an example marker, which is able to open the popup
@@ -919,7 +849,6 @@
             //locateOptions: {}  // define location options e.g enableHighAccuracy: true
         }).addTo(map);
 
-		//L.Control.measureControl().addTo(map);
 
         // new Geoseach Bar			
         new L.Control.GeoSearch({
@@ -928,29 +857,77 @@
 			showMarker: true
         }).addTo(map);
 		
-		
 
-        // create custom zoom control with fullscreen button
-        /*var zoomFS = new L.Control.ZoomFS({
-            position: 'topright'
-        }).addTo(map);
-		*/
-         // you can bind to 2 events: enterFullscreen and exitFullscreen
-         // note that these events are on the map object, not the zoomfs object...
-        /*map.on('enterFullscreen', function () {
-            if (window.console) window.console.log('enterFullscreen');
-        });
-        map.on('exitFullscreen', function () {
-            if (window.console) window.console.log('exitFullscreen');
-        });
-		*/
-         // init ViewCenter plugin
+        // init ViewCenter plugin
         var viewCenter = new L.Control.ViewCenter({
         }).addTo(map);
-
 		
-	
+		
+		//Following codeblocks are shortcuts for the functions on the map
+		//add a marker: ctrl + shift +q
+		var isCtrl = false;
+		var isShift = false
+		$(document).keyup(function (e) {
+			if (e.which == 17) isCtrl = false;
+		}).keyup(function (e) {
+			if (e.which == 16) isCtrl = false;
+		}).keydown(function (e) {
+			if (e.which == 17) isCtrl = true;
+			if (e.which == 16) isShift = true;
+			if (e.which == 81 && isCtrl == true && isShift == true) {
+				new L.Draw.Marker(map, drawControl.options.marker).enable()
+				return false;
+			}
+		});
 
+		//add a Line: ctrl + shift + e
+		var isCtrl = false;
+		var isShift = false
+		$(document).keyup(function (e) {
+			if (e.which == 17) isCtrl = false;
+		}).keyup(function (e) {
+			if (e.which == 16) isCtrl = false;
+		}).keydown(function (e) {
+			if (e.which == 17) isCtrl = true;
+			if (e.which == 16) isShift = true;
+			if (e.which == 69 && isCtrl == true && isShift == true) {
+				new L.Draw.Polyline(map, drawControl.options.polyline).enable()
+				return false;
+			}
+		});
+
+		//show projects: ctrl + shift + t
+		var isCtrl = false;
+		var isShift = false
+		$(document).keyup(function (e) {
+			if (e.which == 17) isCtrl = false;
+		}).keyup(function (e) {
+			if (e.which == 16) isCtrl = false;
+		}).keydown(function (e) {
+			if (e.which == 17) isCtrl = true;
+			if (e.which == 16) isShift = true;
+			if (e.which == 84 && isCtrl == true && isShift == true) {
+				showProjects();
+				return false;
+			}
+		});
+
+		//measure tool: ctrl+shift+m
+		var isCtrl = false;
+		var isShift = false
+		$(document).keyup(function (e) {
+			if (e.which == 17) isCtrl = false;
+		}).keyup(function (e) {
+			if (e.which == 16) isCtrl = false;
+		}).keydown(function (e) {
+			if (e.which == 17) isCtrl = true;
+			if (e.which == 16) isShift = true;
+			if (e.which == 77 && isCtrl == true && isShift == true) {
+				L.Control.MeasureControl.toggle();
+				return false;
+			}
+		});		
+		
     </script>
 </body>
 
