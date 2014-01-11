@@ -315,40 +315,17 @@
 
 		<!--Layer Controls  -->
                 <div id="text" style="margin-top: 10px;>
-                    <button id="minimizeMinimap" class="btn btn-primary" onclick="controlArialMaps._expand();" class="btn danger">
-                        Click to Enable the LayerControl ArialMaps
+                    <button id="minimizeMinimap" class="btn btn-primary" onclick="LayerSwitcher._expand();" class="btn danger">
+                        Click to Enable the LayerControl
                     </button>
                 </div>	
                 
                 <div id="text" style="margin-top: 10px;>
-                    <button id="resoreMinimap" class="btn btn-primary" onclick="controlArialMaps._collapse();" class="btn danger">
-                        Click to Disable the LayerControl ArialMaps
+                    <button id="resoreMinimap" class="btn btn-primary" onclick="LayerSwitcher._collapse();" class="btn danger">
+                        Click to Disable the LayerControl
                     </button>
                 </div>
 
-				<div id="text" style="margin-top: 10px;>
-                    <button id="minimizeMinimap" class="btn btn-primary" onclick="controlBasemaps._expand();" class="btn danger">
-                        Click to Enable the LayerControl Basemaps
-                    </button>
-                </div>	
-
-                <div id="text" style="margin-top: 10px;>
-                    <button id="resoreMinimap" class="btn btn-primary" onclick="controlBasemaps._collapse();" class="btn danger">
-                        Click to Disable the LayerControl Basemaps
-                    </button>
-                </div>
-				
-				<div id="text" style="margin-top: 10px;>
-                    <button id="minimizeMinimap" class="btn btn-primary" onclick="controlOverlaylayers._expand();" class="btn danger">
-                        Click to Enable the LayerControl Overlaylayers
-                    </button>
-                </div>	
-                
-                <div id="text" style="margin-top: 10px;>
-                    <button id="resoreMinimap" class="btn btn-primary" onclick="controlOverlaylayers._collapse();" class="btn danger">
-                        Click to Disable the LayerControl Overlaylayers
-                    </button>
-                </div>
 		<hr>		
 			
 		<!--Home Extend -->
@@ -498,32 +475,17 @@
     <!--https://github.com/makinacorpus/Leaflet.GeometryUtil-->
     <script src="src/Leaflet.almostover/leaflet.almostover.js"></script>
     <!--https://github.com/makinacorpus/Leaflet.AlmostOver-->
+	<script src="src/Leaflet.groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+    <!--https://github.com/ismyrnow/Leaflet.groupedlayercontrol-->
 	
 	<script src="src/custom/customFunctions.js"></script>
 	<script src="src/speech/sphinx/sphinx_commands.js"></script>
 	<!--cutom ones-->
 	
 	
+	
+	
 	<script>
-	
-	/*Adding Words:
-	var recognizer = new Module.Recognizer();
-	var words = new Module.VectorWords();
-	words.push_back(["LEFT", "L EH F T"]);
-
-	if (recognizer.addWords(words) != Module.ReturnType.SUCCESS)
-		// Probably bad format used for pronunciation
-		alert("Error while adding words");
-		words.delete()
-	*/
-	
-	
-	
-    	
-	
-    
-	
-	
 		
 		 var sidebarPoint = L.control.sidebar('sidebarPoint', {
 			position: 'right'
@@ -565,6 +527,8 @@
 			document.getElementById("leaflet-control-geosearch-qry").focus();
 		}
 		
+		
+		
 		//new map with map options
 		var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
         var map = L.map('map', {
@@ -580,7 +544,8 @@
             trackResize: true,
             worldCopyJump: false,
             closePopupOnClick: true,
-            zoomsliderControl: true,
+			scale: true,
+            zoomsliderControl: false,
 			measureControl: true,
             loadingControl: true,
 			panControl: false,
@@ -612,8 +577,130 @@
 					icon: 'src/Leaflet.contextmenu/images/zoom-out.png',
 					callback: zoomOut
 				}]
-			*/	
+			*/
+			//layers: [osm2, osmDE, osmCycle]
 			});
+			
+		var scalebar = L.control.scale({
+			position: 'bottomleft',
+			metric: true,
+			imperial: false
+		}).addTo(map);
+		
+		
+		//OSM maps one as overlay and one base layer 
+		var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        }).addTo(map);
+		
+		var osm2 = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        });
+		
+		var osmDE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        });
+		
+		var osmCycle = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        });
+		
+			
+		
+		//Layers of Geobasis NRW: http://www.bezreg-koeln.nrw.de/brk_internet/organisation/abteilung07/produkte/nrwatlas/index.html 
+		//                          (website which provides different Web Map Service (WMS)-URLs)
+		var layerDGK5=L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dgk5', {
+			attribution: '| &copy Geobasis NRW 2013',
+			layers: 'WMS_NW_DGK5',
+			format: 'image/png',
+			transparent: true,
+			opacity:0.5
+		});
+		var layerDTK10=L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dtk10', {
+			attribution: '| &copy Geobasis NRW 2013',
+			layers: 'nw_dtk10_pan,nw_dtk10_res,NW_DTK10_col,WMS_NW_DTK10',
+			format: 'image/png',
+			transparent: true,
+			opacity:0.5
+		});
+		//Orthophoto layer
+		var layerOrtho = L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dop40', {
+			layers: 'WMS_NW_DOP40',
+			format: 'image/png',
+			version:'1.3.0',
+			transparent: true,
+			opacity:0.4
+		});
+		var EsriStreets = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+			options: {
+				attribution: 'Tiles &copy; Esri'
+			},
+			transparent: true,
+			opacity:0.4
+		});
+		var EsriWorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+			options: {
+				attribution: 'Tiles &copy; Esri'
+			},
+			transparent: true,
+			opacity:0.5
+		});
+		var NokiaNormalDay = L.tileLayer('http://{s}.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?token={devID}&app_id={appID}', {
+			transparent: true,
+			opacity:0.4
+		});
+		
+		
+		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
+		//More information here: https://github.com/leaflet-extras/leaflet-providers
+		var baseLayers = {
+				'OSM': osm2,
+				'OSM DE': osmDE,
+				'OSM Cycle': osmCycle
+		};
+		
+		var groupedOverLayers = {
+			"Map Layers": {
+				'DGK5': layerDGK5,
+				'DTK10': layerDTK10,
+				'Arial View': layerOrtho,
+				'EsriWorldStreetMap': EsriStreets,
+				'EsriWorldImagery': EsriWorldImagery,
+				'NokiaNormalDay': NokiaNormalDay
+			},
+			"Weather Layers": {
+				'OpenWeatherMap_Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
+				'OpenWeatherMap_Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+				'OpenWeatherMap_Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature')
+			}	
+		};
+		
+		
+		//Map control: Layer switcher		  
+		var LayerSwitcher=L.control.groupedLayers(baseLayers,groupedOverLayers,{position:'topright'}).addTo(map);
+
+		
+		
+		
+		//New minimap
+        //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+        var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        })
+         var miniMap = new L.Control.MiniMap(overviewMap, {
+            toggleDisplay: true,
+            mapOptions: {
+                panControl: false,
+                zoomsliderControl: false,
+                crs: L.CRS.Simple,
+            }
+        }).addTo(map);
+		
 		
 		
 		map.addControl(sidebarPoint);
@@ -670,146 +757,7 @@
 		callLines();
 		
 
-		
-		//OSM maps one as overlay and one base layer 
-		var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-        }).addTo(map);
-		
-		
-		//Layers of Geobasis NRW: http://www.bezreg-koeln.nrw.de/brk_internet/organisation/abteilung07/produkte/nrwatlas/index.html 
-		//                          (website which provides different Web Map Service (WMS)-URLs)
-		var layerDTK10_pan=L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dtk10', {
-		   attribution: '| &copy Geobasis NRW 2013',
-			layers: 'NW_DTK10_pan',
-			format: 'image/png',
-			transparent: true,
-			opacity:0.4	
-		});
-		var layerDTK10=L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dtk10', {
-			 attribution: '| &copy Geobasis NRW 2013',
-			layers: 'nw_dtk10_pan,nw_dtk10_res,NW_DTK10_col,WMS_NW_DTK10',
-			format: 'image/png',
-			transparent: true
-		});
-		//layer of the different districts
-		var layerDVG=L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dvg', {
-			 attribution: '| &copy Geobasis NRW 2013',
-			layers: 'WMS_NW_DVG',
-			format: 'image/png',
-			transparent: true,
-			opacity:0.5
-		});
-		var layerDGK5=L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dgk5', {
-		 attribution: '| &copy Geobasis NRW 2013',
-			layers: 'WMS_NW_DGK5',
-			format: 'image/png',
-			transparent: true,
-			opacity:0.5
-		});
-		//Orthophoto layer
-		var layerOrtho = L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dop40', {
-			layers: 'WMS_NW_DOP40',
-			format: 'image/png',
-			version:'1.3.0',
-			attribution: '| &copy Geobasis NRW 2013'
-		});
-		
 
-		var baseMaps={"arial view": layerOrtho,
-					   "DTK10":layerDTK10
-					   };
-					   
-		var overlapMaps={"DVG":layerDVG,
-						  "DTK10_pan":layerDTK10_pan,
-						  "DGK5":layerDGK5
-						};	
-		
-		
-		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
-		//More information here: https://github.com/leaflet-extras/leaflet-providers
-		var baseLayers = {
-			'OpenStreetMapGermanStyle': L.tileLayer.provider('OpenStreetMap.DE'),
-			'OpenStreetMapBlackandWhite': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
-			'OpenStreetMapH.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
-			'ThunderforestOpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
-			'ThunderforestTransport': L.tileLayer.provider('Thunderforest.Transport'),
-			'ThunderforestLandscape': L.tileLayer.provider('Thunderforest.Landscape'),
-			'MapQuestOSM': L.tileLayer.provider('MapQuestOpen.OSM'),
-			'MapQuestAerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
-			'MapBoxExample': L.tileLayer.provider('MapBox.examples.map-zr0njcqy'),
-			'StamenToner': L.tileLayer.provider('Stamen.Toner'),
-			'StamenTerrain': L.tileLayer.provider('Stamen.Terrain'),
-			'StamenWatercolor': L.tileLayer.provider('Stamen.Watercolor'),
-			'EsriWorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
-			'EsriDeLorme': L.tileLayer.provider('Esri.DeLorme'),
-			'EsriWorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
-			'EsriWorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
-			'EsriWorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
-			'EsriWorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
-			'EsriWorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
-			'EsriOceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
-			'EsriNatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
-			'EsriWorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
-			'NokiaNormalDay': L.tileLayer.provider('Nokia.normalDay'),
-			'NokiaNormalDayGrey': L.tileLayer.provider('Nokia.normalGreyDay'),
-			'NokiaSatellite': L.tileLayer.provider('Nokia.satelliteNoLabelsDay'),
-			'NokiaSatellite (Labeled)': L.tileLayer.provider('Nokia.satelliteYesLabelsDay'),
-			'NokiaTerrain': L.tileLayer.provider('Nokia.terrainDay'),
-			'Acetate': L.tileLayer.provider('Acetate')
-		};
-		
-		//new overlay Layers...these layer will be on top of baselayers
-		var overlayLayers = {
-			'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
-			'OpenWeatherMap_Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
-			'OpenWeatherMap_CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
-			'OpenWeatherMap_Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
-			'OpenWeatherMap_PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
-			'OpenWeatherMap_Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
-			'OpenWeatherMap_RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
-			'OpenWeatherMap_Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
-			'OpenWeatherMap_PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
-			'OpenWeatherMap_Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
-			'OpenWeatherMap_Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
-			'OpenWeatherMap_Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
-		};
-		
-
-
-		
-		//Map control: Layer switcher
-								  
-		var controlArialMaps=L.control.layers(baseMaps,overlapMaps,{position:'topright'});
-		var controlBasemaps=L.control.layers(baseLayers,null,{position:'topright'});
-		var controlOverlaylayers=L.control.layers(null,overlayLayers,{position:'topright'});
-		
-		controlArialMaps.addTo(map);
-		controlBasemaps.addTo(map);
-		controlOverlaylayers.addTo(map);
-	
-
-		
-		//New minimap
-        //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
-        var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-        })
-         var miniMap = new L.Control.MiniMap(overviewMap, {
-            toggleDisplay: true,
-            mapOptions: {
-                panControl: false,
-                zoomsliderControl: false,
-                crs: L.CRS.Simple,
-            }
-        }).addTo(map);
-		
-		
-		
-		
-		
 		//----------- Adding drawing , editing and measurement tools in addition to mini Map  --------------------
 		// Initialize the FeatureGroup to store editable layers for drawing tool
 		var drawnItems = new L.FeatureGroup();
@@ -998,10 +946,11 @@
 		*/
          // init ViewCenter plugin
         var viewCenter = new L.Control.ViewCenter({
-        }).addTo(map);;
+        }).addTo(map);
 
 		
-		
+	
+
     </script>
 </body>
 

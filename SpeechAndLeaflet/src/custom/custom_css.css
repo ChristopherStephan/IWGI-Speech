@@ -104,8 +104,29 @@ footer {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     overflow: overlay;
-    max-height: 200px;
+    max-height: 2000px; /* To set the maximum height for the expanded layer.control (important, if you want to display "all" Layers */
 }
+
+
+
+/* gropuped layers control */	
+
+.leaflet-control-layers-group-name {
+      font-weight: bold;
+      margin-bottom: .2em;
+      display: block;
+    }
+
+.leaflet-control-layers-group {
+      margin-bottom: .5em;
+    }
+
+.leaflet-control-layers-group label {
+      padding-left: .5em;
+    }	
+
+
+
 
 .leaflet-control-zoomslider-body {
     position: relative;

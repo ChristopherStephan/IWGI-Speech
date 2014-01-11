@@ -264,7 +264,7 @@
 		 				 
 	    stopRecording();
 		startRecording();
-		//document.getElementById("output").innerHTML = "";
+		//document.getElementById('output').innerHTML = "";
 		pan_right();
 				}
 	  
