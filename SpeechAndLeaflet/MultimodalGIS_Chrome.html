@@ -623,13 +623,14 @@
 		
 		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
 		//More information here: https://github.com/leaflet-extras/leaflet-providers
-		var baseLayers = {
+		//Note that the layer groups should not be local (var) becasue then they are not accessible
+		baseLayers = {
 				'OSM': osm2,
 				'OSM_DE': osmDE,
 				'OSM_Cycle': osmCycle
 		};
 		
-		var groupedOverLayers = {
+		groupedOverLayers = {
 			"Map Layers": {
 				'DGK5': layerDGK5,
 				'DTK10': layerDTK10,
@@ -660,7 +661,7 @@
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
         })
-         var miniMap = new L.Control.MiniMap(overviewMap, {
+        var miniMap = new L.Control.MiniMap(overviewMap, {
             toggleDisplay: true,
             mapOptions: {
                 panControl: false,

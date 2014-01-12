@@ -629,13 +629,14 @@
 		
 		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
 		//More information here: https://github.com/leaflet-extras/leaflet-providers
-		var baseLayers = {
+		//Note that the layer groups should not be local (var) becasue then they are not accessible
+		baseLayers = {
 				'OSM': osm2,
 				'OSM_DE': osmDE,
 				'OSM_Cycle': osmCycle
 		};
 		
-		var groupedOverLayers = {
+		groupedOverLayers = {
 			"Map Layers": {
 				'DGK5': layerDGK5,
 				'DTK10': layerDTK10,
