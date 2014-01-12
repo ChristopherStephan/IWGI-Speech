@@ -300,12 +300,23 @@
             }
         	
 		
-		if (final_transcript.indexOf("disable temperature map") >= 0) {
+			if (final_transcript.indexOf("disable temperature map") >= 0) {
                 overlayLayers.OpenWeatherMap_Precipitation.onRemove(map);
                 console.log("disable temperature map");
                 final_transcript = '';
             }
         }
+	
+	//////////////////////////////////////////////////////////
+	/////Set Focus to the necessary input fields//////////////
+	//////////////////////////////////////////////////////////
+			
+			if (final_transcript.indexOf("switch to search bar") >= 0) {
+                setFocusToSearchBar();
+                console.log("switch to search bar");
+                final_transcript = '';
+            }
+	
 	
 	
 	
