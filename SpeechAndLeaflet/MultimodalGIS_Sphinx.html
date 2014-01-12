@@ -404,10 +404,24 @@
 		
 		</div>
 	</div>
+	
+	<script>
+	//Set Focus to Search Box
+	function setFocusToSearchBar(){
+			document.getElementById("leaflet-control-geosearch-qry").focus();
+		}
+	</script>
+	
 									
+    <div id="Focus_on_Searchbar">
+        <button id="sidebar_button_focus" onclick="setFocusToSearchBar();">
+            Focus on Searchbar
+        </button>
+    </div>
+	
 									
     <div id="Togggle_Speech_Sidebar">
-        <button id="sidebar_button_speech" onclick="sidebarSpeech.toggle();">
+        <button id="sidebar_button_speech" onclick="setFocusToTextBox();">
             Speech/Layer
         </button>
     </div>
@@ -617,15 +631,15 @@
 		//More information here: https://github.com/leaflet-extras/leaflet-providers
 		var baseLayers = {
 				'OSM': osm2,
-				'OSM DE': osmDE,
-				'OSM Cycle': osmCycle
+				'OSM_DE': osmDE,
+				'OSM_Cycle': osmCycle
 		};
 		
 		var groupedOverLayers = {
 			"Map Layers": {
 				'DGK5': layerDGK5,
 				'DTK10': layerDTK10,
-				'Arial View': layerOrtho,
+				'Arial_View': layerOrtho,
 				'EsriWorldStreetMap': EsriStreets,
 				'EsriWorldImagery': EsriWorldImagery,
 				'NokiaNormalDay': NokiaNormalDay
@@ -637,9 +651,13 @@
 			}	
 		};
 		
-		
+		  
 		//Map control: Layer switcher		  
-		var LayerSwitcher=L.control.groupedLayers(baseLayers,groupedOverLayers,{position:'topright'}).addTo(map);
+		var LayerSwitcher=L.control.groupedLayers(
+			baseLayers,groupedOverLayers,{
+				position:'topright'
+				}
+		).addTo(map);
 		
 		
 		//New minimap
@@ -715,6 +733,7 @@
 
 		//----------- Adding drawing , editing and measurement tools in addition to mini Map  --------------------
 		// Initialize the FeatureGroup to store editable layers for drawing tool
+		//https://github.com/Leaflet/Leaflet.draw
 		var drawnItems = new L.FeatureGroup();
 		map.addLayer(drawnItems);
 		// Set the title to show on the polygon button
@@ -727,22 +746,24 @@
 			polyline: {
 				metric: true
 			},
-			polygon: {
-				allowIntersection: false,
-				showArea: true,
-				drawError: {
-				color: '#bada55',
-				timeout: 1000
-				},
-				shapeOptions: {
-				color: '#b00b00'
-				}
-			},
-			circle: {
-				shapeOptions: {
-				color: '#662d91'
-				}
-			},
+			polygon: false,			/*{
+										allowIntersection: false,
+										showArea: true,
+										drawError: {
+											color: '#bada55',
+											timeout: 1000
+										},
+										shapeOptions: {
+										color: '#b00b00'
+										}
+									},*/
+			rectangle: false,
+			
+			circle: false,		/*{
+									shapeOptions: {
+										color: '#662d91'
+									}
+								},*/
 			marker: true
 			},
 			edit: {
@@ -814,12 +835,6 @@
 		});  
 		  
 							
-
-		//an example marker, which is able to open the popup
-        var marker = L.marker([51.982, 7.597]).addTo(map).on('click', function () {
-            sidebarSpeech.toggle();
-        });
-
 		
 		//new Geolocation tool
         var locater = L.control.locate({
