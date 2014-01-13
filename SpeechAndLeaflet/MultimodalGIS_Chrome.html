@@ -72,9 +72,13 @@
 		<br> Name:  
 		<input id="pointname" type="text" SIZE=30 name="pointname" required><br>
 		<br>Description :<br> <input id="pointdes" style="width: 300px; height: 150px;" name="pointdescription"><br><br><br> 
-		<button type="button" onclick="ap()">Submit</button>
-		<!--<input TYPE="RESET" VALUE="Clear">-->
-		<button type="button" onclick="clearForm()">Clear</button>
+		<button id="point_submit" onclick="addPointButton();">
+            Submit
+        </button>
+		
+		<button id="point_clear" onclick="clearForm();">
+            Clear
+        </button>
 	</div>
 
 	<div id="sidebarLine"> 
@@ -83,31 +87,42 @@
 		<br>Description :<br> <input id="linedes" style="width: 300px; height: 150px;" name="linedescription"><br><br><br> 
 		<input id="main" type="radio" name="Linetype" value="Main"> Planned road<br>
 		<input id="alternative" type="radio" name="Linetype" value="Alternative"> Alternative road<br>  
-		<button type="button" onclick="al()">Submit</button>
-		<!--<input TYPE="RESET" VALUE="Clear">-->
-		<button type="button" onclick="clearForm()">Clear</button>
+		
+		<button id="line_submit" onclick="addLineButton();">
+            Submit
+        </button>
+		
+		<button id="line_clear" onclick="clearForm();">
+            Clear
+        </button>
+
 	</div>
 
 	<div id="sidebarComments"> 
 		<b><font color="#0080C0">Add new comment</font></b>
 		<div id="AddComment" style="border: 1px solid #75C0BF; margin = 4"> 
 		<input type="hidden" name="featureid" id = "featureid" size="40" length="40" value="">
-		<br> Citizen Name: <input type="text" id = "featuretype" name="featuretype" size="40" value=""><BR>	
+		<br> Citizen Name: <input type="text" id = "citizenname" name="citizenname" size="40" value=""><BR>	
 		<br> User Comment :<br> <textarea id="usercomment" style="width: 300px; height: 150px;" name="description"></textarea><br> 
 		</div>
-	
-		<button type="button" onclick="sendUserComments()">Submit Comments</button>
-		<button type="button" onclick="clearForm()">Clear</button>
-	
+		
+		<button id="comment_submit" onclick="sendUserComments();">
+            Submit Comments
+        </button>
+		
+		<button id="comment_clear" onclick="clearForm();">
+            Clear
+        </button>
+
 		<div id="sidebarCommentsTable"></div>
 	</div>
 
-	<!--cf. customFunction.js (at the end of the file)-->
+	<!--cf. customFunction.js-->
 	<div id="sidebarProjects"> 
 		<b>Recent Projects</b></br></br>
-		Name:<p id="name1"></p></br>
-		Description:<p id="des1"></p></br>
-		<button id="button1" type="button">Move to</button>
+		Name:<p id="ProjectName"></p></br>
+		Description:<p id="ProjectDes"></p></br>
+		<button id="moveToProject" type="button">Move to</button>
 	</div>
 	
 	
@@ -398,22 +413,13 @@
                 </div>
 		</div>
 		
-
 		
 		</div>
 	</div>
-	
-	<script>
-	//Set Focus to Search Box
-	function setFocusToSearchBar(){
-			document.getElementById("leaflet-control-geosearch-qry").focus();
-		}
-	</script>
-	
-									
+							
     <div id="Focus_on_Searchbar">
         <button id="sidebar_button_focus" onclick="setFocusToSearchBar();">
-            Focus on Searchbar
+            Set SearchbarFocus
         </button>
     </div>
 
@@ -425,7 +431,7 @@
     </div>
 
     <div id="Togggle_Input_Sidebar">
-        <button id="sidebar_button" onclick="sidebar.toggle();">
+        <button id="sidebar_button" onclick="sidebarPoint.toggle();">
             Input Sidebar
         </button>
     </div>
@@ -522,7 +528,7 @@
 		//new map with map options
 		var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
         var map = L.map('map', {
-			center: [51.95442, 7.62709],
+            center: [51.95442, 7.62709],
             zoom: 13,
             dragging: true,
             touchZoom: true,
@@ -632,6 +638,7 @@
 			version:'1.1.1',
 			transparent: true
 		});
+
 		
 		
 		//Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
@@ -659,8 +666,9 @@
 			},
 			"Noise Layers":{
 				'StreetNoise Day': noiseDay,
-				'StreetNoise Night': noiseNGT,
-			},
+				'StreetNoise Night': noiseNGT
+			}
+			
 		};
 		
 		
@@ -700,14 +708,14 @@
 		map.addControl(sidebarSpeech);
 		
 		//add points
-		function ap(){
+		function addPointButton(){
 			pointname=document.getElementById('pointname').value;
 			pointdes =document.getElementById('pointdes').value;
 			addPointAttributes(pointname,pointdes);
 		}
 		
 		//add lines
-		function al(){
+		function addLineButton(){
 			linename=document.getElementById('linename').value;
 			linedes =document.getElementById('linedes').value;
 			
@@ -721,16 +729,16 @@
 		//send comments
 		function sendUserComments(){
 			Fid=currentID;
-			Ftype =document.getElementById('featuretype').value;
+			CName=document.getElementById('citizenname').value;
 			UComment =document.getElementById('usercomment').value;
-			addUserComments(Fid,Ftype,UComment);
-			document.getElementById('featuretype').value = '';
+			addUserComments(Fid,CName,UComment);
+			document.getElementById('citizenname').value = '';
 			document.getElementById('usercomment').value = '';
 		}
 		
 		//clear input fields
 		function clearForm(){
-			document.getElementById('featuretype').value = '';
+			document.getElementById('citizenname').value = '';
 			document.getElementById('usercomment').value = '';
 			document.getElementById('pointname').value = '';
 			document.getElementById('pointdes').value = '';

@@ -260,13 +260,13 @@ function addLineAttributes(name,des,type){
 }
 
 //add user comments 
-function addUserComments(FID,FType,UComment){
+function addUserComments(FID,CName,UComment){
 
 	$.post(
 		"SaveUserComment.php?",
 		{	
 		FID:FID,
-		FType:FType,
+		FType:CName,
 		UComment:UComment
 		}
 		);		
@@ -313,9 +313,102 @@ for (var i=projects.length-1;i>projects.length-2;i--){
 var coordinate = projects[i].Coord.split(',');
 var longitude = coordinate[0].substr(1,coordinate[0].length-1);
 var latitude = coordinate[1].substr(0,coordinate[1].length-1);
-document.getElementById("button1").onclick=function(){map.setView([latitude,longitude],16);};
-document.getElementById("name1").innerHTML=projects[i].Name;
-document.getElementById("des1").innerHTML=projects[i].Description;
+document.getElementById("moveToProject").onclick=function(){map.setView([latitude,longitude],16);};
+document.getElementById("ProjectName").innerHTML=projects[i].Name;
+document.getElementById("ProjectDes").innerHTML=projects[i].Description;
 }
 sidebarProjects.show();
 }
+
+
+////////////////////////Set Focus to different input files//////////////////////////
+
+//Set Focus to Search Box
+function setFocusToSearchBar(){
+	document.getElementById("leaflet-control-geosearch-qry").focus();
+}
+		
+//Set Focus to Point Name Box
+function setFocusToPointName(){
+	document.getElementById("pointname").focus();
+}
+
+//Set Focus to Point Description Box
+function setFocusToPointDes(){
+	document.getElementById("pointdes").focus();
+}
+		
+//Set Focus to Line Name Box
+function setFocusToLineName(){
+	document.getElementById("linename").focus();
+}
+
+//Set Focus to Line Description Box
+function setFocusToLineDes(){
+	document.getElementById("linedes").focus();
+}
+
+//Set Focus to CitizenName Box
+function setFocusToCitizenName(){
+	document.getElementById("citizenname").focus();
+}
+
+//Set Focus to User Comment Box
+function setFocusToUserComment(){
+	document.getElementById("usercomment").focus();
+}
+
+//Set Focus to User Comment Box
+function selectAlternativeRoad(){
+	document.getElementById("main").select();
+}
+
+
+
+
+//Select Planned Road
+function selectPlannedRoad(){
+	document.getElementById("main").checked = true;
+}
+
+//Select Alternative Road
+function selectAlternativeRoad(){
+	document.getElementById("alternative").checked = true;
+}
+
+
+
+
+//Toggle Point Sidebar
+function selectAlternativeRoad(){
+	sidebarPoint.toggle();
+}
+
+//Toggle Line Sidebar
+function selectAlternativeRoad(){
+	sidebarLine.toggle();
+}
+
+//Toggle Comments Sidebar
+function selectAlternativeRoad(){
+	sidebarComments.toggle();
+}
+
+//Toggle Projects Sidebar
+function selectAlternativeRoad(){
+	sidebarProjects.toggle();
+}
+
+//Toggle Speech Sidebar
+function selectAlternativeRoad(){
+	sidebarSpeech.toggle();
+}
+
+//Close Project Sidebar
+//Does not work until now
+function closeProjectSidebar(){
+	$("#div.leaflet-sidebar:nth-child(3) > a:nth-child(2)").click();
+}
+
+
+

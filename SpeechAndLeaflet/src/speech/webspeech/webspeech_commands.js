@@ -305,17 +305,56 @@
                 console.log("disable temperature map");
                 final_transcript = '';
             }
-        }
-	
+			
+			
 	//////////////////////////////////////////////////////////
 	/////Set Focus to the necessary input fields//////////////
 	//////////////////////////////////////////////////////////
 			
-			if (final_transcript.indexOf("switch to search bar") >= 0) {
+			//Focus to search bar
+			if (final_transcript.indexOf("set focus to search bar") >= 0) {
                 setFocusToSearchBar();
-                console.log("switch to search bar");
+                console.log("set focus to search bar");
+                final_transcript = '';
+            }	
+	
+	//////////////////////////////////////////////////////////
+	/////Controlling the UserCommenting Function//////////////
+	//////////////////////////////////////////////////////////
+	
+			//Focus to User Name Box
+			if (final_transcript.indexOf("switch to username") >= 0) {
+                setFocusToCitizenName();
+                console.log("switch to username");
                 final_transcript = '';
             }
+						
+			//Focus to UserComment Box
+			if (final_transcript.indexOf("switch to input field") >= 0) {
+                setFocusToUserComment();
+                console.log("switch to input field");
+                final_transcript = '';
+            }
+						
+			//Send UserComment
+			if (final_transcript.indexOf("submit user input") >= 0) {
+                sendUserComments();
+                console.log("submit user input");
+                final_transcript = '';
+            }
+			
+			//Clear the form
+			if (final_transcript.indexOf("clear form") >= 0) {
+                clearForm();
+                console.log("clear form");
+                final_transcript = '';
+            }
+
+	
+	
+        }
+	
+	
 	
 	
 	
