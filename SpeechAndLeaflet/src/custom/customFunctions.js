@@ -337,7 +337,7 @@ while (i>projects.length-10 && projects[i]!=null)
                                         var description = document.createTextNode(projects[i].Description);
                                         newProjectDescription.appendChild(descriptionText);
                                         newProjectDescription.appendChild(description);
-                                var newProjectButton = document.createElement("button");
+                                var newProjectButton =         document.createElement("button");
                                     newProjectButton.setAttribute("id",i);
                                         var buttonContent = document.createTextNode("Move to Project");
                                                         //var coordinate = projects[i].Coord.split(',');
@@ -372,7 +372,6 @@ while (i>projects.length-10 && projects[i]!=null)
         tag.appendChild(closeButton);
 sidebarProjects.show();
 }
-
 
 function clearSidebar(){
         var list=document.getElementById("sidebarProjectsContent");
