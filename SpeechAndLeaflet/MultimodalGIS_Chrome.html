@@ -118,12 +118,15 @@
 	</div>
 
 	<!--cf. customFunction.js-->
-	<div id="sidebarProjects"> 
-		<b>Recent Projects</b></br></br>
-		Name:<p id="ProjectName"></p></br>
-		Description:<p id="ProjectDes"></p></br>
-		<button id="moveToProject" type="button">Move to</button>
-	</div>
+	<div id="sidebarProjects">
+		<div>
+		   <b>
+			 <big>Recent Projects</big>
+		   </b>
+		   </br></br>
+		</div>
+			<div id="sidebarProjectsContent"></div>
+    </div>
 	
 	
 	<div id="sidebarSpeech">
@@ -897,70 +900,142 @@
         }).addTo(map);
 
 		
-		//Following codeblocks are shortcuts for the functions on the map
-		//add a marker: ctrl + shift +q		
-		var isCtrl = false;
-		var isShift = false
-		$(document).keyup(function (e) {
-			if (e.which == 17) isCtrl = false;
-		}).keyup(function (e) {
-			if (e.which == 16) isCtrl = false;
-		}).keydown(function (e) {
-			if (e.which == 17) isCtrl = true;
-			if (e.which == 16) isShift = true;
-			if (e.which == 81 && isCtrl == true && isShift == true) {
-				new L.Draw.Marker(map, drawControl.options.marker).enable()
-				return false;
-			}
-		});
+//Following codeblocks are shortcuts for the functions on the map
+//add a marker: ctrl + shift +q
+        var isCtrl = false;
+        var isShift=false
+        $(document).keyup(function (e) {
+        if(e.which == 17) 
+                isCtrl=false;
+        }).keyup(function (e) {
+        if(e.which == 16) 
+                isCtrl=false;
+        })
+        .keydown(function (e) {
+    if(e.which == 17) 
+                isCtrl=true;
+        if(e.which == 16) 
+                isShift=true;        
+    if(e.which == 81 && isCtrl == true && isShift == true) {
+        new L.Draw.Marker(map, drawControl.options.marker).enable()
+         return false;
+ }
+});
 
-		//add a Line: ctrl + shift + e
-		var isCtrl = false;
-		var isShift = false
-		$(document).keyup(function (e) {
-			if (e.which == 17) isCtrl = false;
-		}).keyup(function (e) {
-			if (e.which == 16) isCtrl = false;
-		}).keydown(function (e) {
-			if (e.which == 17) isCtrl = true;
-			if (e.which == 16) isShift = true;
-			if (e.which == 69 && isCtrl == true && isShift == true) {
-				new L.Draw.Polyline(map, drawControl.options.polyline).enable()
-				return false;
-			}
-		});
+//add a Line: ctrl + shift + e
+        var isCtrl = false;
+        var isShift=false
+        $(document).keyup(function (e) {
+        if(e.which == 17) 
+                isCtrl=false;
+        }).keyup(function (e) {
+        if(e.which == 16) 
+                isCtrl=false;
+        })
+        .keydown(function (e) {
+    if(e.which == 17) 
+                isCtrl=true;
+        if(e.which == 16) 
+                isShift=true;        
+    if(e.which == 69 && isCtrl == true && isShift == true) {
+       new L.Draw.Polyline(map, drawControl.options.polyline).enable() 
+         return false;
+ }
+});
 
-		//show projects: ctrl + shift + t
-		var isCtrl = false;
-		var isShift = false
-		$(document).keyup(function (e) {
-			if (e.which == 17) isCtrl = false;
-		}).keyup(function (e) {
-			if (e.which == 16) isCtrl = false;
-		}).keydown(function (e) {
-			if (e.which == 17) isCtrl = true;
-			if (e.which == 16) isShift = true;
-			if (e.which == 84 && isCtrl == true && isShift == true) {
-				showProjects();
-				return false;
-			}
-		});
+//show projects: ctrl + shift + t
+        var isCtrl = false;
+        var isShift=false
+        $(document).keyup(function (e) {
+        if(e.which == 17) 
+                isCtrl=false;
+        }).keyup(function (e) {
+        if(e.which == 16) 
+                isCtrl=false;
+        })
+        .keydown(function (e) {
+    if(e.which == 17) 
+                isCtrl=true;
+        if(e.which == 16) 
+                isShift=true;        
+    if(e.which == 84 && isCtrl == true && isShift == true) {
+       showProjects(); 
+         return false;
+ }
+});
 
-		//measure tool: ctrl+shift+m
-		var isCtrl = false;
-		var isShift = false
-		$(document).keyup(function (e) {
-			if (e.which == 17) isCtrl = false;
-		}).keyup(function (e) {
-			if (e.which == 16) isCtrl = false;
-		}).keydown(function (e) {
-			if (e.which == 17) isCtrl = true;
-			if (e.which == 16) isShift = true;
-			if (e.which == 77 && isCtrl == true && isShift == true) {
-				L.Control.MeasureControl.toggle();
-				return false;
-			}
-		});
+//measure tool: ctrl+shift+m
+        var isCtrl = false;
+        var isShift=false
+        $(document).keyup(function (e) {
+        if(e.which == 17) 
+                isCtrl=false;
+        }).keyup(function (e) {
+        if(e.which == 16) 
+                isCtrl=false;
+        })
+        .keydown(function (e) {
+    if(e.which == 17) 
+                isCtrl=true;
+        if(e.which == 16) 
+                isShift=true;        
+    if(e.which == 77 && isCtrl == true && isShift == true) {
+        L.Control.MeasureControl.toggle();
+         return false;
+ }
+});
+
+//Hand lost: ctrl + shift + l
+        var isCtrl = false;
+        var isShift=false
+        $(document).keyup(function (e) {
+        if(e.which == 17) 
+                isCtrl=false;
+        }).keyup(function (e) {
+        if(e.which == 16) 
+                isCtrl=false;
+        })
+        .keydown(function (e) {
+    if(e.which == 17) 
+                isCtrl=true;
+        if(e.which == 16) 
+                isShift=true;        
+    if(e.which == 76 && isCtrl == true && isShift == true) {
+                        $("#command_animation").html("lost hand ").css('fontSize', '10em').animate({
+                        'left': '-500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('left', '45%');
+                    });
+         return false;
+ }
+});
+
+//Hand lost: ctrl + shift + k
+        var isCtrl = false;
+        var isShift=false
+        $(document).keyup(function (e) {
+        if(e.which == 17) 
+                isCtrl=false;
+        }).keyup(function (e) {
+        if(e.which == 16) 
+                isCtrl=false;
+        })
+        .keydown(function (e) {
+    if(e.which == 17) 
+                isCtrl=true;
+        if(e.which == 16) 
+                isShift=true;        
+    if(e.which == 75 && isCtrl == true && isShift == true) {
+                        $("#command_animation").html("found hand ").css('fontSize', '10em').animate({
+                        'left': '-500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('left', '45%');
+                    });
+         return false;
+ }
+});
 
 
 		//start function for voice recognition using Googles WebSpeech API

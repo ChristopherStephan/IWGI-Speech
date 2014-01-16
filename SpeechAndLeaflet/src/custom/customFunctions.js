@@ -308,17 +308,82 @@ function mapright(){
 map.panBy([50, 0]);
 }
 
+
 function showProjects(){
-for (var i=projects.length-1;i>projects.length-2;i--){
-var coordinate = projects[i].Coord.split(',');
-var longitude = coordinate[0].substr(1,coordinate[0].length-1);
-var latitude = coordinate[1].substr(0,coordinate[1].length-1);
-document.getElementById("moveToProject").onclick=function(){map.setView([latitude,longitude],16);};
-document.getElementById("ProjectName").innerHTML=projects[i].Name;
-document.getElementById("ProjectDes").innerHTML=projects[i].Description;
-}
+var tag=document.getElementById("sidebarProjectsContent");
+var i = projects.length-1;
+//for (var i=projects.length-1;i>projects.length-7;i--)
+while (i>projects.length-10 && projects[i]!=null)
+{
+/*
+        var coordinate = projects[i].Coord.split(',');
+        var longitude = coordinate[0].substr(1,coordinate[0].length-1);
+        var latitude = coordinate[1].substr(0,coordinate[1].length-1);
+        document.getElementById("button1").onclick=function(){map.setView([latitude,longitude],16);};
+        document.getElementById("name1").innerHTML=projects[i].Name;
+        document.getElementById("des1").innerHTML=projects[i].Description;
+*/
+                var sidebarContent = document.createElement("div");
+                sidebarContent.setAttribute("id","sidebarContent");        
+                var newProject = document.createElement("div");                
+                newProject.setAttribute("id","newProject"+i);
+                                var newProjectName = document.createElement("div");
+                                        var nameText = document.createTextNode("Name: ");                                                        
+                                        var name = document.createTextNode(projects[i].Name);
+                                        newProjectName.appendChild(nameText);
+                                        newProjectName.appendChild(name);
+                                var newProjectDescription = document.createElement("div");
+                                        var descriptionText = document.createTextNode("Description: ");
+                                        var description = document.createTextNode(projects[i].Description);
+                                        newProjectDescription.appendChild(descriptionText);
+                                        newProjectDescription.appendChild(description);
+                                var newProjectButton = document.createElement("button");
+                                    newProjectButton.setAttribute("id",i);
+                                        var buttonContent = document.createTextNode("Move to Project");
+                                                        //var coordinate = projects[i].Coord.split(',');
+                                                        //var longitude = coordinate[0].substr(1,coordinate[0].length-1);
+                                                        //var latitude = coordinate[1].substr(0,coordinate[1].length-1);
+                                        //newProjectButton.onclick=function(){map.setView([latitude,longitude],14);};
+                                        newProjectButton.onclick=function(){
+                                                var temp = projects[projects.length-(projects.length-this.id)].Coord.split(',');; 
+                                            var longitude = temp[0].substr(1,temp[0].length-1);
+                                            var latitude = temp[1].substr(0,temp[1].length-1);        
+                                                map.setView([latitude,longitude],14);};
+                                        newProjectButton.appendChild(buttonContent);
+                
+                        newProject.appendChild(newProjectName);
+                        var space=document.createElement("br");
+                        newProject.appendChild(space);
+                        newProject.appendChild(newProjectDescription);
+                        newProject.appendChild(space);
+                        newProject.appendChild(newProjectButton);
+                        newProject.appendChild(space);
+                        
+        sidebarContent.appendChild(newProject);        
+        sidebarContent.appendChild(space);
+        tag.appendChild(sidebarContent);
+
+        i--;        
+        }
+        var closeButton = document.createElement("button");
+                closeButton.onclick=function(){clearSidebar();};
+                var buttonContent = document.createTextNode("Close");
+                closeButton.appendChild(buttonContent);
+        tag.appendChild(closeButton);
 sidebarProjects.show();
 }
+
+
+function clearSidebar(){
+        var list=document.getElementById("sidebarProjectsContent");
+        while (list.firstChild) {
+                list.removeChild(list.firstChild);
+        }
+        sidebarProjects.hide();
+        
+}
+
+
 
 
 ////////////////////////Set Focus to different input files//////////////////////////
