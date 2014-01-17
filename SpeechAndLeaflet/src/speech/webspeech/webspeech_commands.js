@@ -16,6 +16,10 @@
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     final_transcript = event.results[i][0].transcript;
+					//copies the input to the usercomment-div
+					//TO-DO: Differentiate this for different divs
+					var txt = $("#usercomment");//find the textarea
+					txt.val(txt.val() + final_transcript);//append results to it's value
                 } else {
                     interim_transcript = event.results[i][0].transcript;
                 }
