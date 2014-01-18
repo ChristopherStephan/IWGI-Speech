@@ -2,6 +2,7 @@
 /////////////////////////////////////////Voice Recognition Part//////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var recognition = new webkitSpeechRecognition();
+var recognizing = false;
 var final_transcript = '';
 var interim_transcript = '';
 var language = 'en-GB'; // TODO: fetch language as option value from drop down box
@@ -369,7 +370,14 @@ recognition.onresult = function (event) {
         console.log("clear form");
         final_transcript = '';
     }
+}
 
+recognition.onend = function() {
+    recognizing = false;
+    document.getElementById("speech").src = "red_circle.png";
+}
 
-
+recognition.onstart = function() {
+    recognizing = true;
+    document.getElementById("speech").src = "green_circle.png";
 }
