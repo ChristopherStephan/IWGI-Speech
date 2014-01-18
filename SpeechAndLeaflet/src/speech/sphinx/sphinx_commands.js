@@ -30,15 +30,19 @@ function spawnWorker(workerURL, onReady) {
 function updateHyp(hyp) {
     if (outputContainer) {
         outputContainer.innerHTML = hyp;
-        newHyp = hyp;
+  /*      newHyp = hyp;
         // only check hyp when hyp has changed
         if (oldHyp != newHyp) {
             // check only the new part pf the hyp 
-            check(newHyp.replace(oldHyp, ""));
+            
         }
-        oldHyp = hyp
-        //console.log("hyp" + hyp)
+        oldHyp = hyp;
+        //console.log("hyp" + hyp)*/
     }
+	checkHyp(hyp);
+	
+	
+
 };
 
 // This updates the UI when the app might get ready
@@ -367,7 +371,7 @@ function pan_down() {
     map.panTo(centerPoint);
 };
 
-
+/*
 function check(tbc) {
     //to be checked
     if (tbc.indexOf("LEFT") >= 0) {
@@ -414,11 +418,11 @@ function check(tbc) {
     }
 }
 
+*/
 
 
-/*
 
-Use this as a reference to implement all other commands
+//Use this as a reference to implement all other commands
 
 //////////////////////////////////////////////////////////
 /////Check the Recognition hyp ///////////////////////////
@@ -427,48 +431,48 @@ Use this as a reference to implement all other commands
 function checkHyp(hyp) {
 
     if (hyp == "LEFT") {
-
-        stopRecording();
-        startRecording();
-        pan_left();
+pan_left();
+recorder.stop();
+ setTimeout(function() { recorder.start();}, 5000);       
+        
     }
 
     if (hyp == "RIGHT") {
-
-        stopRecording();
-        startRecording();
+ pan_right();
+       recorder.stop();
         //document.getElementById('output').innerHTML = "";
-        pan_right();
+       
+		setTimeout(function() { recorder.start();}, 5000);
     }
 
     if (hyp == "UP") {
-
-        stopRecording();
-        startRecording();
-        pan_up();
+   pan_up();
+        recorder.stop();
+     
+		setTimeout(function() { recorder.start();}, 5000);
     }
 
     if (hyp == "DOWN") {
-
-        stopRecording();
-        startRecording();
-        pan_down();
-        stopRecording();
-        startRecording();
+ pan_down();
+        recorder.stop();
+       
+      setTimeout(function() { recorder.start();}, 5000);
     }
 
     if (hyp == "ZOOM IN") {
 
-        stopRecording();
-        startRecording();
+        recorder.stop();
         map.zoomIn();
+		setTimeout(function() { recorder.start();}, 5000);
+		
     }
 
     if (hyp == "ZOOM OUT") {
 
-        stopRecording();
-        startRecording();
+         recorder.stop();
+        
         map.zoomOut();
+		 recorder.start();
     }
     if (hyp == "LOCATE") {
 
@@ -576,4 +580,4 @@ function checkHyp(hyp) {
 
 };
 
-*/
+
