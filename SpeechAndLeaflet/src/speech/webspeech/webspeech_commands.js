@@ -375,6 +375,9 @@ recognition.onresult = function (event) {
 recognition.onend = function() {
     recognizing = false;
     document.getElementById("speech").src = "red_circle.png";
+    $("#speech").click(function() {
+        recognition.start();
+    });
 }
 
 recognition.onstart = function() {
