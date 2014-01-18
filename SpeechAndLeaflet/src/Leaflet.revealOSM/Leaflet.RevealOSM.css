@@ -1,5 +1,5 @@
 .leaflet-control-reveal-osm {
-    height: 26px;
+    height: 60px;
 }
 .leaflet-control-reveal-osm a {
     background: none repeat scroll 0 0 #F8F8F9;
@@ -8,12 +8,12 @@
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    height: 28px;
-    width: 27px;
+    height: 60px;
+    width: 60px;
     display: inline-block;
 }
 .leaflet-control-reveal-osm a {
-    background-image: url("./reveal-osm.png");
+    background-image: url("./reveal-osm_backup.png");
 }
 .leaflet-container.reveal-osm {
     cursor: context-menu;
