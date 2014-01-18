@@ -75,7 +75,7 @@
 	<div id="sidebarPoint"> 
 		<br> Name:  
 		<input id="pointname" type="text" SIZE=30 name="pointname" required><br>
-		<br>Description :<br> <input id="pointdes" style="width: 300px; height: 150px;" name="pointdescription"><br><br><br> 
+		<br>Description :<br> <textarea id="pointdes" style="width: 300px; height: 150px;" name="pointdescription"></textarea><br><br><br> 
 		<button id="point_submit" onclick="addPointButton();">
             Submit
         </button>
@@ -109,8 +109,8 @@
 		<b><font color="#0080C0">Add new comment</font></b>
 		<div id="AddComment" style="border: 1px solid #75C0BF; margin = 4"> 
 		<input type="hidden" name="featureid" id = "featureid" size="40" length="40" value="">
-		<br> Citizen Name: <input x-webkit-speech type="text" id = "citizenname" name="citizenname" size="40" value=""><BR>
-		<br> User Comment :<br> <textarea id="usercomment" style="width: 300px; height: 150px;" name="description"></textarea><br> 
+		<br> Citizen Name: <input x-webkit-speech type="text" id = "citizenname" name="citizenname" size="40" value=""><br>
+		<br> User Comment :<br> <div id="usercomment" style="width: 300px; height: 150px;" name="description"></div><br> 
 		</div>
 		
 		<script>
@@ -820,7 +820,7 @@
 
 			if (type === 'marker') {
 				layer.bindPopup("<br> Point Name: * <br> <input type='text' SIZE=30 name='id' required><br>");
-				
+				$('#usercomment')
 				var coordinates = layer.toGeoJSON().geometry.coordinates;
 				var coord=coordinates.toString();
 				addPoint(coord);
