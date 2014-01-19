@@ -108,7 +108,7 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 
-    if ((final_transcript.indexOf("left") >= 0) || (final_transcript.indexOf("net") >= 0) || (final_transcript.indexOf("next") >= 0)) {
+    if (final_transcript.indexOf("left") >= 0) {
         centerPoint = map.getCenter();
         var m = (map.getBounds().getEast() - map.getBounds().getWest()) / 4;
         centerPoint.lng -= Math.abs(m);
@@ -123,7 +123,7 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 
-    if ((final_transcript.indexOf("right") >= 0) || (final_transcript.indexOf("white") >= 0) || (final_transcript.indexOf("fight") >= 0)) {
+    if (final_transcript.indexOf("right") >= 0) {
         centerPoint = map.getCenter();
         var m = (map.getBounds().getEast() - map.getBounds().getWest()) / 4;
         centerPoint.lng += Math.abs(m);
@@ -140,7 +140,7 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 
-    if ((final_transcript.indexOf("up") >= 0) || (final_transcript.indexOf("apple") >= 0)) {
+    if (final_transcript.indexOf("up") >= 0) {
         centerPoint = map.getCenter();
         var m = (map.getBounds().getNorth() - map.getBounds().getSouth()) / 4;
         centerPoint.lat += m;
