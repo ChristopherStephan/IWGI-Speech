@@ -40,14 +40,29 @@ recognition.onresult = function (event) {
         switch (document.activeElement.id) {
 
         case "pointname":
-            $("#pointname").val(final_transcript);
+            var content = $("#pointname").val();
+            $("#pointname").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            final_transcript = "";
             break;
 
         case "pointdes":
-            $("#pointdes").val(final_transcript);
+            var content = $("#pointdes").val();
+            $("#pointdes").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            final_transcript = "";
+            break;
+
+        case "linename":
+            var content = $("#linename").val();
+            $("#linename").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            final_transcript = "";
+            break;
+
+        case "linedes":
+            var content = $("#linedes").val();
+            $("#linedes").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            final_transcript = "";
             break;
         }
-
     }
 
     // handling commands
@@ -389,4 +404,22 @@ recognition.onend = function() {
 recognition.onstart = function() {
     recognizing = true;
     document.getElementById("speech").src = "green_circle.png";
+}
+
+recognition.onerror = function(event) {
+    if (event.error == 'no-speech') {
+        document.getElementById("speech").src = "red_circle.png";
+        console.log("Error: No speech.")
+      
+    }
+    
+    if (event.error == 'audio-capture') {
+        document.getElementById("speech").src = "red_circle.png";
+        console.log("Error: No Microphone.")
+    }
+  };
+
+var first_char = /\S/;
+function capitalize(s) {
+  return s.replace(first_char, function(m) { return m.toUpperCase(); });
 }
