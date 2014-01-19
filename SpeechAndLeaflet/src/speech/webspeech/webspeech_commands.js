@@ -62,6 +62,18 @@ recognition.onresult = function (event) {
             $("#linedes").val(capitalize(content.replace(final_transcript, "") + final_transcript));
             final_transcript = "";
             break;
+
+        case "citizenname":
+            var content = $("#citizenname").val();
+            $("#citizenname").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            final_transcript = "";
+            break;
+
+        case "usercomment":
+            var content = $("#usercomment").val();
+            $("#usercomment").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            final_transcript = "";
+            break;
         }
     }
 
