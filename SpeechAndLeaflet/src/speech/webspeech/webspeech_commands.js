@@ -375,9 +375,15 @@ recognition.onresult = function (event) {
 recognition.onend = function() {
     recognizing = false;
     document.getElementById("speech").src = "red_circle.png";
+    // automatically restart the speech recognition in case it stops
+    recognition.start();
+    
+    /*
+    //used for manual restart via click on icon
     $("#speech").click(function() {
         recognition.start();
     });
+    */
 }
 
 recognition.onstart = function() {
