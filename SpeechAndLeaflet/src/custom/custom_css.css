@@ -177,12 +177,19 @@ footer {
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
-        
+
+//for measurement tool        
 .leaflet-control.enabled a {
     background-color: yellow;
-}        
+}
+
+.leaflet-draw-toolbar-button-enabled  {
+    background-color: yellow;
+}  
+
+
         
-/*uncomment this to hide the zoom in/out part of slider widget
+//uncomment this to hide the zoom in/out part of slider widget
 /*
 .leaflet-control-zoomslider-in {
     visibility: hidden;

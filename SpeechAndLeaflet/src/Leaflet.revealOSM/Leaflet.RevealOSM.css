@@ -13,7 +13,7 @@
     display: inline-block;
 }
 .leaflet-control-reveal-osm a {
-    background-image: url("./reveal-osm_backup.png");
+    background-image: url("./osm_poi.png");
 }
 .leaflet-container.reveal-osm {
     cursor: context-menu;
@@ -31,6 +31,7 @@
     padding: 0 5px;
     position: relative;
     top: -15px;
+background-color: yellow;
 }
 .leaflet-control-reveal-osm span:before {
     border-right: 12px solid rgba(255, 255, 255, 0.5);

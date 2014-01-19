@@ -2,17 +2,17 @@
 
 .leaflet-touch .leaflet-bar-part-single {
 	-webkit-border-radius: 7px 7px 7px 7px;
-	        border-radius: 7px 7px 7px 7px;
+	border-radius: 7px 7px 7px 7px;
 	border-bottom: none;
 }
 
 .leaflet-control-locate a {
-	background-image: url(images/locate.png);
+	background-image: url(images/locator.png);
 	background-position: -2px -2px;
 }
 
 .leaflet-touch .leaflet-control-locate a {
-	background-image: url(images/locate_touch.png);
+	background-image: url(images/locator.png);
 }
 
 .leaflet-control-locate.requesting a {
@@ -22,6 +22,7 @@
 
 .leaflet-control-locate.active a {
 	background-position: -32px -2px;
+	background-color: yellow;
 }
 
 .leaflet-control-locate.active.following a {

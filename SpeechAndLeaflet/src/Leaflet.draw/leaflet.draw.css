@@ -16,10 +16,12 @@
 
 .leaflet-draw-toolbar-notop a:first-child {
 	border-top-right-radius: 0;
+	background-color: yellow;
 }
 
 .leaflet-draw-toolbar-nobottom a:last-child {
 	border-bottom-right-radius: 0;
+	background-color: yellow;
 }
 
 .leaflet-draw-toolbar a {
