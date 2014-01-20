@@ -176,7 +176,15 @@
 			map!</button>
 		</div><br>
 		<br>
-
+		
+		
+		<div id="div_language">
+		<select id="select_language" onchange="updateCountry()"></select>
+		&nbsp;&nbsp;
+		<select id="select_dialect"></select>
+		</div>
+		
+		
 		<div id="console" style="margin-top: 100px;">
 			<h3>Console:</h3>
 
@@ -487,10 +495,11 @@
 		});
 
 
-
+		var popup;
 		 //new map with map options
 		var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
 		var map = L.map('map', {
+			//crs: L.CRS.EPSG3857,
 			center: [51.95442, 7.62709],
 			zoom: 13,
 			dragging: true,
@@ -515,6 +524,11 @@
 				queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
 			}
 		});
+		
+		//map.addEventListener('click', onMapClick); //needed for wms getfeatureinfo
+		popup = new L.Popup({
+			maxWidth: 400
+		});
 
 
 		var scalebar = L.control.scale({
@@ -527,6 +541,7 @@
 		 //OSM maps one as overlay and one base layer 
 		var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 18,
+			srs:'EPSG:3857',
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap<\/a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA<\/a>, Imagery © <a href="http://cloudmade.com">CloudMade<\/a>'
 		}).addTo(map);
 
@@ -588,18 +603,14 @@
 			transparent: true,
 			opacity: 0.4
 		});
-		var noiseDay = new L.TileLayer.WMS("http://www.wms.nrw.de/umwelt/laerm", {
-			layers: 'STR_DEN',
-			format: 'image/png',
-			version: '1.1.1', //supports Feature Info unlike versionn 1.3.0.
-			transparent: true
-		});
-		var noiseNGT = new L.TileLayer.WMS("http://www.wms.nrw.de/umwelt/laerm", {
-			layers: 'STR_NGT',
+		
+		var wind = new L.TileLayer.WMS("http://www.wms.nrw.de/umwelt/ea_wind", {
+			layers: '7',
 			format: 'image/png',
 			//crs: 'EPSG:4326',
-			version: '1.1.1',
-			transparent: true
+			version: '1.3.3',
+			transparent: true,
+			opacity: 0.5
 		});
 
 
@@ -625,13 +636,10 @@
 			"Weather Layers": {
 				'Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
 				'Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
-				'Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature')
+				'Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
+				'Windspeed': wind
 			},
-			"Noise Layers": {
-				'Street Noise Day': noiseDay,
-				'Street Noise Night': noiseNGT
-			}
-
+			
 		};
 
 
@@ -694,7 +702,6 @@
 			Fid = currentID;
 			CName = document.getElementById('citizenname').value;
 			UComment = document.getElementById('usercomment').value;
-			addUserComments(Fid, CName, UComment);
 			document.getElementById('citizenname').value = '';
 			document.getElementById('usercomment').value = '';
 		}
@@ -708,6 +715,47 @@
 			document.getElementById('linename').value = '';
 			document.getElementById('linedes').value = '';
 		}
+		
+		
+		//wms getfeatureinfo
+		
+		/*function onMapClick(e) {
+		    var latlngStr = '(' + e.latlng.lat.toFixed(3) + ', ' + e.latlng.lng.toFixed(3) + ')';
+		    var BBOX = map.getBounds().toBBoxString();
+		    var WIDTH = map.getSize().x;
+		    var HEIGHT = map.getSize().y;
+		    var X = map.layerPointToContainerPoint(e.layerPoint).x;
+		    var Y = map.layerPointToContainerPoint(e.layerPoint).y;
+		    var URL = '?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&LAYERS=7&QUERY_LAYERS=7&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image%2Fpng&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
+		    URL = escape(URL);
+		    $.ajax({
+		        url: "http://www.wms.nrw.de/umwelt/ea_wind?&args=" + URL,
+		        dataType: "html",
+		        type: "GET",
+		        //async: false,
+		        success: function(data) {
+		            if (data.indexOf("<table") != -1) {
+		                popup.setContent(data);
+		                popup.setLatLng(e.latlng);
+		                map.openPopup(popup);
+
+		            }
+		        }
+		    });
+
+
+		} 
+		
+		function DoTheCheck() {
+			if (document.checkform.getfeatureinfo.checked == true)
+			  {map.addEventListener('click', onMapClick);}
+			if (document.checkform.getfeatureinfo.checked == false)
+			  {map.removeEventListener('click', onMapClick); map.closePopup(popup);}
+		}*/
+		
+		
+		
+		
 
 		callPoints();
 		callLines();
@@ -1059,13 +1107,52 @@
 		});
 
 
-		 //start function for voice recognition using Googles WebSpeech API
+		//Language selection
+		var langs =
+				[
+					 ['Deutsch',     ['de-DE']],
+					 ['English',       ['en-AU', 'Australia'],
+										 ['en-CA', 'Canada'],
+										 ['en-IN', 'India'],
+										 ['en-NZ', 'New Zealand'],
+										 ['en-ZA', 'South Africa'],
+										 ['en-GB', 'United Kingdom'],
+										 ['en-US', 'United States']],
+					 ];
+
+for (var i = 0; i < langs.length; i++) {
+  select_language.options[i] = new Option(langs[i][0], i);
+}
+select_language.selectedIndex = 1;
+updateCountry();
+select_dialect.selectedIndex = 5;
+
+function updateCountry() {
+  for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+    select_dialect.remove(i);
+  }
+  var list = langs[select_language.selectedIndex];
+  for (var i = 1; i < list.length; i++) {
+    select_dialect.options.add(new Option(list[i][1], list[i][0]));
+  }
+  select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+}
+
+ //start function for voice recognition using Googles WebSpeech API
 		function startButton(event) {
 			final_transcript = '';
+			recognition.lang = select_dialect.value;
+			//alert("Sprache= " + recognition.lang);
 			recognition.start();
 			document.getElementById("speech").src = "green_circle.png";
 			
 		}
+
+
+		
+		
+		
+		
 	</script>
 </body>
 </html>
