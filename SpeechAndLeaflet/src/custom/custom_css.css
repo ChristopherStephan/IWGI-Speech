@@ -324,49 +324,90 @@ hr {
     margin: 4px;
 }    
 
-/* ------------------------Speechbubble------------------------- */
-.bubble 
-{
-z-index: 3;
-margin-top: 100px;
-position: relative;
-text-align: center;
-width: 20%;
-height: 5%;
-left: 73%;
-top: -25px;
-padding: 0px;
-background: #FFFFFF;
--webkit-border-radius: 16px;
--moz-border-radius: 16px;
-border-radius: 16px;
-border: #807F7F solid 2px;
+
+
+
+
+/* ============================================================================================================================
+== OVAL SPEECH BUBBLE (more CSS3)
+** ============================================================================================================================ */
+
+.oval-speech-border {
+  z-index: 3;
+  width: 20%;
+  left: 29%;
+  position:relative;
+  padding:70px 30px;
+  margin:1em auto 60px;
+  border:2px solid #f3961c;
+  text-align:center;
+  color:#333;
+  background:#fff;
+  /* css3 */
+  /*
+  NOTES:
+  -webkit-border-radius:240px 140px; // produces oval in safari 4 and chrome 4
+  -webkit-border-radius:240px / 140px; // produces oval in chrome 4 (again!) but not supported in safari 4
+  Not correct application of the current spec, therefore, using longhand to avoid future problems with webkit corrects this
+  */
+  -webkit-border-top-left-radius:240px 140px;
+  -webkit-border-top-right-radius:240px 140px;
+  -webkit-border-bottom-right-radius:240px 140px;
+  -webkit-border-bottom-left-radius:240px 140px;
+  -moz-border-radius:240px / 140px;
+  border-radius:240px / 140px;
 }
 
-.bubble:after 
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 0 62px 21px;
-border-color: #FFFFFF transparent;
-display: block;
-width: 0;
-z-index: 1;
-top: -21px;
-left: 46px;
+/* creates larger curve */
+.oval-speech-border:before {
+  content:"";
+  position:absolute;
+  z-index:2;
+  bottom:140px;
+  right:50%;
+  width:50px;
+  height:30px;
+  border-style:solid;
+  border-width:0px 0px 0px 10px;
+  border-color:#f3961c;
+  margin-right:-45px;
+  background:transparent;
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px 100px;
+  /* reduce the damage in FF3.0 */
+  display:block;
 }
 
-.bubble:before 
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 0 63px 22px;
-border-color: #807F7F transparent;
-display: block;
-width: 0;
-z-index: 0;
-top: -24px;
-left: 46px;
+
+/* creates a small circle to produce a rounded point where the two curves meet */
+.oval-speech-border > :first-child:before {
+  content:"";
+  position:absolute;
+  z-index:1;
+  bottom:-40px;
+  right:50%;
+  width:10px;
+  height:10px;
+  margin-right:45px;
+  background:#f3961c;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+
+/* creates a white rectangle to cover part of the oval border*/
+.oval-speech-border > :first-child:after {
+  content:"";
+  position:absolute;
+  z-index:1;
+  bottom:-10px;
+  right:50%;
+  width:30px;
+  height:15px;
+  background:#fff;
+}
+
+#oval-speech-border-div {
+margin-top: 80px;
 }
