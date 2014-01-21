@@ -10,11 +10,13 @@ var interim_transcript = '';
 
 recognition.continuous = true; // keep processing input until stopped
 recognition.interimResults = true; // show interim results
-//recognition.lang = language; // specify the language
-
+//recognition.lang = $("#select_language").val(); // specify the language
+//console.log("Dialect =" + recognition.lang);
 recognition.onresult = function (event) {
     // Assemble the transcript from the array of results
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
+    recognition.lang = $("#select_language").val(); // specify the language from drop down box
+	console.log("Dialect =" + recognition.lang);
+	for (var i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
             final_transcript = event.results[i][0].transcript;
         } else {

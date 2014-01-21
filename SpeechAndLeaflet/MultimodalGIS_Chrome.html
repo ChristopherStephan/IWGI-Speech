@@ -176,12 +176,13 @@
 			map!</button>
 		</div><br>
 		<br>
-		
-		
 		<div id="div_language">
-		<select id="select_language" onchange="updateCountry()"></select>
-		&nbsp;&nbsp;
-		<select id="select_dialect"></select>
+		<select id="select_language">
+		<option value="en-GB">en-GB</option>
+		<option value="en-US">en-US</option>
+		<option value="en-IN">en-IN</option>
+		<option value="de-DE">de-DE</option>
+		</select>
 		</div>
 		
 		
@@ -608,7 +609,7 @@
 			layers: '7',
 			format: 'image/png',
 			//crs: 'EPSG:4326',
-			version: '1.3.3',
+			version: '1.3.0',
 			transparent: true,
 			opacity: 0.5
 		});
@@ -1108,7 +1109,7 @@
 
 
 		//Language selection
-		var langs =
+/*		var langs =
 				[
 					 ['Deutsch',     ['de-DE']],
 					 ['English',       ['en-AU', 'Australia'],
@@ -1137,12 +1138,11 @@ function updateCountry() {
   }
   select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 }
-
+*/
+ 
  //start function for voice recognition using Googles WebSpeech API
 		function startButton(event) {
 			final_transcript = '';
-			recognition.lang = select_dialect.value;
-			//alert("Sprache= " + recognition.lang);
 			recognition.start();
 			document.getElementById("speech").src = "green_circle.png";
 			
