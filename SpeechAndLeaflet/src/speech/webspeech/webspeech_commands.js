@@ -5,8 +5,7 @@ var recognition = new webkitSpeechRecognition();
 var recognizing = false;
 var final_transcript = '';
 var interim_transcript = '';
-//var language = select_dialect.value; // TODO: fetch language as option value from drop down box
-// en-GB
+
 
 recognition.continuous = true; // keep processing input until stopped
 recognition.interimResults = true; // show interim results
