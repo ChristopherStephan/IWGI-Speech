@@ -78,6 +78,9 @@ recognition.onresult = function (event) {
         }
     }
 
+    // no speech commands from the input fields should not trigger map actions
+    if (document.activeElement.id != ("usercomment"||"citizenname"||"linedes"||"linename"||"pointdes"||"pointname")) {
+
     // handling commands
 
     //////////////////////////////////////////////////////////
@@ -397,6 +400,7 @@ recognition.onresult = function (event) {
         clearForm();
         console.log("clear form");
         final_transcript = '';
+    }
     }
 }
 
