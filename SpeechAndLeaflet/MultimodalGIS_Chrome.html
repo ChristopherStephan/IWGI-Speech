@@ -148,15 +148,6 @@
             <br>
             <br>
         </div>
-        <script>
-            /*
-		//approach to paste the recognized text in the userdocument div. Unfortunately it does not work -.-
-		function fillUsercomment(){
-			document.getElementById('usercomment').innerHTML=document.getElementById('transcript').innerHTML
-		}
-		*/
-        </script>
-
         <button id="comment_submit" onclick="sendUserComments();">Submit Comments</button>
         <button id="comment_clear" onclick="clearForm();">Clear</button>
         <div id="sidebarCommentsTable"></div>
@@ -693,6 +684,17 @@
 
          //add points
         function addPointButton() {
+        	// do not send empty empty comments
+        	if ($("#pointname").val() == ""){
+        		alert("Please enter a name!");
+        		return;
+        	}
+
+        	if ($("#pointdes").val() == ""){
+        		alert("Please enter a description!");
+        		return;
+        	} 
+
             pointname = document.getElementById('pointname').value;
             pointdes = document.getElementById('pointdes').value;
             addPointAttributes(pointname, pointdes);
@@ -700,6 +702,17 @@
 
          //add lines
         function addLineButton() {
+        	// do not send empty comments
+        	if ($("#linename").val() == ""){
+        		alert("Please enter a name!");
+        		return;
+        	}
+
+        	if ($("#linedes").val() == ""){
+        		alert("Please enter a description!");
+        		return;
+        	} 
+            
             linename = document.getElementById('linename').value;
             linedes = document.getElementById('linedes').value;
 
@@ -712,6 +725,16 @@
 
          //send comments
         function sendUserComments() {
+        	if ($("#citizenname").val() == ""){
+        		alert("Please enter a name!");
+        		return;
+        	}
+
+        	if ($("#usercomment").val() == ""){
+        		alert("Please enter a comment!");
+        		return;
+        	}
+
             Fid = currentID;
             CName = document.getElementById('citizenname').value;
             UComment = document.getElementById('usercomment').value;
