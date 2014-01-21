@@ -29,10 +29,12 @@ recognition.onresult = function (event) {
     // update the web page
     if (final_transcript.length > 0) {
         $('#transcript').html(final_transcript);
+        $('#transcript1').html(final_transcript);
     }
 
     if (interim_transcript.length > 0) {
         $('#interim').html(interim_transcript);
+        $('#interim1').html(interim_transcript);
     }
 
 
