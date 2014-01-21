@@ -323,3 +323,50 @@ hr {
     margin: 4px;
     margin: 4px;
 }    
+
+/* ------------------------Speechbubble------------------------- */
+.bubble 
+{
+z-index: 3;
+margin-top: 100px;
+position: relative;
+text-align: center;
+width: 20%;
+height: 5%;
+left: 73%;
+top: -25px;
+padding: 0px;
+background: #FFFFFF;
+-webkit-border-radius: 16px;
+-moz-border-radius: 16px;
+border-radius: 16px;
+border: #807F7F solid 2px;
+}
+
+.bubble:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 62px 21px;
+border-color: #FFFFFF transparent;
+display: block;
+width: 0;
+z-index: 1;
+top: -21px;
+left: 46px;
+}
+
+.bubble:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 63px 22px;
+border-color: #807F7F transparent;
+display: block;
+width: 0;
+z-index: 0;
+top: -24px;
+left: 46px;
+}

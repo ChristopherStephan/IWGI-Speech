@@ -85,6 +85,20 @@
                                 <img alt="" id="speech" src="red_circle.png">
                             </div>
                         </li>
+						
+						<li style="position:relative; left:50%">
+                            <div id="div_language">
+								<select id="select_language">
+									<option value="en-GB">en-GB</option>
+									<option value="en-US">en-US</option>
+									<option value="en-IN">en-IN</option>
+									<option value="de-DE">de-DE</option>
+								</select>
+							</div>
+                        </li>
+						
+						
+						
                     </ul>
                 </div>
             </div>
@@ -98,6 +112,11 @@
 
         <div id="horizontal"></div>
     </div>
+	
+	<div id="speechbubble"> <p class="bubble"></p> 
+		<div id="transcript"></div>
+        <div id="interim"></div>
+	</div>
 
     <div id="command_animation"></div>
 
@@ -164,35 +183,9 @@
     </div>
 
     <div id="sidebarSpeech">
-        <div id="text">
-            <button class="btn success" id="start_button" onclick="startButton(event);">Click to start speaking with the map!
-            </button>
-        </div>
-        <br>
-        <br>
-        <div id="div_language">
-            <select id="select_language">
-                <option value="en-GB">en-GB</option>
-                <option value="en-US">en-US</option>
-                <option value="en-IN">en-IN</option>
-                <option value="de-DE">de-DE</option>
-            </select>
-        </div>
-
-
-        <div id="console" style="margin-top: 100px;">
-            <h3>Console:</h3>
-
-            <div id="transcript"></div>
-
-            <div id="interim"></div>
-        </div>
+        
 
         <div id="description">
-            <p class="description">To test it you need to run the html site within a web server. Browse the site with Chrome. To start interacting with the map by speech, first click the button, allow microphone access from browser and then you can use
-                <br>
-            </p>
-
             <ul>
                 <li>Basic Map Navigation
 
@@ -305,107 +298,7 @@
                     </ul>
                 </li>
             </ul>
-
-            <div id="buttons">
-                <h3>Location, RevealOSM, Measurement, Minimap, Home</h3>
-                <!--Locator -->
-
-                <div class="btn danger" id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Enable Locate function
-                </div>
-                <!--Locator -->
-
-                <div class="btn danger" id="text" onclick="locater.stopLocate();" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Disable Locate function
-                </div>
-                <hr>
-                <!--Reveal OSM activate-->
-
-                <div class="btn danger" id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Enable RevealOSM Plugin
-                </div>
-
-                <div class="btn danger" id="text" onclick="map.revealOSMControl.deactivate();" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Disable RevealOSM Plugin
-                </div>
-                <hr>
-                <!--Measurement Tool -->
-
-                <div class="btn danger" id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Enable Measurement Tool
-                </div>
-
-                <div class="btn danger" id="text" onclick="map.measureControl.toggle();" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Disable Measurement Tool
-                </div>
-                <hr>
-                <!--Minimap  -->
-
-                <div class="btn danger" id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Disable the Overview Minimap
-                </div>
-
-                <div class="btn danger" id="text" onclick="miniMap._restore();" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Enable Overview Minimap
-                </div>
-                <hr>
-                <!--Layer Controls  -->
-
-                <div class="btn danger" id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Enable the LayerControl
-                </div>
-
-                <div class="btn danger" id="text" onclick="LayerSwitcher._collapse();" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Disable the LayerControl
-                </div>
-                <hr>
-                <!--Home Extend -->
-
-                <div id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to switch to home extend
-                </div>
-
-                <h3>Drawing Options with Drawing Plugin</h3>
-                <!--Drawing Tool - Marker 
-				https://github.com/Leaflet/Leaflet.draw/issues/179 -->
-
-                <div class="btn danger" id="text" onclick="new L.Draw.Marker(map).enable();" style="margin-top: 10px;&gt; &lt;button id=">
-                    <!-- or this way: L.Draw.Marker(map, drawControl.options.marker).enable();    https://github.com/Leaflet/Leaflet.draw/issues/179#issuecomment-26500042 -->
-                    Click to place a point project
-                </div>
-                <!--Drawing Tool - Line -->
-
-                <div id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click place a street project
-                </div>
-                <!--Drawing Tool - Circle -->
-
-                <div class="btn danger" id="text" onclick="new L.Draw.Circle(map).enable();" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to start drawing a circle
-                </div>
-                <!--Drawing Tool - Polygon -->
-
-                <div id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to start drawing a polygon
-                </div>
-                <!--Drawing Tool - Rectangle -->
-
-                <div class="btn danger" id="text" onclick="new L.Draw.Rectangle(map).enable();" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to start drawing a rectangle
-                </div>
-                <hr>
-
-                <h3>Layer Control</h3>
-                <!--Layer Controll -->
-
-                <div class="btn danger" id="text" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Enable OpenWeatherMap_Temperature layer
-                </div>
-
-                <div class="btn danger" id="text" onclick="overlayLayers.OpenWeatherMap_Temperature.onRemove(map);" style="margin-top: 10px;&gt; &lt;button id=">
-                    Click to Disable OpenWeatherMap_Temperature layer
-                </div>
-            </div>
+ 
         </div>
     </div>
 
