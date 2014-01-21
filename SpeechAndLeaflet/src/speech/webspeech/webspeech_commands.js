@@ -5,16 +5,18 @@ var recognition = new webkitSpeechRecognition();
 var recognizing = false;
 var final_transcript = '';
 var interim_transcript = '';
-var language = 'en-GB'; // TODO: fetch language as option value from drop down box
+//var language = select_dialect.value; // TODO: fetch language as option value from drop down box
 // en-GB
 
 recognition.continuous = true; // keep processing input until stopped
 recognition.interimResults = true; // show interim results
-recognition.lang = language; // specify the language
-
+//recognition.lang = $("#select_language").val(); // specify the language
+//console.log("Dialect =" + recognition.lang);
 recognition.onresult = function (event) {
     // Assemble the transcript from the array of results
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
+    recognition.lang = $("#select_language").val(); // specify the language from drop down box
+	console.log("Dialect =" + recognition.lang);
+	for (var i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
             final_transcript = event.results[i][0].transcript;
         } else {
