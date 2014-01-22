@@ -113,28 +113,16 @@ xmlhttp.onreadystatechange=function()
 
 //add line
 function addLine(coord){
-
-		//var pointname= prompt("Please Enter Point Name: ","");
-		var linename=" ";
-		//window.open('pointinformation.html','mywindow',"width=400,height=500,left=200,top=100, resizable=no, titlebar=no, toolbar=no, menubar=no");
-
-		//var container = $('<div />');
-		var coordinates = coord;
-		//var coords=coordinates.toString();
-		lastIDLine=(lastIDLine+1);
-	
-		// 2 options to call the edit function, option 1: using prompt window ,, option 2 : using new form window .... option 1 is disactivated,, option 2 acitivated
-	//container.html('Coordination of Point Name: <br> ('+ coord+') <br>'+"<a href='#' font-size=30 > Website</a>"+ '&#09' +"<a href='#' font-size=30  onClick='confirmation()'> Delete</a>"+ '&#09' +"<a href='#' onClick=Editing() font-size=30 >  Edit</a>" );
-	//container.html('Coordination of '+linename +' is: <br> ('+ coord+') <br>'+"<a href='#' font-size=30 > Website</a>"+ '&#09' +"<button type='button' onclick='deleting("+lastID+''+")' style='align:left;'>Delete</button>"+ '&#09' +"<a href='#' onClick=window.open('pointinformation.html','mywindow','width=400,height=500,left=200,top=100') font-size=30 >  Edit</a>" );
-	
-  // marker.bindPopup(container[0]);
+	var linename=" ";
+	var coordinates = coord;
+	lastIDLine=(lastIDLine+1);
 	var lineCoordinates = "(";
 	for (var i=0; i<coordinates.length; i=i+1){
 		lineCoordinates = lineCoordinates +coordinates[i]+",";
 	}
 	lineCoordinates = lineCoordinates.substr(0,lineCoordinates.length-1);
 	lineCoordinates = lineCoordinates+")";
-   saveLine("test","Description","{Comment1,Comment2}",true,lineCoordinates);
+    saveLine("test","Description","{Comment1,Comment2}",true,lineCoordinates);
 			
 };
 
