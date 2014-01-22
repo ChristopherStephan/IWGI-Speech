@@ -6,14 +6,14 @@ var recognizing = false;
 var final_transcript = '';
 var interim_transcript = '';
 
-
+recognition.lang = "en-US";
 recognition.continuous = true; // keep processing input until stopped
 recognition.interimResults = true; // show interim results
 //recognition.lang = $("#select_language").val(); // specify the language
 //console.log("Dialect =" + recognition.lang);
 recognition.onresult = function (event) {
     // Assemble the transcript from the array of results
-    recognition.lang = $("#select_language").val(); // specify the language from drop down box
+    //recognition.lang = $("#select_language").val(); // specify the language from drop down box
 	console.log("Dialect =" + recognition.lang);
 	for (var i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
