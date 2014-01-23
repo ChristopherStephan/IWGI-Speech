@@ -51,14 +51,14 @@ To test it, you need to run the .html site within a web server like apache or to
      - **"Focus username"**
  - Set focus in the user comment box
      - **"Focus input"**
-- Submit user comment
+ - Submit user comment
      - **"Submit input"**
-- Clear the form
+ - Clear the form
      - **"Clear form"**
-- Place a street project
+ - Place a street project
      - **"Place street project"**
      
-- Place a point project
+ - Place a point project
      - **"Place point project"**
      
 
