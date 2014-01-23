@@ -26,7 +26,7 @@ To test it, you need to run the .html site within a web server like apache or to
      - **"Draw marker"**,
      - **"Draw line"**,
      - **"Draw circle"**, 
-     - **"Draw polygon"**, 
+     - **"Draw polyline"**, 
      - **"Draw rectangle"** 
  - Locate yourself using the Geolocate Tool
      - **"Start location"**,
