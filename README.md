@@ -30,10 +30,10 @@ To test it, you need to run the .html site within a web server like apache or to
      - **"Draw rectangle"** 
  - Locate yourself using the Geolocate Tool
      - **"Start location"**,
-     - **"Stop location"**  
+     - **"End location"**  
  - To control the Reveal OSM Plugin, which provides additional information via OSM features say:
      - **"Start information"**,
-     - **"Stop information"** 
+     - **"End information"** 
  - To switch back to the home extend (Münster): 
      - **"Back to home"** 
  - To Enable or Disable the measurement tool, say
