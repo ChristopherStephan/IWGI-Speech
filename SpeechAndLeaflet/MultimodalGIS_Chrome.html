@@ -15,6 +15,9 @@
     <link href="src/Leaflet.pancontrol/L.Control.Pan.ie.css" rel="stylesheet">
     <link href="src/Leaflet.locator/L.Control.Locate.css" rel="stylesheet">
     <link href="src/Leaflet.viewcenter/leaflet.viewcenter.css" rel="stylesheet">
+	<link href="src/Leaflet.speechbar/leaflet.speechbar.css" rel="stylesheet">
+	<link href="src/Leaflet.inputbar/leaflet.inputbar.css" rel="stylesheet">
+	<link href="src/Leaflet.projectbar/leaflet.projectbar.css" rel="stylesheet">
     <link href="src/Leaflet.loading/Control.Loading.css" rel="stylesheet">
     <link href="src/Leaflet.sidebar/L.Control.Sidebar.css" rel="stylesheet">
     <link href="src/Leaflet.revealOSM/Leaflet.RevealOSM.css" rel="stylesheet">
@@ -334,6 +337,9 @@
     <script src="src/Leaflet.locator/L.Control.Locate.js"></script>
     <!-- https://github.com/domoritz/leaflet-locatecontrol -->
     <script src="src/Leaflet.viewcenter/leaflet.viewcenter.js"></script>
+	<script src="src/Leaflet.speechbar/leaflet.speechbar.js"></script>
+	<script src="src/Leaflet.inputbar/leaflet.inputbar.js"></script>
+	<script src="src/Leaflet.projectbar/leaflet.projectbar.js"></script>
     <!-- https://github.com/pwldp/leaflet.viewcenter -->
     <script src="src/Leaflet.loading/Control.Loading.js"></script>
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
@@ -789,6 +795,12 @@
 
          // init ViewCenter plugin
         var viewCenter = new L.Control.ViewCenter({}).addTo(map);
+		// init speechbar plugin
+		var speechbar = new L.Control.Speechbar({}).addTo(map);
+		// init projectbar plugin
+		var projectbar = new L.Control.Projectbar({}).addTo(map);
+		// init inputbar plugin
+		var inputbar = new L.Control.Inputbar({}).addTo(map);
 
 
          //Following codeblocks are shortcuts for the functions on the map

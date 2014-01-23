@@ -5,6 +5,8 @@ L.Control.ViewCenter = L.Control.extend({
                 forceSeparateButton: false,
                 center: [51.95442, 7.62709],
                 zoom: 13
+				
+				
         },
 
         onAdd: function (map) {
@@ -19,6 +21,7 @@ L.Control.ViewCenter = L.Control.extend({
                 this._createButton(this.options, className, container, this.setCenterView, map);
 
                 return container;
+				
         },
         
         _createButton: function (opts, className, container, fn, context) {
@@ -33,6 +36,7 @@ L.Control.ViewCenter = L.Control.extend({
                         .addListener(link, 'click', L.DomEvent.preventDefault)
                         .addListener(link, 'click', function(){
                             context.setView(opts.center, zoom);
+							
                         }, context);
                 return link;
         }

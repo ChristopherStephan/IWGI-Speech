@@ -358,7 +358,7 @@ while (i>projects.length-10 && projects[i]!=null)
                 var buttonContent = document.createTextNode("Close");
                 closeButton.appendChild(buttonContent);
         tag.appendChild(closeButton);
-sidebarProjects.show();
+//sidebarProjects.show();
 }
 
 function clearSidebar(){
