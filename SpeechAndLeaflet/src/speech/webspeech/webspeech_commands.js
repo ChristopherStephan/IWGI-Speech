@@ -241,63 +241,63 @@ recognition.onresult = function (event) {
 
 
 
-    if (final_transcript.indexOf("enable location function") >= 0) {
+    if (final_transcript.indexOf("start location") >= 0) {
         locater.locate();
-        console.log("enable location function");
+        console.log("start location");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("disable location function") >= 0) {
+    if (final_transcript.indexOf("end location") >= 0) {
         locater.stopLocate();
-        console.log("disable location function");
+        console.log("end location");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("enable additional information") >= 0) {
+    if (final_transcript.indexOf("start information") >= 0) {
         map.revealOSMControl.activate();
-        console.log("enable additional information");
+        console.log("start information");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("disable additional information") >= 0) {
+    if (final_transcript.indexOf("end information") >= 0) {
         map.revealOSMControl.deactivate();
-        console.log("disable additional information");
+        console.log("end information");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("go back to home") >= 0) {
+    if (final_transcript.indexOf("back to home") >= 0) {
         map.setView(new L.LatLng(51.95442, 7.62709), 13);
         console.log("go back to home");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("enable measurement") >= 0) {
+    if (final_transcript.indexOf("start measurement") >= 0) {
         map.measureControl.toggle();
-        console.log("enable measurement");
+        console.log("start measurement");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("disable measurement") >= 0) {
+    if (final_transcript.indexOf("end measurement") >= 0) {
         map.measureControl.toggle();
-        console.log("disable measurement");
+        console.log("end measurement");
         final_transcript = '';
     }
 
-    if (final_transcript.indexOf("enable minimap") >= 0) {
+    if (final_transcript.indexOf("start minimap") >= 0) {
         miniMap._restore();
-        console.log("enable mini map");
+        console.log("start mini map");
         final_transcript = '';
     }
 
-    if (final_transcript.indexOf("disable minimap") >= 0) {
+    if (final_transcript.indexOf("end minimap") >= 0) {
         miniMap._minimize();
-        console.log("disable mini map");
+        console.log("end mini map");
         final_transcript = '';
     }
 
@@ -306,38 +306,38 @@ recognition.onresult = function (event) {
     /////Start using drawing plugin tool//////////////////////
     //////////////////////////////////////////////////////////
 
-    if (final_transcript.indexOf("place a point project") >= 0) {
+    if (final_transcript.indexOf("place point project") >= 0) {
         new L.Draw.Marker(map).enable();
         //or this way: L.Draw.Marker(map, drawControl.options.marker).enable();    https://github.com/Leaflet/Leaflet.draw/issues/179#issuecomment-26500042
-        console.log("place a point project");
+        console.log("place point project");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("place a street project") >= 0) {
+    if (final_transcript.indexOf("place street project") >= 0) {
         new L.Draw.Polyline(map).enable();
-        console.log("place a street project");
+        console.log("place street project");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("enable circle drawing") >= 0) {
+    if (final_transcript.indexOf("draw circle") >= 0) {
         new L.Draw.Circle(map).enable();
-        console.log("enable circle drawing");
+        console.log("draw circle");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("enable polygon drawing") >= 0) {
+    if (final_transcript.indexOf("draw polygon") >= 0) {
         new L.Draw.Polygon(map).enable();
-        console.log("enable polygon drawing");
+        console.log("draw polygon");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("enable rectangle drawing") >= 0) {
+    if (final_transcript.indexOf("draw rectangle") >= 0) {
         new L.Draw.Rectangle(map).enable();
-        console.log("enable rectangle drawing");
+        console.log("draw rectangle");
         final_transcript = '';
     }
 
@@ -347,16 +347,16 @@ recognition.onresult = function (event) {
     //////////////////////////////////////////////////////////
 
 
-    if (final_transcript.indexOf("enable temperature map") >= 0) {
+    if (final_transcript.indexOf("start temperature map") >= 0) {
         overlayLayers.OpenWeatherMap_Precipitation.onAdd(map);
-        console.log("enable temperature map");
+        console.log("start temperature map");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("disable temperature map") >= 0) {
+    if (final_transcript.indexOf("end temperature map") >= 0) {
         overlayLayers.OpenWeatherMap_Precipitation.onRemove(map);
-        console.log("disable temperature map");
+        console.log("end temperature map");
         final_transcript = '';
     }
 
@@ -366,9 +366,9 @@ recognition.onresult = function (event) {
     //////////////////////////////////////////////////////////
 
     //Focus to search bar
-    if (final_transcript.indexOf("set focus to search bar") >= 0) {
+    if (final_transcript.indexOf("focus search bar") >= 0) {
         setFocusToSearchBar();
-        console.log("set focus to search bar");
+        console.log("focus search bar");
         final_transcript = '';
     }
 
@@ -377,23 +377,23 @@ recognition.onresult = function (event) {
     //////////////////////////////////////////////////////////
 
     //Focus to User Name Box
-    if (final_transcript.indexOf("switch to username") >= 0) {
+    if (final_transcript.indexOf("focus username") >= 0) {
         setFocusToCitizenName();
-        console.log("switch to username");
+        console.log("focus username");
         final_transcript = '';
     }
 
     //Focus to UserComment Box
-    if (final_transcript.indexOf("switch to input field") >= 0) {
+    if (final_transcript.indexOf("focus input") >= 0) {
         setFocusToUserComment();
-        console.log("switch to input field");
+        console.log("focus input");
         final_transcript = '';
     }
 
     //Send UserComment
-    if (final_transcript.indexOf("submit user input") >= 0) {
+    if (final_transcript.indexOf("submit input") >= 0) {
         sendUserComments();
-        console.log("submit user input");
+        console.log("submit input");
         final_transcript = '';
     }
 
