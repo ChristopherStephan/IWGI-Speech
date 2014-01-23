@@ -10,9 +10,10 @@ To test it, you need to run the .html site within a web server like apache or to
  3. Browse the site with Google Chrome. Other Browser are not supported, because the application uses heavily Googles WebSpeech API, which only works with Google Chrome. We're currently investigating other options using PocketSphinx or other libs.
  4. To start interacting with the map by speech, first click the green button, allow microphone access from browser. There you have the following options:
 
- - Basic Map Navigation
+ - Basic Map Navigation Zoom
      - **"Zoom out"**, 
-     - **"Zoom in"**, 
+     - **"Zoom in"**
+ - Basic Map Navigation Pan
      - **"Up"**, 
      - **"Down"**,
      - **"Left"**, 
@@ -22,36 +23,51 @@ To test it, you need to run the .html site within a web server like apache or to
      - **"Large/medium/small circle"**,
      - **"Large/medium/small rectangle"**
  - Control the drawing control plugin (enable drawing functionalities)
-     - **"Start marker drawing"**,
-     - **"Start line drawing"**,
-     - **"Start circle drawing"**, 
-     - **"Start polygon drawing"**, 
-     - **"Start rectangle drawing"** 
+     - **"Draw marker"**,
+     - **"Draw line"**,
+     - **"Draw circle"**, 
+     - **"Draw polygon"**, 
+     - **"Draw rectangle"** 
  - Locate yourself using the Geolocate Tool
-     - **"Show me where I am"**,
-     - **"End show me where I am"**  
+     - **"Start location"**,
+     - **"Stop location"**  
  - To control the Reveal OSM Plugin, which provides additional information via OSM features say:
-     - **"Enable additional information"**,
-     - **"Disable additional information"** 
+     - **"Start information"**,
+     - **"Stop information"** 
  - To switch back to the home extend (Münster): 
-     - **"Go back to home"** 
+     - **"Back to home"** 
  - To Enable or Disable the measurement tool, say
      - **"Start measurement"**,
      - **"End measurement"**
  - To control the minimap.
-     - **"Minimize minimap"**,
-     - **"Maximize minimap"**
+     - **"Start minimap"**,
+     - **"End minimap"**
  - To enable a temperature layer. More layers will follow
-     - **"Enable temperature map"**,
-     - **"Disable temperature map"**
-
+     - **"Start temperature map"**,
+     - **"End temperature map"**
+ - Set focus in the search bar
+     - **"Focus search bar"**
+ - Set focus in the name box
+     - **"Focus username"**
+ - Set focus in the user comment box
+     - **"Focus input"**
+- Submit user comment
+     - **"Submit input"**
+- Clear the form
+     - **"Clear form"**
+- Place a street project
+     - **"Place street project"**
+     
+- Place a point project
+     - **"Place point project"**
+     
 
 ----------
 To-DOs
 
  - Issue list: https://github.com/ChristopherStephan/IWGI-Speech/issues
  - Mainly: 
-     - Sphinx Integration, 
+     - Sphinx Integration (closed), 
      - Timeout for WebSpeech API
      - Gesture Integration
      - Backend Stuff
