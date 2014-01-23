@@ -47,7 +47,7 @@ L.Control.Locate = L.Control.extend({
         },
         setView: true, // automatically sets the map view to the user's location
         strings: {
-            title: "Show me where I am",
+            title: "Show your location\nSpeech:Start/End location",
             popup: "You are within {distance} {unit} from this point",
             outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
         },

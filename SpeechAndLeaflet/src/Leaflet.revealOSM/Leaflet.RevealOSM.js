@@ -5,7 +5,7 @@ L.Control.RevealOSM = L.Control.extend({
         position: 'topleft',
         apiUrl: 'http://overpass-api.de/api/interpreter?data=',
         queryTemplate: '[out:json];node(around:{radius},{lat},{lng})[name];out body qt 1;',
-        helpText: "Click on names to get more infos",
+        helpText: "Click on names to get more infos\nSpeech:Start/End information",
         excludeKeys: [/source/, /^ref\:/ ], //
         translateKeys: {}
     },

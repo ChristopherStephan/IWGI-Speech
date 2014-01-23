@@ -15,11 +15,11 @@
                     text: "Cancel"
                 },
                 buttons: {
-                    polyline: "Draw a polyline",
+                    polyline: "Draw a polyline\nSpeech:Draw polyline",
                     polygon: "Draw a polygon",
                     rectangle: "Draw a rectangle",
                     circle: "Draw a circle",
-                    marker: "Draw a marker"
+                    marker: "Draw a marker\nSpeech:Draw marker"
                 }
             },
             handlers: {

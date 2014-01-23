@@ -12,9 +12,9 @@ L.Control.MiniMap = L.Control.extend({
                 shadowRectOptions: {color: "#000000", weight: 1, clickable: false, opacity:0, fillOpacity:0}
         },
         
-        hideText: 'Hide MiniMap',
+        hideText: 'Hide MiniMap\nSpeech: End MiniMap',
         
-        showText: 'Show MiniMap',
+        showText: 'Show MiniMap\nSpeech:Start Minimap',
         
         //layer is the map layer to be shown in the minimap
         initialize: function (layer, options) {

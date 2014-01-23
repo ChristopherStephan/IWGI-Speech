@@ -328,7 +328,7 @@ recognition.onresult = function (event) {
     }
 
 
-    if (final_transcript.indexOf("draw polygon") >= 0) {
+    if (final_transcript.indexOf("draw polyline") >= 0) {
         new L.Draw.Polygon(map).enable();
         console.log("draw polygon");
         final_transcript = '';

@@ -78,7 +78,8 @@ L.Polyline.Measure = L.Draw.Polyline.extend({
 L.Control.MeasureControl = L.Control.extend({
 
     statics: {
-        TITLE: 'Measure distances'
+        TITLE: 'Measure distances\nSpeech:Start/End measurement'
+		
     },
     options: {
         position: 'topleft',

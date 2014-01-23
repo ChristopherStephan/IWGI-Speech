@@ -1,7 +1,7 @@
 L.Control.ViewCenter = L.Control.extend({
         options: {
                 position: 'topleft',
-                title: 'Go to center of Münster, Germany',
+                title: 'Go to center of Münster, Germany\nSpeech:Back to home',
                 forceSeparateButton: false,
                 center: [51.95442, 7.62709],
                 zoom: 13
