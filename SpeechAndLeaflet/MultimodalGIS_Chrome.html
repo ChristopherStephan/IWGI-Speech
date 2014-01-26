@@ -375,8 +375,9 @@
         var popup;
          //new map with map options
         var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
-        var map = L.map('map', {
-            //crs: L.CRS.EPSG3857,
+        var map = new L.Map('map', {
+		//crs: L.CRS.EPSG4326,
+            crs: L.CRS.EPSG3857,
             center: [51.95442, 7.62709],
             zoom: 13,
             dragging: true,
@@ -401,6 +402,10 @@
                 queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
             }
         });
+		
+		
+		
+		
 
          //map.addEventListener('click', onMapClick); //needed for wms getfeatureinfo
         popup = new L.Popup({
@@ -489,6 +494,25 @@
             transparent: true,
             opacity: 0.5
         });
+		
+		
+	var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+            layers: 'STR_NGT',
+            format: 'image/png',
+            crs: L.CRS.EPSG4326,
+            version: '1.3.0',
+            transparent: true,
+            opacity: 0.5
+        });
+
+	var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+            layers: 'STR_DEN',
+            format: 'image/png',
+            crs: L.CRS.EPSG4326,
+            version: '1.3.0',
+            transparent: true,
+            opacity: 0.5
+        });
 
 
 
@@ -514,7 +538,9 @@
                 'Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
                 'Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
                 'Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
-                'Windspeed': wind
+                'Windspeed': wind,
+				'NoiseMap_Night':laerm_night,
+				'NoiseMap_24h':laerm_24
             },
 
         };
