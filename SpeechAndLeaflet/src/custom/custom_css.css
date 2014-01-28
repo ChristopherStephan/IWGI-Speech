@@ -332,10 +332,20 @@ hr {
 == OVAL SPEECH BUBBLE (more CSS3)
 ** ============================================================================================================================ */
 
+#transcriptBubble{
+  z-index: 3;
+  width: 20%;
+  left: -30%;
+  position:relative;
+  padding:70px 30px;
+  margin: -16em auto 60px;
+
+}
+
 .oval-speech-border {
   z-index: 3;
   width: 20%;
-  left: 29%;
+  left: -30%;
   position:relative;
   padding:70px 30px;
   margin:1em auto 60px;
