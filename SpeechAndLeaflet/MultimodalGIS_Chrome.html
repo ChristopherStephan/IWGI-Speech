@@ -126,25 +126,24 @@
         <br>
         <br>Description:
         <br>
-        <textarea id="pointdes" name="pointdescription" style="width: 402px; height: 443px; margin: 0px"></textarea>
+        <textarea id="pointdes" name="pointdescription" style="width: 95%; height: 58%; margin: 0px"></textarea>
         <br>
         <br>
-        <button id="point_submit" onclick="addPointButton();">Submit</button>
-        <button id="point_clear" onclick="clearForm();">Clear</button>
+        <button id="point_submit" style="width: 46%; height: 65px;" onclick="addPointButton();">Submit</button>
+        <button id="point_clear" style="width: 46%; height: 65px;" onclick="clearForm();">Clear</button>
     </div>
 
     <div id="sidebarLine"> 
 		<br> Name:  
 		<input id="linename" type="text" SIZE=30 name="linename" required><br>	
 		<br>Description:
-		<input id="linedes" style="width: 300px; height: 150px;" name="linedescription">
-		<br>
+		<textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
+		<br><br>
 		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned road</label>
-        <br>
-        <input id="alternative" name="Linetype" type="radio" value="Alternative"><label for="alternative">Alternative road</label><br>
-		<button type="button" onclick="addLineButton()">Submit</button>
+        <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative road</label><br><br>
+		<button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
 		<!--<input TYPE="RESET" VALUE="Clear">-->
-		<button type="button" onclick="clearForm()">Clear</button>
+		<button type="button" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm()">Clear</button>
 	</div>
 
     <div id="sidebarComments"> 
@@ -539,8 +538,8 @@
                 'Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
                 'Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
                 'Windspeed': wind,
-				'NoiseMap_Night':laerm_night,
-				'NoiseMap_24h':laerm_24
+				'Noise Map (night)':laerm_night,
+				'Noise Map (24h)':laerm_24
             },
 
         };
