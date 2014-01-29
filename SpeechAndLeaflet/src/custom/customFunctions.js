@@ -215,6 +215,8 @@ var currentID;
  //add comments
 function AddComment(id) {
     currentID = id;
+    sidebarLine.hide();
+    sidebarPoint.hide();
     sidebarComments.show();
     $.get("AddandDisplayComments.php?fid=" + id, function (data) {
         document.getElementById('sidebarCommentsTable').innerHTML = data;

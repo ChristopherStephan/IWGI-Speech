@@ -726,7 +726,7 @@
                 var coordinates = layer.toGeoJSON().geometry.coordinates;
                 var coord = coordinates.toString();
                 addPoint(coord);
-
+                sidebarLine.hide();
                 sidebarPoint.show();
             }
 
@@ -734,6 +734,7 @@
                 var geojsonFeature = layer.toGeoJSON();
 				layer.addTo(map);
                 addLine(geojsonFeature.geometry.coordinates);
+                sidebarPoint.hide();
                 sidebarLine.show();
             }
             //save to db here , you can check the type is it marker or polygon ... then save it to db
