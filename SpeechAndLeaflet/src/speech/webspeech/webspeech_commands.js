@@ -240,63 +240,63 @@ recognition.onresult = function (event) {
 
 
 
-    if (final_transcript.indexOf("start location") >= 0) {
+    if (final_transcript.indexOf("enable location") >= 0) {
         locater.locate();
-        console.log("start location");
+        console.log("enable location");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("end location") >= 0) {
+    if (final_transcript.indexOf("disable location") >= 0) {
         locater.stopLocate();
         console.log("end location");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("start information") >= 0) {
+    if (final_transcript.indexOf("enable information") >= 0) {
         map.revealOSMControl.activate();
-        console.log("start information");
+        console.log("enable information");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("end information") >= 0) {
+    if (final_transcript.indexOf("disable information") >= 0) {
         map.revealOSMControl.deactivate();
-        console.log("end information");
+        console.log("disable information");
         final_transcript = '';
     }
 
 
     if (final_transcript.indexOf("back to home") >= 0) {
         map.setView(new L.LatLng(51.95442, 7.62709), 13);
-        console.log("go back to home");
+        console.log("back to home");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("start measurement") >= 0) {
+    if (final_transcript.indexOf("enable measurement") >= 0) {
         map.measureControl.toggle();
-        console.log("start measurement");
+        console.log("enable measurement");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("end measurement") >= 0) {
+    if (final_transcript.indexOf("disable measurement") >= 0) {
         map.measureControl.toggle();
-        console.log("end measurement");
+        console.log("disable measurement");
         final_transcript = '';
     }
 
-    if (final_transcript.indexOf("start minimap") >= 0) {
+    if (final_transcript.indexOf("enable mini map") >= 0) {
         miniMap._restore();
-        console.log("start mini map");
+        console.log("enable mini map");
         final_transcript = '';
     }
 
-    if (final_transcript.indexOf("end minimap") >= 0) {
+    if (final_transcript.indexOf("disable minimap") >= 0) {
         miniMap._minimize();
-        console.log("end mini map");
+        console.log("disable mini map");
         final_transcript = '';
     }
 
@@ -305,40 +305,20 @@ recognition.onresult = function (event) {
     /////Start using drawing plugin tool//////////////////////
     //////////////////////////////////////////////////////////
 
-    if (final_transcript.indexOf("place point project") >= 0) {
+    if (final_transcript.indexOf("point project") >= 0) {
         new L.Draw.Marker(map).enable();
         //or this way: L.Draw.Marker(map, drawControl.options.marker).enable();    https://github.com/Leaflet/Leaflet.draw/issues/179#issuecomment-26500042
-        console.log("place point project");
+        console.log("point project");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("place street project") >= 0) {
+    if (final_transcript.indexOf("street project") >= 0) {
         new L.Draw.Polyline(map).enable();
-        console.log("place street project");
+        console.log("street project");
         final_transcript = '';
     }
 
-
-    if (final_transcript.indexOf("draw circle") >= 0) {
-        new L.Draw.Circle(map).enable();
-        console.log("draw circle");
-        final_transcript = '';
-    }
-
-
-    if (final_transcript.indexOf("draw polyline") >= 0) {
-        new L.Draw.Polygon(map).enable();
-        console.log("draw polygon");
-        final_transcript = '';
-    }
-
-
-    if (final_transcript.indexOf("draw rectangle") >= 0) {
-        new L.Draw.Rectangle(map).enable();
-        console.log("draw rectangle");
-        final_transcript = '';
-    }
 
 
     //////////////////////////////////////////////////////////
