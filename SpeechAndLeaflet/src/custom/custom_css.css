@@ -52,6 +52,22 @@ footer {
         
         
 /* Map and Map controls------------------------- */
+       
+#vertical {
+    height: 100%;
+    border-left: 2px solid blue;
+    position: absolute;
+    left: 50%;
+    z-index: 50;
+}
+
+#horizontal {
+    width: 100%;
+    border-top: 2px solid blue;
+    position: absolute;
+    top: 50%;
+    z-index: 50;
+}
 
 #map {
     height: calc(100% - 50px);
@@ -65,8 +81,9 @@ footer {
 
 #description {
     font-style: italic;
-    color: #AAA;
+    color: #131010;
     margin-bottom: 30px;
+	text-align: center;
 }
 
 #map.leaflet-fullscreen {
@@ -406,3 +423,64 @@ hr {
 #oval-speech-border-div {
 margin-top: 80px;
 }
+
+
+
+
+/*table .css*/
+
+.datagrid table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
+.datagrid {
+    font: normal 12px/150% Arial, Helvetica, sans-serif;
+    background: #fff;
+    overflow: hidden;
+    border: 4px solid #006699;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.datagrid table td, .datagrid table th {
+    padding: 3px 5px;
+}
+
+.datagrid table thead th {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );
+    background: -moz-linear-gradient( center top, #006699 5%, #00557F 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
+    background-color: #006699;
+    color: #FFFFFF;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.datagrid table thead th:first-child {
+    border: none;
+}
+
+.datagrid table tbody td {
+    color: #00557F;
+    border-left: 3px solid #E1EEF4;
+    font-size: 17px;
+    font-weight: normal;
+	text-align: center;
+}
+
+.datagrid table tbody .alt td {
+    background: #E1EEf4;
+    color: #00557F;
+}
+
+.datagrid table tbody td:first-child {
+    border-left: none;
+}
+
+.datagrid table tbody tr:last-child td {
+    border-bottom: none;
+}
+
