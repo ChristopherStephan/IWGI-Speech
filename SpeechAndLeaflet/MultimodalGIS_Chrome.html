@@ -26,7 +26,7 @@
     <link href="src/Leaflet.draw/leaflet.draw.css" rel="stylesheet">
     <link href="src/Leaflet.measureControl/leaflet.measurecontrol.css" rel="stylesheet">
     <link href="src/custom/custom_css.css" rel="stylesheet">
-    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">    
 </head>
 
 <body onload="startButton();">
@@ -296,6 +296,8 @@
         </div>
     </div>
 
+    <div id="dialog" title="Info"></div>
+
  
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -354,6 +356,7 @@
     <script src="src/custom/customFunctions.js"></script>
     <script src="src/speech/webspeech/webspeech_commands.js"></script>
     <!--cutom ones-->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
         var sidebarPoint = L.control.sidebar('sidebarPoint', {
             position: 'right'
@@ -641,12 +644,23 @@
         function addPointButton() {
         	// do not send empty empty comments
         	if ($("#pointname").val() == ""){
-        		alert("Please enter a name!");
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a name!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
+
         		return;
         	}
 
         	if ($("#pointdes").val() == ""){
-        		alert("Please enter a description!");
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a description!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
         		return;
         	} 
 
@@ -659,12 +673,22 @@
         function addLineButton() {
             // do not send empty comments
         	if ($("#linename").val() == ""){
-        		alert("Please enter a name!");
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a name!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
         		return;
         	}
 
         	if ($("#linedes").val() == ""){
-        		alert("Please enter a description!");
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a description!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
         		return;
         	} 
 			
@@ -682,12 +706,22 @@
 		function sendUserComments(){
 			//no empty usercomments
 			if ($("#citizenname").val() == ""){
-        		alert("Please enter a name!");
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a name!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
         		return;
         	}
 
         	if ($("#usercomment").val() == ""){
-        		alert("Please enter a comment!");
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a comment!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
         		return;
         	}
 
