@@ -137,20 +137,20 @@
 		<br>Description:
 		<textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
 		<br><br>
-		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned road</label>
-        <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative road</label><br><br>
+		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned</label>
+        <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative</label><br><br>
 		<button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
 		<!--<input TYPE="RESET" VALUE="Clear">-->
 		<button type="button" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm()">Clear</button>
 	</div>
 
     <div id="sidebarComments"> 
-		<b><font color="#0080C0">Add new comment</font></b>
+		<b><font color="#0080C0">Add new Remark</font></b>
 		<div id="AddComment" style="width: 385px; border: 1px solid #75C0BF; margin = 1"> 
 		Citizen Name: <input type="text" id = "citizenname" name="citizenname" size="37" value=""><br>	
-		User Comment :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
+		User Remark :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
 		</div>
-		<button type="comment_sumbit" onclick="sendUserComments()">Submit Comment</button>
+		<button type="comment_sumbit" onclick="sendUserComments()">Submit Remark</button>
 		<button type="comment_clear" onclick="clearForm()">Clear Form</button>
 		<div id="sidebarCommentsTable"></div>
 	</div>

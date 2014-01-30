@@ -316,7 +316,7 @@ recognition.onresult = function (event) {
 
     //////////////////////////////////////////////////////////
     /////Controlling the UserCommenting Function//////////////
-    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////	
 
     //Focus to User Name Box
     if (final_transcript.indexOf("focus username") >= 0) {
@@ -325,17 +325,17 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 
-    //Focus to UserComment Box
-    if (final_transcript.indexOf("focus input") >= 0) {
+    //Focus to Userremark Box
+    if (final_transcript.indexOf("focus remark") >= 0) {
         setFocusToUserComment();
-        console.log("focus input");
+        console.log("focus remark");
         final_transcript = '';
     }
 
-    //Send UserComment
-    if (final_transcript.indexOf("submit input") >= 0) {
+    //Send Userremark
+    if (final_transcript.indexOf("send remark") >= 0) {
         sendUserComments();
-        console.log("submit input");
+        console.log("send remark");
         final_transcript = '';
     }
 
@@ -345,7 +345,97 @@ recognition.onresult = function (event) {
         console.log("clear form");
         final_transcript = '';
     }
+    
+
+	
+	 //////////////////////////////////////////////////////////
+     /////Controlling the Point Function///////////////////////
+     //////////////////////////////////////////////////////////
+
+	//Focus to Point Name Box
+    if (final_transcript.indexOf("focus point name") >= 0) {
+        setFocusToPointName();
+        console.log("focus point name");
+        final_transcript = '';
     }
+	
+	
+	//Focus to Point Description Box
+    if (final_transcript.indexOf("focus point description") >= 0) {
+        setFocusToPointDes();
+        console.log("focus point description");
+        final_transcript = '';
+    }
+	
+
+	//Submit Point
+    if (final_transcript.indexOf("send Point") >= 0) {
+        addPointButton();
+        console.log("send Point");
+        final_transcript = '';
+    }
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////
+    /////Controlling the street Function///////////////////////
+    //////////////////////////////////////////////////////////
+
+	//Focus to street Name Box
+    if (final_transcript.indexOf("focus street name") >= 0) {
+        setFocusToLineName();
+        console.log("focus street name");
+        final_transcript = '';
+    }
+	
+	
+	//Focus to street Description Box
+    if (final_transcript.indexOf("focus Street description") >= 0) {
+        setFocusToLineDes();
+        console.log("focus Street description");
+        final_transcript = '';
+    }
+	
+	
+	//Select Planned Street
+    if (final_transcript.indexOf("select real street") >= 0) {
+        selectPlannedRoad();
+        console.log("select real street");
+        final_transcript = '';
+    }
+	
+	
+	//Select Alternative Street
+    if (final_transcript.indexOf("select alternative Street") >= 0) {
+        selectAlternativeRoad();
+        console.log("select alternative Street");
+        final_transcript = '';
+    }
+	
+
+	//Submit street
+    if (final_transcript.indexOf("send Street") >= 0) {
+        addLineButton();
+        console.log("send Street");
+        final_transcript = '';
+    }
+	
+	
+	
+	//////////////////////////////////////////////////////////
+    /////Controlling the Clear Function/////////////////////
+    //////////////////////////////////////////////////////////
+	
+
+	//Clear Form
+    if (final_transcript.indexOf("delete project") >= 0) {
+        clearForm();
+        console.log("delete project");
+        final_transcript = '';
+    }
+	}
+	
 }
 
 recognition.onend = function() {
