@@ -168,9 +168,8 @@
     <div id="sidebarSpeech">
         <div id="description">
 		<br>
-		To control the map by using your voice, please use the following commands:
-		<p><img src="voice.png" alt="Voice"></p>
-		<br>
+		Control the map by saying the following commands:
+		<br><br>
             <ul style="padding-left: 10px;">	
 			Basic Map-Navigation:
                 <div class="datagrid">
@@ -717,6 +716,9 @@
                 var coordinates = layer.toGeoJSON().geometry.coordinates;
                 var coord = coordinates.toString();
                 addPoint(coord);
+                sidebarComments.hide();
+                sidebarProjects.hide();
+                sidebarSpeech.hide();
                 sidebarLine.hide();
                 sidebarPoint.show();
             }
@@ -725,6 +727,10 @@
                 var geojsonFeature = layer.toGeoJSON();
 				layer.addTo(map);
                 addLine(geojsonFeature.geometry.coordinates);
+                sidebarSpeech.hide();
+                sidebarComments.hide();
+                sidebarProjects.hide();
+                sidebarSpeech.hide();
                 sidebarPoint.hide();
                 sidebarLine.show();
             }
