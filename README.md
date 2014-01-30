@@ -44,14 +44,42 @@ Speech
  - To enable a temperature layer. More layers will follow
      - **"Enable temperature map"**,
      - **"Disable temperature map"**
+
+To set the focus to different input fields (search bar)
  - Set focus in the search bar
      - **"Focus search bar"**
- - Set focus in the name box
+
+To set the focus to different input fields (**Comment** function)
+ - Set focus in the name box of the Comment function
      - **"Focus username"**
- - Set focus in the user comment box
-     - **"Focus input"**
- - Submit user comment
-     - **"Submit input"**
+ - Set focus in the user comment box in the Comment function
+     - **"Focus remark"**
+ - Submit user comment in the Comment Function
+     - **"Submit remark"**
+ - Clear the form
+     - **"Clear form"**
+
+To set the focus to different input fields (**Point** project function)
+ - Set focus in the point name box of the PointProject function
+     - **"Focus Point Name"**
+ - Set focus in the point description box of the PointProject function
+     - **"Focus Point Description"**
+ - Submit point project in the PointProject Function
+     - **"Send Point"**
+ - Clear the form
+     - **"Clear form"**
+
+To set the focus to different input fields (**Line** project function)
+ - Set focus in the street name box of the LineProject function
+     - **"Focus Street Name"**
+ - Set focus in the street description box of the LineProject function
+     - **"Focus Street Description"**
+ - Select "Planned Street" option of the LineProject function
+     - **"Select Real Street"**
+ - Select "Alternative Street" option of the LineProject function
+     - **"Select Alternative Street"**
+ - Submit street project in the LineProject Function
+     - **"Send Street"**
  - Clear the form
      - **"Clear form"**
 
