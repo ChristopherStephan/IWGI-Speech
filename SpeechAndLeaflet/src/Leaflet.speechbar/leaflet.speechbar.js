@@ -32,12 +32,12 @@ L.Control.Speechbar = L.Control.extend({
                         
                         .addListener(link, 'click', function(){
                                 $(function () {
-                                        $("#dialog").dialog().html($("#description"));
+                                        $("#dialog").dialog({width:1300,height:600,position:['top',53],}).html($('<img width="1300px" height="600px" src="src/custom/commands.gif">'));
                                     });
                                     setTimeout(function () {
                                         $("#dialog").dialog("close");
                                         
-                                    }, 5000);
+                                    }, 13000);
 				//sidebarSpeech.toggle();
                         }, context);
                 return link;
