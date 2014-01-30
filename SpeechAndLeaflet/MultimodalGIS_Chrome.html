@@ -420,7 +420,7 @@
         });
 		
 		
-	var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+		var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
             layers: 'STR_NGT',
             format: 'image/png',
             crs: L.CRS.EPSG4326,
@@ -429,7 +429,7 @@
             opacity: 0.5
         });
 
-	var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+		var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
             layers: 'STR_DEN',
             format: 'image/png',
             crs: L.CRS.EPSG4326,
@@ -438,6 +438,14 @@
             opacity: 0.5
         });
 
+		var rain = new L.tileLayer ('http://{s}.tile.openweathermap.org/map/rain/{z}/{x}/{y}.png', {
+			options: {
+				attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+				opacity: 0.5
+			},
+			transparent: true,
+            opacity: 0.5
+		});	
 
 
          //Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
@@ -450,14 +458,14 @@
 
         groupedOverLayers = {
             "Map Layers": {
-                'DGK5': layerDGK5,
+                //'DGK5': layerDGK5,
                 'DTK10': layerDTK10,
                 'Arial View': layerOrtho
             },
             "Weather Layers": {
-                'Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+                //'Rain': rain,
                 'Windspeed': wind,
-				'Noise Map (night)':laerm_night,
+				//'Noise Map (night)':laerm_night,
 				'Noise Map (24h)':laerm_24
             },
 
