@@ -103,11 +103,6 @@
     </div>
 
     <div id="map">
-        <!--One vertical and one horizontal line within the map-->
-
-        <div id="vertical"></div>
-
-        <div id="horizontal"></div>
     </div>
 	
 	<div id="oval-speech-border-div" style="position:relative;">
@@ -137,20 +132,20 @@
 		<br>Description:
 		<textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
 		<br><br>
-		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned road</label>
-        <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative road</label><br><br>
+		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned</label>
+        <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative</label><br><br>
 		<button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
 		<!--<input TYPE="RESET" VALUE="Clear">-->
 		<button type="button" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm()">Clear</button>
 	</div>
 
     <div id="sidebarComments"> 
-		<b><font color="#0080C0">Add new comment</font></b>
+		<b><font color="#0080C0">Add new Remark</font></b>
 		<div id="AddComment" style="width: 385px; border: 1px solid #75C0BF; margin = 1"> 
 		Citizen Name: <input type="text" id = "citizenname" name="citizenname" size="37" value=""><br>	
-		User Comment :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
+		User Remark :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
 		</div>
-		<button type="comment_sumbit" onclick="sendUserComments()">Submit Comment</button>
+		<button type="comment_sumbit" onclick="sendUserComments()">Submit Remark</button>
 		<button type="comment_clear" onclick="clearForm()">Clear Form</button>
 		<div id="sidebarCommentsTable"></div>
 	</div>
@@ -420,7 +415,7 @@
         });
 		
 		
-	var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+		var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
             layers: 'STR_NGT',
             format: 'image/png',
             crs: L.CRS.EPSG4326,
@@ -429,7 +424,7 @@
             opacity: 0.5
         });
 
-	var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+		var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
             layers: 'STR_DEN',
             format: 'image/png',
             crs: L.CRS.EPSG4326,
@@ -438,6 +433,14 @@
             opacity: 0.5
         });
 
+		var rain = new L.tileLayer ('http://{s}.tile.openweathermap.org/map/rain/{z}/{x}/{y}.png', {
+			options: {
+				attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+				opacity: 0.5
+			},
+			transparent: true,
+            opacity: 0.5
+		});	
 
 
          //Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
@@ -450,14 +453,14 @@
 
         groupedOverLayers = {
             "Map Layers": {
-                'DGK5': layerDGK5,
+                //'DGK5': layerDGK5,
                 'DTK10': layerDTK10,
                 'Arial View': layerOrtho
             },
             "Weather Layers": {
-                'Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+                //'Rain': rain,
                 'Windspeed': wind,
-				'Noise Map (night)':laerm_night,
+				//'Noise Map (night)':laerm_night,
 				'Noise Map (24h)':laerm_24
             },
 

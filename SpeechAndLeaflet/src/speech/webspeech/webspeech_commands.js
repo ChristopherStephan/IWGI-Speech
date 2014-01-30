@@ -175,63 +175,6 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 
-    //////////////////////////////////////////////////////////
-    /////Start using leaflets integrated drawing tool/////////
-    //////////////////////////////////////////////////////////
-
-
-    if (final_transcript.indexOf("place marker") >= 0) {
-        L.marker(map.getCenter()).addTo(map);
-        console.log("place marker");
-        final_transcript = '';
-    }
-
-    if (final_transcript.indexOf("place large circle") >= 0) {
-        L.circle(map.getCenter(), 400).addTo(map);
-        console.log("place large circle");
-        final_transcript = '';
-    }
-
-    if (final_transcript.indexOf("place medium circle") >= 0) {
-        L.circle(map.getCenter(), 200).addTo(map);
-        console.log("place medium circle");
-        final_transcript = '';
-    }
-
-    if (final_transcript.indexOf("place small circle") >= 0) {
-        L.circle(map.getCenter(), 100).addTo(map);
-        console.log("place small circle");
-        final_transcript = '';
-    }
-
-    if (final_transcript.indexOf("place large rectangle") >= 0) {
-        L.rectangle([
-            [map.getCenter().lat - 0.01, map.getCenter().lng - 0.01],
-            [map.getCenter().lat + 0.01, map.getCenter().lng + 0.01]
-        ]).addTo(map);
-        console.log("place large rectangle");
-        final_transcript = '';
-    }
-
-
-    if (final_transcript.indexOf("place medium rectangle") >= 0) {
-        L.rectangle([
-            [map.getCenter().lat - 0.005, map.getCenter().lng - 0.005],
-            [map.getCenter().lat + 0.005, map.getCenter().lng + 0.005]
-        ]).addTo(map);
-        console.log("place medium rectangle");
-        final_transcript = '';
-    }
-
-
-    if (final_transcript.indexOf("place small rectangle") >= 0) {
-        L.rectangle([
-            [map.getCenter().lat - 0.0025, map.getCenter().lng - 0.0025],
-            [map.getCenter().lat + 0.0025, map.getCenter().lng + 0.0025]
-        ]).addTo(map);
-        console.log("place small rectangle");
-        final_transcript = '';
-    }
 
 
     //////////////////////////////////////////////////////////
@@ -288,15 +231,15 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 
-    if (final_transcript.indexOf("enable mini map") >= 0) {
+    if (final_transcript.indexOf("enable minimap") >= 0) {
         miniMap._restore();
-        console.log("enable mini map");
+        console.log("enable minimap");
         final_transcript = '';
     }
 
     if (final_transcript.indexOf("disable minimap") >= 0) {
         miniMap._minimize();
-        console.log("disable mini map");
+        console.log("disable minimap");
         final_transcript = '';
     }
 
@@ -305,17 +248,17 @@ recognition.onresult = function (event) {
     /////Start using drawing plugin tool//////////////////////
     //////////////////////////////////////////////////////////
 
-    if (final_transcript.indexOf("point project") >= 0) {
+    if (final_transcript.indexOf("place project") >= 0) {
         new L.Draw.Marker(map).enable();
         //or this way: L.Draw.Marker(map, drawControl.options.marker).enable();    https://github.com/Leaflet/Leaflet.draw/issues/179#issuecomment-26500042
-        console.log("point project");
+        console.log("place project");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("street project") >= 0) {
+    if (final_transcript.indexOf("Street project") >= 0) {
         new L.Draw.Polyline(map).enable();
-        console.log("street project");
+        console.log("Street project");
         final_transcript = '';
     }
 
@@ -326,18 +269,38 @@ recognition.onresult = function (event) {
     //////////////////////////////////////////////////////////
 
 
-    if (final_transcript.indexOf("start temperature map") >= 0) {
-        overlayLayers.OpenWeatherMap_Precipitation.onAdd(map);
-        console.log("start temperature map");
+    if (final_transcript.indexOf("enable noise map") >= 0) {
+        laerm24.onAdd(map);
+        console.log("enable noise map");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("end temperature map") >= 0) {
-        overlayLayers.OpenWeatherMap_Precipitation.onRemove(map);
-        console.log("end temperature map");
+    if (final_transcript.indexOf("disable noise map") >= 0) {
+        laerm24.onRemove(map);
+        console.log("disable noise map");
         final_transcript = '';
     }
+	
+	
+	if (final_transcript.indexOf("enable cycle map") >= 0) {
+        osmCycle.onAdd(map);
+        console.log("enable cycle map");
+        final_transcript = '';
+    }
+
+
+    if (final_transcript.indexOf("disable cycle map") >= 0) {
+        osmCycle.onRemove(map);
+        console.log("disable cycle map");
+        final_transcript = '';
+    }
+	
+
+	
+	// some other layers, which can be used: osmcyle, layerDGK5, layerDTK10, layerOrtho, rain,wind, laerm_24
+
+	
 
 
     //////////////////////////////////////////////////////////
@@ -353,7 +316,7 @@ recognition.onresult = function (event) {
 
     //////////////////////////////////////////////////////////
     /////Controlling the UserCommenting Function//////////////
-    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////	
 
     //Focus to User Name Box
     if (final_transcript.indexOf("focus username") >= 0) {
@@ -362,17 +325,17 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 
-    //Focus to UserComment Box
-    if (final_transcript.indexOf("focus input") >= 0) {
+    //Focus to Userremark Box
+    if (final_transcript.indexOf("focus remark") >= 0) {
         setFocusToUserComment();
-        console.log("focus input");
+        console.log("focus remark");
         final_transcript = '';
     }
 
-    //Send UserComment
-    if (final_transcript.indexOf("submit input") >= 0) {
+    //Send Userremark
+    if (final_transcript.indexOf("send remark") >= 0) {
         sendUserComments();
-        console.log("submit input");
+        console.log("send remark");
         final_transcript = '';
     }
 
@@ -382,7 +345,97 @@ recognition.onresult = function (event) {
         console.log("clear form");
         final_transcript = '';
     }
+    
+
+	
+	 //////////////////////////////////////////////////////////
+     /////Controlling the Point Function///////////////////////
+     //////////////////////////////////////////////////////////
+
+	//Focus to Point Name Box
+    if (final_transcript.indexOf("focus point name") >= 0) {
+        setFocusToPointName();
+        console.log("focus point name");
+        final_transcript = '';
     }
+	
+	
+	//Focus to Point Description Box
+    if (final_transcript.indexOf("focus point description") >= 0) {
+        setFocusToPointDes();
+        console.log("focus point description");
+        final_transcript = '';
+    }
+	
+
+	//Submit Point
+    if (final_transcript.indexOf("send Point") >= 0) {
+        addPointButton();
+        console.log("send Point");
+        final_transcript = '';
+    }
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////
+    /////Controlling the street Function///////////////////////
+    //////////////////////////////////////////////////////////
+
+	//Focus to street Name Box
+    if (final_transcript.indexOf("focus street name") >= 0) {
+        setFocusToLineName();
+        console.log("focus street name");
+        final_transcript = '';
+    }
+	
+	
+	//Focus to street Description Box
+    if (final_transcript.indexOf("focus Street description") >= 0) {
+        setFocusToLineDes();
+        console.log("focus Street description");
+        final_transcript = '';
+    }
+	
+	
+	//Select Planned Street
+    if (final_transcript.indexOf("select real street") >= 0) {
+        selectPlannedRoad();
+        console.log("select real street");
+        final_transcript = '';
+    }
+	
+	
+	//Select Alternative Street
+    if (final_transcript.indexOf("select alternative Street") >= 0) {
+        selectAlternativeRoad();
+        console.log("select alternative Street");
+        final_transcript = '';
+    }
+	
+
+	//Submit street
+    if (final_transcript.indexOf("send Street") >= 0) {
+        addLineButton();
+        console.log("send Street");
+        final_transcript = '';
+    }
+	
+	
+	
+	//////////////////////////////////////////////////////////
+    /////Controlling the Clear Function/////////////////////
+    //////////////////////////////////////////////////////////
+	
+
+	//Clear Form
+    if (final_transcript.indexOf("delete project") >= 0) {
+        clearForm();
+        console.log("delete project");
+        final_transcript = '';
+    }
+	}
+	
 }
 
 recognition.onend = function() {

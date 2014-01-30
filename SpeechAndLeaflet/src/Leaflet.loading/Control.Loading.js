@@ -4,7 +4,7 @@
  */
 L.Control.Loading = L.Control.extend({
     options: {
-        position: 'topleft',
+        position: 'topright',
         separate: true,
         zoomControl: null
     },

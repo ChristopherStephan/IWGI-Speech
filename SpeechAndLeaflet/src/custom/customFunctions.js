@@ -449,8 +449,6 @@ function selectAlternativeRoad() {
 }
 
 
-
-
  //Select Planned Road
 function selectPlannedRoad() {
     document.getElementById("main").checked = true;
@@ -465,27 +463,27 @@ function selectAlternativeRoad() {
 
 
  //Toggle Point Sidebar
-function selectAlternativeRoad() {
+function sidebarPointToggle() {
     sidebarPoint.toggle();
 }
 
  //Toggle Line Sidebar
-function selectAlternativeRoad() {
+function sidebarLineToggle() {
     sidebarLine.toggle();
 }
 
  //Toggle Comments Sidebar
-function selectAlternativeRoad() {
+function sidebarCommentToggle() {
     sidebarComments.toggle();
 }
 
  //Toggle Projects Sidebar
-function selectAlternativeRoad() {
+function sidebarProjectToggle() {
     sidebarProjects.toggle();
 }
 
  //Toggle Speech Sidebar
-function selectAlternativeRoad() {
+function sidebarSpeechToggle() {
     sidebarSpeech.toggle();
 }
 
