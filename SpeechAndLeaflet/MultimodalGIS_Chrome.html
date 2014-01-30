@@ -312,7 +312,7 @@
             scale: true,
             zoomsliderControl: false,
             measureControl: true,
-            loadingControl: false,
+            loadingControl: true,
             panControl: false,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice   
             // measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
@@ -333,7 +333,7 @@
 
 
         var scalebar = L.control.scale({
-            position: 'topright',
+            position: 'bottomleft',
             metric: true,
             imperial: false
         }).addTo(map);
