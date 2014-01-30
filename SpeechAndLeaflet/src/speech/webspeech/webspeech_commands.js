@@ -43,7 +43,7 @@ recognition.onresult = function (event) {
 
         case "pointname":
             var content = $("#pointname").val();
-            $("#pointname").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            $("#pointname").val(capitalize(final_transcript));
             final_transcript = "";
             break;
 
@@ -55,7 +55,7 @@ recognition.onresult = function (event) {
 
         case "linename":
             var content = $("#linename").val();
-            $("#linename").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            $("#linename").val(capitalize(final_transcript));
             final_transcript = "";
             break;
 
@@ -67,7 +67,7 @@ recognition.onresult = function (event) {
 
         case "citizenname":
             var content = $("#citizenname").val();
-            $("#citizenname").val(capitalize(content.replace(final_transcript, "") + final_transcript));
+            $("#citizenname").val(capitalize(final_transcript));
             final_transcript = "";
             break;
 
