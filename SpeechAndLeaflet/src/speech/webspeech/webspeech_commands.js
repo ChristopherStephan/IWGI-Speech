@@ -283,16 +283,16 @@ recognition.onresult = function (event) {
     }
 	
 	
-	if (final_transcript.indexOf("enable cycle map") >= 0) {
+	if (final_transcript.indexOf("enabling bicycle map") >= 0) {
         osmCycle.onAdd(map);
-        console.log("enable cycle map");
+        console.log("enabling bicycle map");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("disable cycle map") >= 0) {
+    if (final_transcript.indexOf("disable bicycle map") >= 0) {
         osmCycle.onRemove(map);
-        console.log("disable cycle map");
+        console.log("disable bicycle map");
         final_transcript = '';
     }
 	
