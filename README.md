@@ -49,6 +49,10 @@ To set the focus to different input fields (search bar)
  - Set focus in the search bar
      - **"Focus search bar"**
 
+
+----------
+
+
 To set the focus to different input fields (**Comment** function)
  - Set focus in the name box of the Comment function
      - **"Focus username"**
@@ -59,6 +63,10 @@ To set the focus to different input fields (**Comment** function)
  - Clear the form
      - **"Clear form"**
 
+
+----------
+
+
 To set the focus to different input fields (**Point** project function)
  - Set focus in the point name box of the PointProject function
      - **"Focus Point Name"**
@@ -68,6 +76,10 @@ To set the focus to different input fields (**Point** project function)
      - **"Send Point"**
  - Clear the form
      - **"Clear form"**
+
+
+----------
+
 
 To set the focus to different input fields (**Line** project function)
  - Set focus in the street name box of the LineProject function
