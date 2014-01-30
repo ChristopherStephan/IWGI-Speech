@@ -31,8 +31,14 @@ L.Control.Speechbar = L.Control.extend({
                 L.DomEvent
                         
                         .addListener(link, 'click', function(){
-                            
-							sidebarSpeech.toggle();
+                                $(function () {
+                                        $("#dialog").dialog().html($("#description"));
+                                    });
+                                    setTimeout(function () {
+                                        $("#dialog").dialog("close");
+                                        
+                                    }, 5000);
+				//sidebarSpeech.toggle();
                         }, context);
                 return link;
         }
