@@ -23,9 +23,10 @@ Speech
      - **"Down"**,
      - **"Left"**, 
      - **"Right"** 
- - Control the drawing control plugin (placing projects)
-     - **"Place project"**,
-     - **"Street project"**,
+ - Place a street project
+     - **"Street project"**
+ - Place a point project
+     - **"Place project"**
  - Locate yourself using the Geolocate Tool
      - **"Enable location"**,
      - **"Disable location"**  
@@ -53,10 +54,6 @@ Speech
      - **"Submit input"**
  - Clear the form
      - **"Clear form"**
- - Place a street project
-     - **"Place street project"**
- - Place a point project
-     - **"Place point project"**
 
 ----------
 Gesture
