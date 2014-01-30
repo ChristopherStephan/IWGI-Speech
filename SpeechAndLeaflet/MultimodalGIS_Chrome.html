@@ -317,7 +317,7 @@
             scale: true,
             zoomsliderControl: false,
             measureControl: true,
-            loadingControl: true,
+            loadingControl: false,
             panControl: false,
             zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice   
             // measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
@@ -338,7 +338,7 @@
 
 
         var scalebar = L.control.scale({
-            position: 'bottomleft',
+            position: 'topright',
             metric: true,
             imperial: false
         }).addTo(map);
@@ -823,9 +823,9 @@
          // init ViewCenter plugin
         var viewCenter = new L.Control.ViewCenter({}).addTo(map);
 		// init speechbar plugin
-		var speechbar = new L.Control.Speechbar({}).addTo(map);
+		var speechbar = new L.Control.Speechbar({position:"topleft"}).addTo(map);
 		// init projectbar plugin
-		var projectbar = new L.Control.Projectbar({}).addTo(map);
+		var projectbar = new L.Control.Projectbar({position:"topleft"}).addTo(map);
 		// init inputbar plugin
 		//var inputbar = new L.Control.Inputbar({}).addTo(map);
 
