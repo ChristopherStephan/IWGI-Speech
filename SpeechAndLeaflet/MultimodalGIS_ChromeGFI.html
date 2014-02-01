@@ -1,0 +1,1036 @@
+﻿<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width" name="viewport">
+
+    <title>Speech &amp; Gesture Map</title>
+    <link href="src/Leaflet-0.7/leaflet.css" rel="stylesheet">
+    <link href="src/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="src/bootstrap/font-awesome.css" rel="stylesheet">
+    <link href="src/Leaflet.minimap/Control.MiniMap.css" rel="stylesheet">
+    <link href="src/Leaflet.geosearch/l.geosearch.css" rel="stylesheet">
+    <link href="src/Leaflet.zoomslider/L.Control.Zoomslider.css" rel="stylesheet">
+    <link href="src/Leaflet.pancontrol/L.Control.Pan.css" rel="stylesheet">
+    <link href="src/Leaflet.pancontrol/L.Control.Pan.ie.css" rel="stylesheet">
+    <link href="src/Leaflet.locator/L.Control.Locate.css" rel="stylesheet">
+    <link href="src/Leaflet.viewcenter/leaflet.viewcenter.css" rel="stylesheet">
+	<link href="src/Leaflet.speechbar/leaflet.speechbar.css" rel="stylesheet">
+	<link href="src/Leaflet.inputbar/leaflet.inputbar.css" rel="stylesheet">
+	<link href="src/Leaflet.projectbar/leaflet.projectbar.css" rel="stylesheet">
+    <link href="src/Leaflet.loading/Control.Loading.css" rel="stylesheet">
+    <link href="src/Leaflet.sidebar/L.Control.Sidebar.css" rel="stylesheet">
+    <link href="src/Leaflet.revealOSM/Leaflet.RevealOSM.css" rel="stylesheet">
+    <link href="src/Leaflet.editInOSM/Leaflet.EditInOSM.css" rel="stylesheet">
+    <link href="src/Leaflet.contextmenu/leaflet.contextmenu.css" rel="stylesheet">
+    <link href="src/Leaflet.draw/leaflet.draw.css" rel="stylesheet">
+    <link href="src/Leaflet.measureControl/leaflet.measurecontrol.css" rel="stylesheet">
+    <link href="src/custom/custom_css.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">    
+</head>
+
+<body onload="startButton();">
+    <!--Navigationbar (Bootstrap)-->
+
+    <div id="header">
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index_startpage.html">IWGI
+					Gesture &amp; Speech</a>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <!--	<li><a href="index_startpage.html">Home</a></li>	-->
+
+                        <li class="active"><a href="MultimodalGIS_Chrome.html">Map-Chrome</a>
+                        </li>
+						
+                        <li><a href="Help&amp;About.html">Help&amp;About</a>
+                        </li>
+
+                        <li style="position:relative; top:15; left:25%">
+                            <div>
+                                <p style="color:white;">Left hand</p>
+                            </div>
+                        </li>
+
+                        <li style="position:relative; left:25%">
+                            <div>
+                                <img alt="" id="lefthand" src="red_circle.png">
+                            </div>
+                        </li>
+
+                        <li style="position:relative; top:15; left:35%">
+                            <div>
+                                <p style="color:white;">Right hand</p>
+                            </div>
+                        </li>
+
+                        <li style="position:relative; left:35%">
+                            <div>
+                                <img alt="" id="righthand" src="red_circle.png">
+                            </div>
+                        </li>
+
+                        <li style="position:relative; top:15; left:45%">
+                            <div>
+                                <p style="color:white;">Speech</p>
+                            </div>
+                        </li>
+
+                        <li style="position:relative; left:45%">
+                            <div>
+                                <img alt="" id="speech" src="red_circle.png">
+                            </div>
+                        </li>
+						
+						<!--li style="position:relative; left:50%">
+                            <div id="div_language">
+								<select id="select_language">
+									<option value="en-GB">en-GB</option>
+									<option value="en-US">en-US</option>
+									<option value="en-IN">en-IN</option>
+									<option value="de-DE">de-DE</option>
+								</select>
+							</div>
+                        </li-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map">
+    </div>
+	
+	<div id="oval-speech-border-div" style="position:static;">
+		<p class="oval-speech-border">
+			<div id="transcriptBubble"></div>
+        </p> 		
+	</div>
+
+    <div id="command_animation"></div>
+
+    <div id="sidebarPoint">
+        <br>Name:
+        <input id="pointname" name="pointname" required="" size="30" type="text">
+        <br>
+        <br>Description:
+        <br>
+        <textarea id="pointdes" name="pointdescription" style="width: 95%; height: 58%; margin: 0px"></textarea>
+        <br>
+        <br>
+        <button id="point_submit" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addPointButton();">Submit</button>
+        <button id="point_clear" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm();">Clear</button>
+    </div>
+
+    <div id="sidebarLine"> 
+		<br> Name:  
+		<input id="linename" type="text" SIZE=30 name="linename" required><br>	
+		<br>Description:
+		<textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
+		<br><br>
+		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned</label>
+        <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative</label><br><br>
+		<button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
+		<!--<input TYPE="RESET" VALUE="Clear">-->
+		<button type="button" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm()">Clear</button>
+	</div>
+
+    <div id="sidebarComments"> 
+		<b><font color="#0080C0">Add new Remark</font></b>
+		<div id="AddComment" style="width: 385px; border: 1px solid #75C0BF; margin = 1"> 
+		Citizen Name: <input type="text" id = "citizenname" name="citizenname" size="37" value=""><br>	
+		User Remark :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
+		</div>
+		<button type="comment_sumbit" onclick="sendUserComments()">Submit Remark</button>
+		<button type="comment_clear" onclick="clearForm()">Clear Form</button>
+		<div id="sidebarCommentsTable"></div>
+	</div>
+
+    <div id="sidebarProjects">
+        <div>
+            <b><big>Recent Projects</big></b>
+            <br>
+            <br>
+        </div>
+
+        <div id="sidebarProjectsContent"></div>
+    </div>
+
+    <div id="sidebarSpeech">
+        <div id="description">
+		<br>
+		Control the map by saying the following commands:
+		<br><br>
+            <ul style="padding-left: 10px;">	
+			Basic Map-Navigation:
+                <div class="datagrid">
+				<table>
+						<tbody>
+							<tr><td>"Zoom In"</td><td>"Zoom Out"</td></tr>
+							<tr class="alt"><td>"Up"</td><td>"Down"</td></tr>
+							<tr><td>"Left"</td><td>"Right"</td></tr>
+							<tr class="alt"><td>"Back to Home"</td><td>"Back to Home"</td></tr>
+						</tbody>
+				</table>
+				</div>
+            </ul>
+
+			<br>
+			
+            <ul style="padding-left: 10px;">
+			Place new Point or Line Projects:
+                <div class="datagrid">
+				<table>
+						<tbody>
+							<tr><td>"Point Project"</td></tr>
+							<tr class="alt"><td>"Street Project"</td></tr>
+						</tbody>
+				</table>
+				</div>
+            </ul>
+			
+			<br>
+			
+			<ul style="padding-left: 10px;">
+			Control various plugins:
+                <div class="datagrid">
+				<table>
+						<tbody>
+							<tr><td>"Enable Location"</td><td>"Disable Location"</td></tr>
+							<tr class="alt"><td>"Enable information"</td><td>"Disable information"</td></tr>
+							<tr><td>"Enable measurement"</td><td>"Disable measurement"</td></tr>
+							<tr class="alt"><td>"Enable minimap"</td><td>"Disable mini map"</td></tr>
+							<tr><td>"Enable xxx map"</td><td>"Disable xxx map"</td></tr>
+						</tbody>
+				</table>
+				</div>
+            </ul>
+ 
+        </div>
+
+    <div id="dialog" title="Info"></div>
+
+ 
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="src/jquery/jquery-2.0.3.min.js"></script>
+    <script src="src/jquery/jquery.js"></script>
+    <!-- These are the two JavaScript files you must load in the HTML,
+	The recognizer is loaded through a Web Worker -->
+    <script src="src/speech/sphinx/audioRecorder.js"></script>
+    <script src="src/speech/sphinx/callbackManager.js"></script>
+    <script src="src/bootstrap/bootstrap.min.js"></script>
+    <script src="src/Leaflet-0.7/leaflet.js"></script>
+    <!--https://github.com/Leaflet/Leaflet-->
+    <script src="src/Leaflet.lvector/lvector-custom.js"></script>
+    <!--https://github.com/JasonSanford/leaflet-vector-layers -->
+    <script src="src/Leaflet.minimap/Control.MiniMap.js"></script>
+    <!-- https://github.com/Norkart/Leaflet-MiniMap -->
+    <script src="src/Leaflet.geosearch/l.control.geosearch.js"></script>
+    <!-- https://github.com/smeijer/L.GeoSearch-->
+    <script src="src/Leaflet.geosearch/l.geosearch.provider.google.js"></script>
+    <!-- https://github.com/smeijer/L.GeoSearch-->
+    <script src="src/Leaflet.zoomfs/leaflet.zoomfs.js"></script>
+    <!-- Fullscreen Button https://github.com/elidupuis/leaflet.zoomfs -->
+    <script src="src/Leaflet.zoomslider/L.Control.Zoomslider.js"></script>
+    <!-- http://kartena.github.io/Leaflet.zoomslider/ -->
+    <script src="src/Leaflet.pancontrol/L.Control.Pan.js"></script>
+    <!-- http://kartena.github.io/Leaflet.Pancontrol/ -->
+    <script src="src/Leaflet.locator/L.Control.Locate.js"></script>
+    <!-- https://github.com/domoritz/leaflet-locatecontrol -->
+    <script src="src/Leaflet.viewcenter/leaflet.viewcenter.js"></script>
+	<script src="src/Leaflet.speechbar/leaflet.speechbar.js"></script>
+	<script src="src/Leaflet.inputbar/leaflet.inputbar.js"></script>
+	<script src="src/Leaflet.projectbar/leaflet.projectbar.js"></script>
+    <!-- https://github.com/pwldp/leaflet.viewcenter -->
+    <script src="src/Leaflet.loading/Control.Loading.js"></script>
+    <!-- https://github.com/ebrelsford/Leaflet.loading -->
+    <script src="src/Leaflet.sidebar/L.Control.Sidebar.js"></script>
+    <!--https://github.com/turbo87/leaflet-sidebar/-->
+    <script src="src/Leaflet.providers/leaflet-providers.js"></script>
+    <!--https://github.com/leaflet-extras/leaflet-providers -->
+    <script src="src/Leaflet.revealOSM/Leaflet.RevealOSM.js"></script>
+    <!--https://github.com/yohanboniface/Leaflet.RevealOSM -->
+    <script src="src/Leaflet.editInOSM/Leaflet.EditInOSM.js"></script>
+    <!--https://github.com/yohanboniface/Leaflet.EditInOSM -->
+    <script src="src/Leaflet.contextmenu/leaflet.contextmenu.js"></script>
+    <!--https://github.com/aratcliffe/Leaflet.contextmenu-->
+    <script src="src/Leaflet.draw/leaflet.draw.js"></script>
+    <!--https://github.com/Leaflet/Leaflet.draw -->
+    <script src="src/Leaflet.measureControl/leaflet.measurecontrol.js"></script>
+    <!--https://github.com/makinacorpus/Leaflet.MeasureControl-->
+    <script src="src/Leaflet.geometryUtil/dist/leaflet.geometryutil.js"></script>
+    <!--https://github.com/makinacorpus/Leaflet.GeometryUtil-->
+    <script src="src/Leaflet.almostover/leaflet.almostover.js"></script>
+    <!--https://github.com/makinacorpus/Leaflet.AlmostOver-->
+    <script src="src/Leaflet.groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+    <!--https://github.com/ismyrnow/Leaflet.groupedlayercontrol-->
+    <script src="src/custom/customFunctions.js"></script>
+    <script src="src/speech/webspeech/webspeech_commands.js"></script>
+    <!--cutom ones-->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+        var sidebarPoint = L.control.sidebar('sidebarPoint', {
+            position: 'right'
+        });
+
+        var sidebarLine = L.control.sidebar('sidebarLine', {
+            position: 'right'
+        });
+
+        var sidebarProjects = L.control.sidebar('sidebarProjects', {
+            position: 'right'
+        });
+
+        var sidebarComments = L.control.sidebar('sidebarComments', {
+            position: 'right'
+        });
+
+
+        var popup;
+         //new map with map options
+        var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
+        var map = new L.Map('map', {
+		//crs: L.CRS.EPSG4326,
+            crs: L.CRS.EPSG3857,
+            center: [51.95442, 7.62709],
+            zoom: 13,
+            dragging: true,
+            touchZoom: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: true,
+            boxZoom: true,
+            tap: true,
+            tapTolerance: 15,
+            trackResize: true,
+            worldCopyJump: false,
+            closePopupOnClick: true,
+            scale: true,
+            zoomsliderControl: false,
+            measureControl: true,
+            loadingControl: true,
+            panControl: false,
+            zoomControl: false, //disable the zoomControl to show only the zoom control, which handles the Fullscreen mode. Otherwise the map would have the ZoomIn and ZoomOut Control twice   
+            // measureControl:true,    //Here it's implemented via "L.Control.measureControl().addTo(map);"
+            revealOSMControl: true, //more options here: https://github.com/yohanboniface/Leaflet.RevealOSM
+            revealOSMControlOptions: {
+                queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
+            }
+        });
+		
+		
+		
+		
+
+         //map.addEventListener('click', onMapClick); //needed for wms getfeatureinfo
+        popup = new L.Popup({
+            maxWidth: 400
+        });
+
+
+        var scalebar = L.control.scale({
+            position: 'bottomleft',
+            metric: true,
+            imperial: false
+        }).addTo(map);
+
+
+         //OSM maps one as overlay and one base layer 
+        var osm = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            srs: 'EPSG:3857',
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap<\/a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA<\/a>, Imagery © <a href="http://cloudmade.com">CloudMade<\/a>'
+        }).addTo(map);
+
+        var osm2 = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap<\/a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA<\/a>, Imagery © <a href="http://cloudmade.com">CloudMade<\/a>'
+        });
+
+        var osmDE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap<\/a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA<\/a>, Imagery © <a href="http://cloudmade.com">CloudMade<\/a>'
+        });
+
+        var osmCycle = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap<\/a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA<\/a>, Imagery © <a href="http://cloudmade.com">CloudMade<\/a>'
+        });
+
+
+         //Layers of Geobasis NRW: http://www.bezreg-koeln.nrw.de/brk_internet/organisation/abteilung07/produkte/nrwatlas/index.html 
+         //                          (website which provides different Web Map Service (WMS)-URLs)
+        var layerDGK5 = L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dgk5', {
+            attribution: '| &copy Geobasis NRW 2013',
+            layers: 'WMS_NW_DGK5',
+            format: 'image/png',
+            transparent: true,
+            opacity: 0.5
+        });
+        var layerDTK10 = L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dtk10', {
+            attribution: '| &copy Geobasis NRW 2013',
+            layers: 'nw_dtk10_pan,nw_dtk10_res,NW_DTK10_col,WMS_NW_DTK10',
+            format: 'image/png',
+            transparent: true,
+            opacity: 0.5
+        });
+         //Orthophoto layer
+        var layerOrtho = L.tileLayer.wms('http://www.wms.nrw.de/geobasis/wms_nw_dop40', {
+            layers: 'WMS_NW_DOP40',
+            format: 'image/png',
+            version: '1.3.0',
+            transparent: true,
+            opacity: 0.4
+        });
+        var EsriStreets = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            options: {
+                attribution: 'Tiles &copy; Esri'
+            },
+            transparent: true,
+            opacity: 0.4
+        });
+        var EsriWorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            options: {
+                attribution: 'Tiles &copy; Esri'
+            },
+            transparent: true,
+            opacity: 0.5
+        });
+        var NokiaNormalDay = L.tileLayer('http://{s}.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?token={devID}&app_id={appID}', {
+            transparent: true,
+            opacity: 0.4
+        });
+
+        var wind = new L.TileLayer.WMS("http://www.wms.nrw.de/umwelt/ea_wind", {
+            layers: '7',
+            format: 'image/png',
+            //crs: 'EPSG:4326',
+            version: '1.3.0',
+            transparent: true,
+            opacity: 0.5
+        });
+		
+		
+		var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+            layers: 'STR_NGT',
+            format: 'image/png',
+            crs: L.CRS.EPSG4326,
+            version: '1.3.0',
+            transparent: true,
+            opacity: 0.5
+        });
+
+		var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+            layers: 'STR_DEN',
+            format: 'image/png',
+            crs: L.CRS.EPSG4326,
+            version: '1.3.0',
+            transparent: true,
+            opacity: 0.5
+        });
+
+		var rain = new L.tileLayer ('http://{s}.tile.openweathermap.org/map/rain/{z}/{x}/{y}.png', {
+			options: {
+				attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+				opacity: 0.5
+			},
+			transparent: true,
+            opacity: 0.5
+		});	
+
+
+         //Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
+         //More information here: https://github.com/leaflet-extras/leaflet-providers
+         //Note that the layer groups should not be local (var) becasue then they are not accessible
+        baseLayers = {
+            'OSM': osm2,
+            'OSM Open Cycle Map': osmCycle
+        };
+
+        groupedOverLayers = {
+            "Map Layers": {
+                //'DGK5': layerDGK5,
+                'DTK10': layerDTK10,
+                'Arial View': layerOrtho
+            },
+            "Weather Layers": {
+                //'Rain': rain,
+                'Windspeed': wind,
+				//'Noise Map (night)':laerm_night,
+				'Noise Map (24h)':laerm_24
+            },
+
+        };
+
+
+         //Map control: Layer switcher        
+        var LayerSwitcher = L.control.groupedLayers(
+            baseLayers, groupedOverLayers, {
+                position: 'bottomleft'
+            }
+        ).addTo(map);
+
+
+         //New minimap
+         //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+        var overviewMap = L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap<\/a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA<\/a>, Imagery © <a href="http://cloudmade.com">CloudMade<\/a>'
+        })
+         var miniMap = new L.Control.MiniMap(overviewMap, {
+            toggleDisplay: true,
+            mapOptions: {
+                panControl: false,
+                zoomsliderControl: false,
+                crs: L.CRS.Simple,
+            }
+        }).addTo(map);
+
+
+        map.addControl(sidebarPoint);
+        map.addControl(sidebarLine);
+        map.addControl(sidebarProjects);
+        map.addControl(sidebarComments)
+
+         var sidebarSpeech = L.control.sidebar('sidebarSpeech', {
+            closeButton: true,
+            position: 'right'
+        });
+        map.addControl(sidebarSpeech);
+
+        // get feature info wms request
+
+       
+        map.addEventListener('click', onMapClick);
+		
+		popup = new L.Popup({
+			maxWidth: 400
+		});
+
+		function onMapClick(e) {
+		    var latlngStr = '(' + e.latlng.lat.toFixed(3) + ', ' + e.latlng.lng.toFixed(3) + ')';
+		    var BBOX = map.getBounds().toBBoxString();
+		    var WIDTH = map.getSize().x;
+		    var HEIGHT = map.getSize().y;
+		    var X = map.layerPointToContainerPoint(e.layerPoint).x;
+		    var Y = map.layerPointToContainerPoint(e.layerPoint).y;
+		    
+		    var URL =  'https://www.wms.nrw.de/umwelt/laerm?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=STR_DEN&QUERY_LAYERS=STR_DEN&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image%2Fpng&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
+
+		    URL = encodeURIComponent(URL);
+		    console.log(URL);
+		    //URL = escape(URL);
+			$.ajax({
+		        url: 'ba-simple-proxy2.php?url=' +URL,
+		        dataType: "json",
+		        type: "POST",
+		        async: true,
+		        success: function(data) {
+		        	//alert("Here");
+		        	alert("Noise Valule: "+ data);
+	            
+	                popup.setContent(data);
+	                popup.setLatLng(e.latlng);
+	                map.openPopup(popup);
+
+		                
+		            
+		        }
+		    });
+
+			
+		}
+		
+		function DoTheCheck() {
+			if (document.checkform.getfeatureinfo.checked == true)
+			  {map.addEventListener('click', onMapClick);}
+			if (document.checkform.getfeatureinfo.checked == false)
+			  {map.removeEventListener('click', onMapClick); map.closePopup(popup);}
+		}
+		
+
+
+
+         //add points
+        function addPointButton() {
+        	// do not send empty empty comments
+        	if ($("#pointname").val() == ""){
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a name!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
+
+        		return;
+        	}
+
+        	if ($("#pointdes").val() == ""){
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a description!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
+        		return;
+        	} 
+
+            pointname = document.getElementById('pointname').value;
+            pointdes = document.getElementById('pointdes').value;
+            addPointAttributes(pointname, pointdes);
+        }
+
+         //add lines
+        function addLineButton() {
+            // do not send empty comments
+        	if ($("#linename").val() == ""){
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a name!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
+        		return;
+        	}
+
+        	if ($("#linedes").val() == ""){
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a description!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
+        		return;
+        	} 
+			
+			linename = document.getElementById('linename').value;
+            linedes = document.getElementById('linedes').value;
+
+            /*if (document.getElementById('main').checked)
+                                type = true;
+                        if (document.getElementById('alternative').checked)
+                                type = false;*/
+            addLineAttributes(linename, linedes, document.getElementById('main').checked);
+        }
+
+        //send comments
+		function sendUserComments(){
+			//no empty usercomments
+			if ($("#citizenname").val() == ""){
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a name!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
+        		return;
+        	}
+
+        	if ($("#usercomment").val() == ""){
+        		$(function() {
+					$( "#dialog" ).dialog().html("Please enter a comment!");
+				});
+				setTimeout(function() {
+					$( "#dialog" ).dialog( "close" )
+				}, 1500);
+        		return;
+        	}
+
+			Fid=currentID;
+			Ftype =document.getElementById('citizenname').value;
+			UComment =document.getElementById('usercomment').value;
+			addUserComments(Fid,Ftype,UComment);
+			document.getElementById('citizenname').value = '';
+			document.getElementById('usercomment').value = '';
+		}
+
+         //clear input fields
+        function clearForm() {
+            document.getElementById('citizenname').value = '';
+            document.getElementById('usercomment').value = '';
+            document.getElementById('pointname').value = '';
+            document.getElementById('pointdes').value = '';
+            document.getElementById('linename').value = '';
+            document.getElementById('linedes').value = '';
+        }
+
+
+        callPoints();
+        callLines();
+
+
+
+         //----------- Adding drawing , editing and measurement tools in addition to mini Map  --------------------
+         // Initialize the FeatureGroup to store editable layers for drawing tool
+         //https://github.com/Leaflet/Leaflet.draw
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+         // Set the title to show on the polygon button
+        L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon!';
+
+         // Initialize the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new L.Control.Draw({
+            position: 'topleft',
+            draw: {
+                polyline: {
+                    metric: true
+                },
+                polygon: false,
+                /*{
+										allowIntersection: false,
+										showArea: true,
+										drawError: {
+											color: '#bada55',
+											timeout: 1000
+										},
+										shapeOptions: {
+										color: '#b00b00'
+										}
+									},*/
+                rectangle: false,
+
+                circle: false,
+                /*{
+									shapeOptions: {
+										color: '#662d91'
+									}
+								},*/
+                marker: true
+            },
+            edit: false
+        });
+
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+
+            if (type === 'marker') {
+                layer.bindPopup("<br> Point Name: * <br> <input type='text' SIZE=30 name='id' required><br>");
+                $('#usercomment')
+				layer.addTo(map);
+                var coordinates = layer.toGeoJSON().geometry.coordinates;
+                var coord = coordinates.toString();
+                addPoint(coord);
+                sidebarComments.hide();
+                sidebarProjects.hide();
+                sidebarSpeech.hide();
+                sidebarLine.hide();
+                sidebarPoint.show();
+            }
+
+            if (type === 'polyline') {
+                var geojsonFeature = layer.toGeoJSON();
+				layer.addTo(map);
+                addLine(geojsonFeature.geometry.coordinates);
+                sidebarSpeech.hide();
+                sidebarComments.hide();
+                sidebarProjects.hide();
+                sidebarSpeech.hide();
+                sidebarPoint.hide();
+                sidebarLine.show();
+            }
+            //save to db here , you can check the type is it marker or polygon ... then save it to db
+            //drawnItems.addLayer(layer);
+        });
+
+
+        map.on('draw:edited', function (e) {
+            var layers = e.layers;
+            var countOfEditedLayers = 0;
+            layers.eachLayer(function (layer) {
+                //save to db here , 
+
+            });
+
+        });
+
+
+         // Add Draw control 
+        map.addControl(drawControl);
+
+        var circle = L.circleMarker([0, 0], {
+            radius: 5,
+            fillColor: 'white',
+            fillOpacity: 1
+        });
+        var previousColor;
+        map.on('almost:over', function (e) {
+            previousColor = e.layer.options.color;
+            e.layer.setStyle({
+                color: 'blue'
+            });
+        });
+
+        map.on('almost:move', function (e) {
+            circle.setLatLng(e.latlng);
+        });
+
+        map.on('almost:out', function (e) {
+            map.removeLayer(circle);
+            e.layer.setStyle({
+                color: previousColor
+            });
+        });
+
+        map.on('almost:click', function (e) {
+            e.layer.openPopup();
+            e.layer.setStyle({});
+        });
+
+
+         //new Geolocation tool
+        var locater = L.control.locate({
+            position: 'topleft', // set the location of the control
+            drawCircle: true, // controls whether a circle is drawn that shows the uncertainty about the location
+            follow: true, // follow the location if `watch` and `setView` are set to true in locateOptions
+            stopFollowingOnDrag: false, // stop following when the map is dragged if `follow` is set to true
+            circleStyle: {}, // change the style of the circle around the user's location
+            markerStyle: {},
+            followCircleStyle: {}, // set difference for the style of the circle around the user's location while following
+            followMarkerStyle: {},
+            circlePadding: [0, 0], // padding around accuracy circle, value is passed to setBounds
+            metric: true, // use metric or imperial units
+            watch: true,
+            onLocationError: function (err) {
+                alert(err.message)
+            }, // define an error callback function
+            onLocationOutsideMapBounds: function (context) { // called when outside map boundaries
+                alert(context.options.strings.outsideMapBoundsMsg);
+            },
+            setView: true, // automatically sets the map view to the user's location
+            strings: {
+                title: "Show your location\nSpeech:Start/End location", // title of the locat control
+                popup: "You are within {distance} {unit} from this point", // text to appear if user clicks on circle
+                outsideMapBoundsMsg: "You seem located outside the boundaries of the map" // default message for onLocationOutsideMapBounds
+            }
+            //locateOptions: {}  // define location options e.g enableHighAccuracy: true
+        }).addTo(map);
+
+
+         // new Geoseach Bar            
+        new L.Control.GeoSearch({
+            provider: new L.GeoSearch.Provider.Google(),
+            position: 'topcenter',
+            showMarker: true
+        }).addTo(map);
+
+
+         // init ViewCenter plugin
+        var viewCenter = new L.Control.ViewCenter({}).addTo(map);
+		// init speechbar plugin
+		var speechbar = new L.Control.Speechbar({position:"topleft"}).addTo(map);
+		// init projectbar plugin
+		var projectbar = new L.Control.Projectbar({position:"topleft"}).addTo(map);
+		// init inputbar plugin
+		//var inputbar = new L.Control.Inputbar({}).addTo(map);
+
+
+         //Following codeblocks are shortcuts for the functions on the map
+         //add a marker: ctrl + shift +q
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        })
+            .keydown(function (e) {
+                if (e.which == 17)
+                    isCtrl = true;
+                if (e.which == 16)
+                    isShift = true;
+                if (e.which == 81 && isCtrl == true && isShift == true) {
+                    new L.Draw.Marker(map, drawControl.options.marker).enable()
+                    return false;
+                }
+            });
+
+         //add a Line: ctrl + shift + e
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        })
+            .keydown(function (e) {
+                if (e.which == 17)
+                    isCtrl = true;
+                if (e.which == 16)
+                    isShift = true;
+                if (e.which == 69 && isCtrl == true && isShift == true) {
+                    new L.Draw.Polyline(map, drawControl.options.polyline).enable()
+                    return false;
+                }
+            });
+
+         //show projects: ctrl + shift + t
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        })
+            .keydown(function (e) {
+                if (e.which == 17)
+                    isCtrl = true;
+                if (e.which == 16)
+                    isShift = true;
+                if (e.which == 84 && isCtrl == true && isShift == true) {
+                    showProjects();
+                    return false;
+                }
+            });
+
+         //measure tool: ctrl+shift+m
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        })
+            .keydown(function (e) {
+                if (e.which == 17)
+                    isCtrl = true;
+                if (e.which == 16)
+                    isShift = true;
+                if (e.which == 77 && isCtrl == true && isShift == true) {
+                    L.Control.MeasureControl.toggle();
+                    return false;
+                }
+            });
+
+         //Hand lost: ctrl + shift + l
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        })
+            .keydown(function (e) {
+                if (e.which == 17)
+                    isCtrl = true;
+                if (e.which == 16)
+                    isShift = true;
+                if (e.which == 76 && isCtrl == true && isShift == true) {
+                    $("#command_animation").html("lost left hand ").css('fontSize', '10em').animate({
+                            'left': '-500px'
+                        }, 1100,
+                        function () {
+                            $("#command_animation").html("").css('left', '45%');
+                        });
+                    document.getElementById("lefthand").src = "red_circle.png";
+                    return false;
+                }
+            });
+
+         //Hand lost: ctrl + shift + k
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        })
+            .keydown(function (e) {
+                if (e.which == 17)
+                    isCtrl = true;
+                if (e.which == 16)
+                    isShift = true;
+                if (e.which == 75 && isCtrl == true && isShift == true) {
+                    $("#command_animation").html("found left hand").css('fontSize', '10em').animate({
+                            'left': '-500px'
+                        }, 1100,
+                        function () {
+                            $("#command_animation").html("").css('left', '45%');
+                        });
+                    document.getElementById("lefthand").src = "green_circle.png";
+                    return false;
+                }
+            });
+
+         //Hand lost: ctrl + shift + ,
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        })
+            .keydown(function (e) {
+                if (e.which == 17)
+                    isCtrl = true;
+                if (e.which == 16)
+                    isShift = true;
+                if (e.which == 188 && isCtrl == true && isShift == true) {
+                    $("#command_animation").html("lost right hand ").css('fontSize', '10em').animate({
+                            'left': '-500px'
+                        }, 1100,
+                        function () {
+                            $("#command_animation").html("").css('left', '45%');
+                        });
+                    document.getElementById("righthand").src = "red_circle.png";
+                    return false;
+                }
+            });
+
+         //Hand lost: ctrl + shift + F1
+        var isCtrl = false;
+        var isShift = false
+         $(document).keyup(function (e) {
+            if (e.which == 17)
+                isCtrl = false;
+        }).keyup(function (e) {
+            if (e.which == 16)
+                isCtrl = false;
+        }).keydown(function (e) {
+            if (e.which == 17)
+                isCtrl = true;
+            if (e.which == 16)
+                isShift = true;
+            if (e.which == 112 && isCtrl == true && isShift == true) {
+                $("#command_animation").html("found right hand").css('fontSize', '10em').animate({
+                        'left': '-500px'
+                    }, 1100,
+                    function () {
+                        $("#command_animation").html("").css('left', '45%');
+                    });
+                document.getElementById("righthand").src = "green_circle.png";
+                return false;
+            }
+        });
+
+
+         //start function for voice recognition using Googles WebSpeech API
+        function startButton(event) {
+            final_transcript = '';
+            recognition.start();
+            document.getElementById("speech").src = "green_circle.png";
+
+        }
+    </script>
+</body>
+
+</html>
