@@ -26,7 +26,8 @@
     <link href="src/Leaflet.draw/leaflet.draw.css" rel="stylesheet">
     <link href="src/Leaflet.measureControl/leaflet.measurecontrol.css" rel="stylesheet">
     <link href="src/custom/custom_css.css" rel="stylesheet">
-    <link href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">    
+    <link href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+ 
 </head>
 
 <body onload="startButton();">
@@ -103,6 +104,7 @@
     </div>
 
     <div id="map">
+	
     </div>
 	
 	<div id="oval-speech-border-div" style="position:static;">
@@ -291,7 +293,7 @@
         });
 
 
-        var popup;
+        //var popup;
          //new map with map options
         var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
         var map = new L.Map('map', {
@@ -327,9 +329,9 @@
 		
 
          //map.addEventListener('click', onMapClick); //needed for wms getfeatureinfo
-        popup = new L.Popup({
-            maxWidth: 400
-        });
+        //popup = new L.Popup({
+        //    maxWidth: 400
+        //});
 
 
         var scalebar = L.control.scale({
@@ -512,44 +514,41 @@
 		});
 
 		function onMapClick(e) {
-		    var latlngStr = '(' + e.latlng.lat.toFixed(3) + ', ' + e.latlng.lng.toFixed(3) + ')';
-		    var BBOX = map.getBounds().toBBoxString();
-		    var WIDTH = map.getSize().x;
-		    var HEIGHT = map.getSize().y;
-		    var X = map.layerPointToContainerPoint(e.layerPoint).x;
-		    var Y = map.layerPointToContainerPoint(e.layerPoint).y;
-		    
-		    var URL =  'https://www.wms.nrw.de/umwelt/laerm?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=STR_DEN&QUERY_LAYERS=STR_DEN&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image%2Fpng&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
-
-		    URL = encodeURIComponent(URL);
-		    console.log(URL);
-		    //URL = escape(URL);
-			$.ajax({
-		        url: 'ba-simple-proxy2.php?url=' +URL,
-		        dataType: "json",
-		        type: "POST",
-		        async: true,
-		        success: function(data) {
-		        	//alert("Here");
-		        	alert("Noise Valule: "+ data);
-	            
-	                popup.setContent(data);
-	                popup.setLatLng(e.latlng);
-	                map.openPopup(popup);
-
-		                
-		            
-		        }
-		    });
-
-			
-		}
 		
-		function DoTheCheck() {
-			if (document.checkform.getfeatureinfo.checked == true)
-			  {map.addEventListener('click', onMapClick);}
-			if (document.checkform.getfeatureinfo.checked == false)
-			  {map.removeEventListener('click', onMapClick); map.closePopup(popup);}
+			if (map.hasLayer(laerm_24)) {
+			
+			
+				var latlngStr = '(' + e.latlng.lat.toFixed(3) + ', ' + e.latlng.lng.toFixed(3) + ')';
+				var BBOX = map.getBounds().toBBoxString();
+				var WIDTH = map.getSize().x;
+				var HEIGHT = map.getSize().y;
+				var X = map.layerPointToContainerPoint(e.layerPoint).x;
+				var Y = map.layerPointToContainerPoint(e.layerPoint).y;
+				
+				var URL =  'https://www.wms.nrw.de/umwelt/laerm?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=STR_DEN&QUERY_LAYERS=STR_DEN&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image%2Fpng&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
+
+				URL = encodeURIComponent(URL);
+				console.log(URL);
+				//URL = escape(URL);
+				$.ajax({
+					url: 'ba-simple-proxy2.php?url=' +URL,
+					dataType: "json",
+					type: "POST",
+					async: true,
+					success: function(data) {
+						//alert("Here");
+						alert("Noise Valule: "+ data);
+					
+						popup.setContent(data);
+						alert("popup data" + data);
+						popup.setLatLng(e.latlng);
+						alert("popup LatLng" + e.latlng);
+						map.openPopup(popup);
+						alert("popup  add to map");
+					}
+				});
+			}
+			
 		}
 		
 
