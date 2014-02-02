@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
-	
-	
+    
+    
 
     <title>Speech &amp; Gesture Map</title>
     <link href="src/Leaflet-0.7/leaflet.css" rel="stylesheet">
-	<style type="text/css">
-		.leaflet-popup-content {
-			/*margin: 14px 20px;
-			overflow: scroll;
-			maxWidth: 400;*/
-		}
-	</style>
+    <style type="text/css">
+        .leaflet-popup-content {
+            /*margin: 14px 20px;
+            overflow: scroll;
+            maxWidth: 400;*/
+        }
+    </style>
     <link href="src/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="src/bootstrap/font-awesome.css" rel="stylesheet">
     <link href="src/Leaflet.minimap/Control.MiniMap.css" rel="stylesheet">
@@ -24,9 +24,9 @@
     <link href="src/Leaflet.pancontrol/L.Control.Pan.ie.css" rel="stylesheet">
     <link href="src/Leaflet.locator/L.Control.Locate.css" rel="stylesheet">
     <link href="src/Leaflet.viewcenter/leaflet.viewcenter.css" rel="stylesheet">
-	<link href="src/Leaflet.speechbar/leaflet.speechbar.css" rel="stylesheet">
-	<link href="src/Leaflet.inputbar/leaflet.inputbar.css" rel="stylesheet">
-	<link href="src/Leaflet.projectbar/leaflet.projectbar.css" rel="stylesheet">
+    <link href="src/Leaflet.speechbar/leaflet.speechbar.css" rel="stylesheet">
+    <link href="src/Leaflet.inputbar/leaflet.inputbar.css" rel="stylesheet">
+    <link href="src/Leaflet.projectbar/leaflet.projectbar.css" rel="stylesheet">
     <link href="src/Leaflet.loading/Control.Loading.css" rel="stylesheet">
     <link href="src/Leaflet.sidebar/L.Control.Sidebar.css" rel="stylesheet">
     <link href="src/Leaflet.revealOSM/Leaflet.RevealOSM.css" rel="stylesheet">
@@ -47,16 +47,16 @@
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index_startpage.html">IWGI
-					Gesture &amp; Speech</a>
+                    Gesture &amp; Speech</a>
                 </div>
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <!--	<li><a href="index_startpage.html">Home</a></li>	-->
+                        <!--    <li><a href="index_startpage.html">Home</a></li>    -->
 
                         <li class="active"><a href="MultimodalGIS_Chrome.html">Map-Chrome</a>
                         </li>
-						
+                        
                         <li><a href="Help&amp;About.html">Help&amp;About</a>
                         </li>
 
@@ -95,16 +95,16 @@
                                 <img alt="" id="speech" src="red_circle.png">
                             </div>
                         </li>
-						
-						<!--li style="position:relative; left:50%">
+                        
+                        <!--li style="position:relative; left:50%">
                             <div id="div_language">
-								<select id="select_language">
-									<option value="en-GB">en-GB</option>
-									<option value="en-US">en-US</option>
-									<option value="en-IN">en-IN</option>
-									<option value="de-DE">de-DE</option>
-								</select>
-							</div>
+                                <select id="select_language">
+                                    <option value="en-GB">en-GB</option>
+                                    <option value="en-US">en-US</option>
+                                    <option value="en-IN">en-IN</option>
+                                    <option value="de-DE">de-DE</option>
+                                </select>
+                            </div>
                         </li-->
                     </ul>
                 </div>
@@ -113,14 +113,14 @@
     </div>
 
     <div id="map">
-	
+    
     </div>
-	
-	<div id="oval-speech-border-div" style="position:static;">
-		<p class="oval-speech-border">
-			<div id="transcriptBubble"></div>
-        </p> 		
-	</div>
+    
+    <div id="oval-speech-border-div" style="position:static;">
+        <p class="oval-speech-border">
+            <div id="transcriptBubble"></div>
+        </p>        
+    </div>
 
     <div id="command_animation"></div>
 
@@ -138,28 +138,28 @@
     </div>
 
     <div id="sidebarLine"> 
-		<br> Name:  
-		<input id="linename" type="text" SIZE=30 name="linename" required><br>	
-		<br>Description:
-		<textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
-		<br><br>
-		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned</label>
+        <br> Name:  
+        <input id="linename" type="text" SIZE=30 name="linename" required><br>  
+        <br>Description:
+        <textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
+        <br><br>
+        <input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned</label>
         <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative</label><br><br>
-		<button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
-		<!--<input TYPE="RESET" VALUE="Clear">-->
-		<button type="button" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm()">Clear</button>
-	</div>
+        <button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
+        <!--<input TYPE="RESET" VALUE="Clear">-->
+        <button type="button" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm()">Clear</button>
+    </div>
 
     <div id="sidebarComments"> 
-		<b><font color="#0080C0">Add new Remark</font></b>
-		<div id="AddComment" style="width: 385px; border: 1px solid #75C0BF; margin = 1"> 
-		Citizen Name: <input type="text" id = "citizenname" name="citizenname" size="37" value=""><br>	
-		User Remark :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
-		</div>
-		<button type="comment_sumbit" onclick="sendUserComments()">Submit Remark</button>
-		<button type="comment_clear" onclick="clearForm()">Clear Form</button>
-		<div id="sidebarCommentsTable"></div>
-	</div>
+        <b><font color="#0080C0">Add new Remark</font></b>
+        <div id="AddComment" style="width: 385px; border: 1px solid #75C0BF; margin = 1"> 
+        Citizen Name: <input type="text" id = "citizenname" name="citizenname" size="37" value=""><br>  
+        User Remark :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
+        </div>
+        <button type="comment_sumbit" onclick="sendUserComments()">Submit Remark</button>
+        <button type="comment_clear" onclick="clearForm()">Clear Form</button>
+        <div id="sidebarCommentsTable"></div>
+    </div>
 
     <div id="sidebarProjects">
         <div>
@@ -173,52 +173,52 @@
 
     <div id="sidebarSpeech">
         <div id="description">
-		<br>
-		Control the map by saying the following commands:
-		<br><br>
-            <ul style="padding-left: 10px;">	
-			Basic Map-Navigation:
+        <br>
+        Control the map by saying the following commands:
+        <br><br>
+            <ul style="padding-left: 10px;">    
+            Basic Map-Navigation:
                 <div class="datagrid">
-				<table>
-						<tbody>
-							<tr><td>"Zoom In"</td><td>"Zoom Out"</td></tr>
-							<tr class="alt"><td>"Up"</td><td>"Down"</td></tr>
-							<tr><td>"Left"</td><td>"Right"</td></tr>
-							<tr class="alt"><td>"Back to Home"</td><td>"Back to Home"</td></tr>
-						</tbody>
-				</table>
-				</div>
+                <table>
+                        <tbody>
+                            <tr><td>"Zoom In"</td><td>"Zoom Out"</td></tr>
+                            <tr class="alt"><td>"Up"</td><td>"Down"</td></tr>
+                            <tr><td>"Left"</td><td>"Right"</td></tr>
+                            <tr class="alt"><td>"Back to Home"</td><td>"Back to Home"</td></tr>
+                        </tbody>
+                </table>
+                </div>
             </ul>
 
-			<br>
-			
+            <br>
+            
             <ul style="padding-left: 10px;">
-			Place new Point or Line Projects:
+            Place new Point or Line Projects:
                 <div class="datagrid">
-				<table>
-						<tbody>
-							<tr><td>"Point Project"</td></tr>
-							<tr class="alt"><td>"Street Project"</td></tr>
-						</tbody>
-				</table>
-				</div>
+                <table>
+                        <tbody>
+                            <tr><td>"Point Project"</td></tr>
+                            <tr class="alt"><td>"Street Project"</td></tr>
+                        </tbody>
+                </table>
+                </div>
             </ul>
-			
-			<br>
-			
-			<ul style="padding-left: 10px;">
-			Control various plugins:
+            
+            <br>
+            
+            <ul style="padding-left: 10px;">
+            Control various plugins:
                 <div class="datagrid">
-				<table>
-						<tbody>
-							<tr><td>"Enable Location"</td><td>"Disable Location"</td></tr>
-							<tr class="alt"><td>"Enable information"</td><td>"Disable information"</td></tr>
-							<tr><td>"Enable measurement"</td><td>"Disable measurement"</td></tr>
-							<tr class="alt"><td>"Enable minimap"</td><td>"Disable mini map"</td></tr>
-							<tr><td>"Enable xxx map"</td><td>"Disable xxx map"</td></tr>
-						</tbody>
-				</table>
-				</div>
+                <table>
+                        <tbody>
+                            <tr><td>"Enable Location"</td><td>"Disable Location"</td></tr>
+                            <tr class="alt"><td>"Enable information"</td><td>"Disable information"</td></tr>
+                            <tr><td>"Enable measurement"</td><td>"Disable measurement"</td></tr>
+                            <tr class="alt"><td>"Enable minimap"</td><td>"Disable mini map"</td></tr>
+                            <tr><td>"Enable xxx map"</td><td>"Disable xxx map"</td></tr>
+                        </tbody>
+                </table>
+                </div>
             </ul>
  
         </div>
@@ -231,7 +231,7 @@
     <script src="src/jquery/jquery-2.0.3.min.js"></script>
     <script src="src/jquery/jquery.js"></script>
     <!-- These are the two JavaScript files you must load in the HTML,
-	The recognizer is loaded through a Web Worker -->
+    The recognizer is loaded through a Web Worker -->
     <script src="src/speech/sphinx/audioRecorder.js"></script>
     <script src="src/speech/sphinx/callbackManager.js"></script>
     <script src="src/bootstrap/bootstrap.min.js"></script>
@@ -254,9 +254,9 @@
     <script src="src/Leaflet.locator/L.Control.Locate.js"></script>
     <!-- https://github.com/domoritz/leaflet-locatecontrol -->
     <script src="src/Leaflet.viewcenter/leaflet.viewcenter.js"></script>
-	<script src="src/Leaflet.speechbar/leaflet.speechbar.js"></script>
-	<script src="src/Leaflet.inputbar/leaflet.inputbar.js"></script>
-	<script src="src/Leaflet.projectbar/leaflet.projectbar.js"></script>
+    <script src="src/Leaflet.speechbar/leaflet.speechbar.js"></script>
+    <script src="src/Leaflet.inputbar/leaflet.inputbar.js"></script>
+    <script src="src/Leaflet.projectbar/leaflet.projectbar.js"></script>
     <!-- https://github.com/pwldp/leaflet.viewcenter -->
     <script src="src/Leaflet.loading/Control.Loading.js"></script>
     <!-- https://github.com/ebrelsford/Leaflet.loading -->
@@ -284,6 +284,10 @@
     <script src="src/speech/webspeech/webspeech_commands.js"></script>
     <!--cutom ones-->
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <!-- datum conversion libs proj4js-->
+    <script src="src/proj4js/lib/proj4js-combined.js"></script>    
+    <script src="src/proj4js/lib/defs/EPSG3857.js"></script>
+    <script src="src/proj4js/lib/defs/EPSG4326.js"></script>
     <script>
         var sidebarPoint = L.control.sidebar('sidebarPoint', {
             position: 'right'
@@ -306,7 +310,7 @@
          //new map with map options
         var centerPoint = new L.LatLng(51.95442, 7.62709); // initial view point
         map = new L.Map('map', {
-		//crs: L.CRS.EPSG4326,
+        //crs: L.CRS.EPSG4326,
             crs: L.CRS.EPSG3857,
             center: [51.95442, 7.62709],
             zoom: 13,
@@ -332,10 +336,10 @@
                 queryTemplate: '[out:json];(node(around:{radius},{lat},{lng})[name];way(around:{radius},{lat},{lng})[name][highway];);out body qt 1;'
             }
         });
-		
-		
-		
-		
+        
+        
+        
+        
 
          map.addEventListener('click', onMapClick); //needed for wms getfeatureinfo
         popup = new L.Popup({
@@ -424,9 +428,9 @@
             transparent: true,
             opacity: 0.5
         });
-		
-		
-		var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+        
+        
+        var laerm_night = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
             layers: 'STR_NGT',
             format: 'image/png',
             crs: L.CRS.EPSG4326,
@@ -435,7 +439,7 @@
             opacity: 0.5
         });
 
-		var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
+        var laerm_24 = new L.TileLayer.WMS("https://www.wms.nrw.de/umwelt/laerm", {
             layers: 'STR_DEN',
             format: 'image/png',
             crs: L.CRS.EPSG4326,
@@ -444,14 +448,14 @@
             opacity: 0.5
         });
 
-		var rain = new L.tileLayer ('http://{s}.tile.openweathermap.org/map/rain/{z}/{x}/{y}.png', {
-			options: {
-				attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
-				opacity: 0.5
-			},
-			transparent: true,
+        var rain = new L.tileLayer ('http://{s}.tile.openweathermap.org/map/rain/{z}/{x}/{y}.png', {
+            options: {
+                attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+                opacity: 0.5
+            },
+            transparent: true,
             opacity: 0.5
-		});	
+        }); 
 
 
          //Nokia, Mapbox and Cloudmate need specific registration data for defined layers. To provide these, you have to edit the leaflet-providers.js source 
@@ -471,8 +475,8 @@
             "Weather Layers": {
                 //'Rain': rain,
                 'Windspeed': wind,
-				//'Noise Map (night)':laerm_night,
-				'Noise Map (24h)':laerm_24
+                //'Noise Map (night)':laerm_night,
+                'Noise Map (24h)':laerm_24
             },
 
         };
@@ -517,80 +521,95 @@
 
        
         /*map.addEventListener('click', onMapClick);
-		
-		popup = new L.Popup({
-			maxWidth: 400
-		});*/
+        
+        popup = new L.Popup({
+            maxWidth: 400
+        });*/
 
-		function onMapClick(e) {
-		
-			if (map.hasLayer(laerm_24)) {
-			
-			
-				var latlngStr = '(' + e.latlng.lat.toFixed(3) + ', ' + e.latlng.lng.toFixed(3) + ')';
-				var BBOX = map.getBounds().toBBoxString();
-				var WIDTH = map.getSize().x;
-				var HEIGHT = map.getSize().y;
-				var X = map.layerPointToContainerPoint(e.layerPoint).x;
-				var Y = map.layerPointToContainerPoint(e.layerPoint).y;
-				
-				var URL =  'https://www.wms.nrw.de/umwelt/laerm?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=STR_DEN&QUERY_LAYERS=STR_DEN&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image%2Fpng&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
+        function onMapClick(e) {
+        
+            if (map.hasLayer(laerm_24)) {
+            
+            
+                var latlngStr = '(' + e.latlng.lat.toFixed(3) + ', ' + e.latlng.lng.toFixed(3) + ')';
+                var BBOX = map.getBounds().toBBoxString();
+                var WIDTH = map.getSize().x;
+                var HEIGHT = map.getSize().y;
+                var X = map.layerPointToContainerPoint(e.layerPoint).x;
+                var Y = map.layerPointToContainerPoint(e.layerPoint).y;
 
-				URL = encodeURIComponent(URL);
-				console.log(URL);
-				//URL = escape(URL);
-				$.ajax({
-					url: 'ba-simple-proxy2.php?url=' +URL,
-					dataType: "json",
-					type: "POST",
-					async: true,
-					success: function(data) {
-						if (data == '-1')
-						{
-							var popup = L.popup()
-							.setLatLng(e.latlng)
-							.setContent("No noise data available !")
-							.openOn(map);
-							}
-						else {	
-							var popup = L.popup()
-							.setLatLng(e.latlng)
-							.setContent("Noise level = " + data)
-							.openOn(map);
-							}}
-					
-					
-				});
-			}
-			
-		}
-		
+                /*
+                Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
+                Proj4js.defs["EPSG:3857"] = "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+
+
+                var destEpsg = new Proj4js.Proj('EPSG:4326');    //source coordinates will be in Longitude/Latitude
+                var srcEpsg = new Proj4js.Proj('EPSG:3857');     //destination coordinates in LCC, south of France
+
+                // transforming point coordinates
+                var p = new Proj4js.Point(X,Y);   //any object will do as long as it has 'x' and 'y' properties
+                Proj4js.transform(srcEpsg, destEpsg, p);      //do the transformation.  x and y are modified in place
+                console.log("p" + p)
+                //p.x and p.y are now EPSG:27563 easting and northing in meters
+                */
+                
+                var URL =  'https://www.wms.nrw.de/umwelt/laerm?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=STR_DEN&QUERY_LAYERS=STR_DEN&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image%2Fpng&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
+
+                URL = encodeURIComponent(URL);
+                console.log(URL);
+                //URL = escape(URL);
+                $.ajax({
+                    url: 'ba-simple-proxy2.php?url=' +URL,
+                    dataType: "json",
+                    type: "POST",
+                    async: true,
+                    success: function(data) {
+                        if (data == '-1')
+                        {
+                            var popup = L.popup()
+                            .setLatLng(e.latlng)
+                            .setContent("No noise data available !")
+                            .openOn(map);
+                            }
+                        else {  
+                            var popup = L.popup()
+                            .setLatLng(e.latlng)
+                            .setContent("Noise level = " + data)
+                            .openOn(map);
+                            }}
+                    
+                    
+                });
+            }
+            
+        }
+        
 
 
 
          //add points
         function addPointButton() {
-        	// do not send empty empty comments
-        	if ($("#pointname").val() == ""){
-        		$(function() {
-					$( "#dialog" ).dialog().html("Please enter a name!");
-				});
-				setTimeout(function() {
-					$( "#dialog" ).dialog( "close" )
-				}, 1500);
+            // do not send empty empty comments
+            if ($("#pointname").val() == ""){
+                $(function() {
+                    $( "#dialog" ).dialog().html("Please enter a name!");
+                });
+                setTimeout(function() {
+                    $( "#dialog" ).dialog( "close" )
+                }, 1500);
 
-        		return;
-        	}
+                return;
+            }
 
-        	if ($("#pointdes").val() == ""){
-        		$(function() {
-					$( "#dialog" ).dialog().html("Please enter a description!");
-				});
-				setTimeout(function() {
-					$( "#dialog" ).dialog( "close" )
-				}, 1500);
-        		return;
-        	} 
+            if ($("#pointdes").val() == ""){
+                $(function() {
+                    $( "#dialog" ).dialog().html("Please enter a description!");
+                });
+                setTimeout(function() {
+                    $( "#dialog" ).dialog( "close" )
+                }, 1500);
+                return;
+            } 
 
             pointname = document.getElementById('pointname').value;
             pointdes = document.getElementById('pointdes').value;
@@ -600,27 +619,27 @@
          //add lines
         function addLineButton() {
             // do not send empty comments
-        	if ($("#linename").val() == ""){
-        		$(function() {
-					$( "#dialog" ).dialog().html("Please enter a name!");
-				});
-				setTimeout(function() {
-					$( "#dialog" ).dialog( "close" )
-				}, 1500);
-        		return;
-        	}
+            if ($("#linename").val() == ""){
+                $(function() {
+                    $( "#dialog" ).dialog().html("Please enter a name!");
+                });
+                setTimeout(function() {
+                    $( "#dialog" ).dialog( "close" )
+                }, 1500);
+                return;
+            }
 
-        	if ($("#linedes").val() == ""){
-        		$(function() {
-					$( "#dialog" ).dialog().html("Please enter a description!");
-				});
-				setTimeout(function() {
-					$( "#dialog" ).dialog( "close" )
-				}, 1500);
-        		return;
-        	} 
-			
-			linename = document.getElementById('linename').value;
+            if ($("#linedes").val() == ""){
+                $(function() {
+                    $( "#dialog" ).dialog().html("Please enter a description!");
+                });
+                setTimeout(function() {
+                    $( "#dialog" ).dialog( "close" )
+                }, 1500);
+                return;
+            } 
+            
+            linename = document.getElementById('linename').value;
             linedes = document.getElementById('linedes').value;
 
             /*if (document.getElementById('main').checked)
@@ -631,35 +650,35 @@
         }
 
         //send comments
-		function sendUserComments(){
-			//no empty usercomments
-			if ($("#citizenname").val() == ""){
-        		$(function() {
-					$( "#dialog" ).dialog().html("Please enter a name!");
-				});
-				setTimeout(function() {
-					$( "#dialog" ).dialog( "close" )
-				}, 1500);
-        		return;
-        	}
+        function sendUserComments(){
+            //no empty usercomments
+            if ($("#citizenname").val() == ""){
+                $(function() {
+                    $( "#dialog" ).dialog().html("Please enter a name!");
+                });
+                setTimeout(function() {
+                    $( "#dialog" ).dialog( "close" )
+                }, 1500);
+                return;
+            }
 
-        	if ($("#usercomment").val() == ""){
-        		$(function() {
-					$( "#dialog" ).dialog().html("Please enter a comment!");
-				});
-				setTimeout(function() {
-					$( "#dialog" ).dialog( "close" )
-				}, 1500);
-        		return;
-        	}
+            if ($("#usercomment").val() == ""){
+                $(function() {
+                    $( "#dialog" ).dialog().html("Please enter a comment!");
+                });
+                setTimeout(function() {
+                    $( "#dialog" ).dialog( "close" )
+                }, 1500);
+                return;
+            }
 
-			Fid=currentID;
-			Ftype =document.getElementById('citizenname').value;
-			UComment =document.getElementById('usercomment').value;
-			addUserComments(Fid,Ftype,UComment);
-			document.getElementById('citizenname').value = '';
-			document.getElementById('usercomment').value = '';
-		}
+            Fid=currentID;
+            Ftype =document.getElementById('citizenname').value;
+            UComment =document.getElementById('usercomment').value;
+            addUserComments(Fid,Ftype,UComment);
+            document.getElementById('citizenname').value = '';
+            document.getElementById('usercomment').value = '';
+        }
 
          //clear input fields
         function clearForm() {
@@ -694,24 +713,24 @@
                 },
                 polygon: false,
                 /*{
-										allowIntersection: false,
-										showArea: true,
-										drawError: {
-											color: '#bada55',
-											timeout: 1000
-										},
-										shapeOptions: {
-										color: '#b00b00'
-										}
-									},*/
+                                        allowIntersection: false,
+                                        showArea: true,
+                                        drawError: {
+                                            color: '#bada55',
+                                            timeout: 1000
+                                        },
+                                        shapeOptions: {
+                                        color: '#b00b00'
+                                        }
+                                    },*/
                 rectangle: false,
 
                 circle: false,
                 /*{
-									shapeOptions: {
-										color: '#662d91'
-									}
-								},*/
+                                    shapeOptions: {
+                                        color: '#662d91'
+                                    }
+                                },*/
                 marker: true
             },
             edit: false
@@ -725,7 +744,7 @@
             if (type === 'marker') {
                 layer.bindPopup("<br> Point Name: * <br> <input type='text' SIZE=30 name='id' required><br>");
                 $('#usercomment')
-				layer.addTo(map);
+                layer.addTo(map);
                 var coordinates = layer.toGeoJSON().geometry.coordinates;
                 var coord = coordinates.toString();
                 addPoint(coord);
@@ -738,7 +757,7 @@
 
             if (type === 'polyline') {
                 var geojsonFeature = layer.toGeoJSON();
-				layer.addTo(map);
+                layer.addTo(map);
                 addLine(geojsonFeature.geometry.coordinates);
                 sidebarSpeech.hide();
                 sidebarComments.hide();
@@ -835,12 +854,12 @@
 
          // init ViewCenter plugin
         var viewCenter = new L.Control.ViewCenter({}).addTo(map);
-		// init speechbar plugin
-		var speechbar = new L.Control.Speechbar({position:"topleft"}).addTo(map);
-		// init projectbar plugin
-		var projectbar = new L.Control.Projectbar({position:"topleft"}).addTo(map);
-		// init inputbar plugin
-		//var inputbar = new L.Control.Inputbar({}).addTo(map);
+        // init speechbar plugin
+        var speechbar = new L.Control.Speechbar({position:"topleft"}).addTo(map);
+        // init projectbar plugin
+        var projectbar = new L.Control.Projectbar({position:"topleft"}).addTo(map);
+        // init inputbar plugin
+        //var inputbar = new L.Control.Inputbar({}).addTo(map);
 
 
          //Following codeblocks are shortcuts for the functions on the map
