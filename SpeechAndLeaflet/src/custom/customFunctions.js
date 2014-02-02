@@ -487,6 +487,11 @@ function sidebarSpeechToggle() {
     sidebarSpeech.toggle();
 }
 
+function showProjectSidebar() {
+	showProjects();
+	sidebarProjects.toggle();
+}
+
  //Close Project Sidebar
  //Does not work until now
 function closeProjectSidebar() {

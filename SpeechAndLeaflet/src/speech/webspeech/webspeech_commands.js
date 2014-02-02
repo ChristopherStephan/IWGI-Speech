@@ -434,8 +434,43 @@ recognition.onresult = function (event) {
         console.log("delete project");
         final_transcript = '';
     }
-	}
 	
+	
+	//////////////////////////////////////////////////////////
+    /////Show additional information (help,projects)//////////
+    //////////////////////////////////////////////////////////
+	
+
+	//Enable help
+    if (final_transcript.indexOf("enable help") >= 0) {
+        speechbar.toggleDialog();
+        console.log("enable help");
+        final_transcript = '';
+    }
+	
+	//Disable help
+    if (final_transcript.indexOf("disable help") >= 0) {
+        speechbar.hideDialog();
+        console.log("disable help");
+        final_transcript = '';
+    }
+	
+	//Enable Projectbar
+    if (final_transcript.indexOf("enable projects ") >= 0) {
+        showProjectSidebar(); //check customFunction.js
+        console.log("enable projects ");
+        final_transcript = '';
+    }
+	
+	//Disable Projectbar
+    if (final_transcript.indexOf("disable projects") >= 0) {
+        sidebarProjects.hide(); //check customFunction.js
+        console.log("disable projects");
+        final_transcript = '';
+    }
+	
+	
+	}
 }
 
 recognition.onend = function() {
