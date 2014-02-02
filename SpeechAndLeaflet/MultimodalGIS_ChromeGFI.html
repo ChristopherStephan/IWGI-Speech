@@ -143,7 +143,7 @@
         <br>Description:
         <textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
         <br><br>
-        <input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned</label>
+        <input id="main" name="Linetype" type="radio" value="Main"><label for="main">Real</label>
         <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative</label><br><br>
         <button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
         <!--<input TYPE="RESET" VALUE="Clear">-->
@@ -664,7 +664,7 @@
 
             if ($("#usercomment").val() == ""){
                 $(function() {
-                    $( "#dialog" ).dialog().html("Please enter a comment!");
+                    $( "#dialog" ).dialog().html("Please enter a remark!");
                 });
                 setTimeout(function() {
                     $( "#dialog" ).dialog( "close" )
