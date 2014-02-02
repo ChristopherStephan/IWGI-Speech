@@ -443,7 +443,7 @@ recognition.onresult = function (event) {
 
 	//Enable help
     if (final_transcript.indexOf("enable help") >= 0) {
-        speechbar.toggleDialog();
+        speechbar.showDialog();
         console.log("enable help");
         final_transcript = '';
     }
