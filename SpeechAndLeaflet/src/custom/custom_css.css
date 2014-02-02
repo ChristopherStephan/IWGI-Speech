@@ -484,3 +484,7 @@ margin-top: 80px;
     border-bottom: none;
 }
 
+.ui-dialog{
+	margin-top: 300px;
+	width: 1300px;
+}
