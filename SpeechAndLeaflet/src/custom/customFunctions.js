@@ -93,7 +93,7 @@ function callPoints() {
                 .setIcon(icon)
                     .addTo(map)
                 var container = $('<div />');
-                container.html('<b>Name:</b> ' + obj[i].Name + '<br> <b>Description:</b> ' + obj[i].Description + ' <br>' + "<a href='#' font-size=30 ></a>" + '&#09' + "<button type='button' onclick='deleting(" + obj[i].ID + ")' style='align:left;'>Delete</button>" + '&#09' + "<button type='button' onclick='AddComment(" + obj[i].ID + ")' font-size=30 > Comments </button>");
+                container.html('<b>Name:</b> ' + obj[i].Name + '<br> <b>Description:</b> ' + obj[i].Description + ' <br>' + "<a href='#' font-size=30 ></a>" + '&#09' + "<button type='button' onclick='deleting(" + obj[i].ID + ")' style='align:left;'>Delete</button>" + '&#09' + "<button type='button' onclick='AddComment(" + obj[i].ID + ")' font-size=30 > Remarks </button>");
                 marker.bindPopup(container[0]);
                 lastIDPoint = parseInt(obj[i].ID);
                 map.almostOver.addLayer(marker);
@@ -276,7 +276,7 @@ function addUserComments(FID, CName, UComment) {
         }
     );
     $(function () {
-        $("#dialog").dialog().html("Thank you, we have received your comment!");
+        $("#dialog").dialog().html("Thank you, we have received your remark!");
     });
     setTimeout(function () {
         $("#dialog").dialog("close");
