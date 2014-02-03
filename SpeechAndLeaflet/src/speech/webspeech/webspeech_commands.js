@@ -282,10 +282,11 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 	
-	
-	if (final_transcript.indexOf("enabling bicycle map") >= 0) {
+	if ((final_transcript.indexOf("enable bicycle map") >= 0)
+				||(final_transcript.indexOf("enabling bicycle map") >= 0)
+				||(final_transcript.indexOf("AB bicycle map") >= 0)){
         osmCycle.onAdd(map);
-        console.log("enabling bicycle map");
+        console.log("enable bicycle map");
         final_transcript = '';
     }
 
@@ -326,7 +327,7 @@ recognition.onresult = function (event) {
     }
 
     //Focus to Userremark Box
-    if (final_transcript.indexOf("focus remark") >= 0) {
+    if ((final_transcript.indexOf("focus remark") >= 0 || final_transcript.indexOf("vocals remark") >= 0)){
         setFocusToUserComment();
         console.log("focus remark");
         final_transcript = '';
@@ -340,7 +341,8 @@ recognition.onresult = function (event) {
     }
 
     //Clear the form
-    if (final_transcript.indexOf("clear form") >= 0) {
+   if ((final_transcript.indexOf("clear form") >= 0)
+				||(final_transcript.indexOf("clear foam") >= 0)){
         clearForm();
         console.log("clear form");
         final_transcript = '';
@@ -351,6 +353,32 @@ recognition.onresult = function (event) {
 	 //////////////////////////////////////////////////////////
      /////Controlling the Point Function///////////////////////
      //////////////////////////////////////////////////////////
+	 
+	 //Focus to street Name Box
+    if (final_transcript.indexOf("name") >= 0) {
+				if (sidebarOpen == 'line'){
+					document.getElementById('linename').focus();
+				}else if (sidebarOpen == 'point'){
+					document.getElementById('pointname').focus();
+				}
+				else if (sidebarOpen == 'comment'){
+					document.getElementById('citizenname').focus();
+				}
+                console.log("name");
+                final_transcript = '';
+            }
+	
+	
+	if (final_transcript.indexOf("description") >= 0) {
+				if (sidebarOpen == 'line'){
+					document.getElementById('linedes').focus();
+				}else if (sidebarOpen == 'point'){
+					document.getElementById('pointdes').focus();
+				}
+                console.log("description");
+                final_transcript = '';
+            }
+	 
 
 	//Focus to Point Name Box
     if (final_transcript.indexOf("focus point name") >= 0) {
@@ -383,19 +411,29 @@ recognition.onresult = function (event) {
     //////////////////////////////////////////////////////////
 
 	//Focus to street Name Box
-    if (final_transcript.indexOf("focus street name") >= 0) {
-        setFocusToLineName();
-        console.log("focus street name");
-        final_transcript = '';
-    }
+    if (final_transcript.indexOf("name") >= 0) {
+				if (sidebarOpen == 'line'){
+					document.getElementById('linename').focus();
+				}else if (sidebarOpen == 'point'){
+					document.getElementById('pointname').focus();
+				}
+				else if (sidebarOpen == 'comment'){
+					document.getElementById('featuretype').focus();
+				}
+                console.log("name");
+                final_transcript = '';
+            }
 	
 	
-	//Focus to street Description Box
-    if (final_transcript.indexOf("focus Street description") >= 0) {
-        setFocusToLineDes();
-        console.log("focus Street description");
-        final_transcript = '';
-    }
+	if (final_transcript.indexOf("description") >= 0) {
+				if (sidebarOpen == 'line'){
+					document.getElementById('linedes').focus();
+				}else if (sidebarOpen == 'point'){
+					document.getElementById('pointdes').focus();
+				}
+                console.log("description");
+                final_transcript = '';
+            }
 	
 	
 	//Select Planned Street
@@ -421,20 +459,7 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 	
-	
-	
-	//////////////////////////////////////////////////////////
-    /////Controlling the Clear Function/////////////////////
-    //////////////////////////////////////////////////////////
-	
-
-	//Clear Form
-    if (final_transcript.indexOf("delete project") >= 0) {
-        clearForm();
-        console.log("delete project");
-        final_transcript = '';
-    }
-	
+		
 	
 	//////////////////////////////////////////////////////////
     /////Show additional information (help,projects)//////////
@@ -456,14 +481,16 @@ recognition.onresult = function (event) {
     }
 	
 	//Enable Projectbar
-    if (final_transcript.indexOf("enable projects ") >= 0) {
+	if ((final_transcript.indexOf("enable projects") >= 0)
+				||(final_transcript.indexOf("enable project") >= 0)){
         showProjectSidebar(); //check customFunction.js
-        console.log("enable projects ");
+        console.log("enable projects");
         final_transcript = '';
     }
 	
 	//Disable Projectbar
-    if (final_transcript.indexOf("disable projects") >= 0) {
+	if ((final_transcript.indexOf("disable projects") >= 0)
+				||(final_transcript.indexOf("disable project") >= 0)){
         sidebarProjects.hide(); //check customFunction.js
         console.log("disable projects");
         final_transcript = '';

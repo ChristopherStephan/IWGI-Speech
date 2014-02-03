@@ -221,6 +221,7 @@ function AddComment(id) {
     $.get("AddandDisplayComments.php?fid=" + id, function (data) {
         document.getElementById('sidebarCommentsTable').innerHTML = data;
     });
+	sidebarOpen = 'comment';
 }
 
  //add point attributes (name and description)

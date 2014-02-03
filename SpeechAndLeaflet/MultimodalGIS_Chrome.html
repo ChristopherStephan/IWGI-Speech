@@ -585,6 +585,7 @@
             pointname = document.getElementById('pointname').value;
             pointdes = document.getElementById('pointdes').value;
             addPointAttributes(pointname, pointdes);
+			sidebarOpen = '';
         }
 
          //add lines
@@ -612,12 +613,8 @@
 			
 			linename = document.getElementById('linename').value;
             linedes = document.getElementById('linedes').value;
-
-            /*if (document.getElementById('main').checked)
-                                type = true;
-                        if (document.getElementById('alternative').checked)
-                                type = false;*/
             addLineAttributes(linename, linedes, document.getElementById('main').checked);
+			sidebarOpen = '';
         }
 
         //send comments
@@ -659,6 +656,7 @@
             document.getElementById('pointdes').value = '';
             document.getElementById('linename').value = '';
             document.getElementById('linedes').value = '';
+			sidebarOpen = '';
         }
 
 
@@ -707,7 +705,8 @@
             edit: false
         });
 
-
+		var sidebarOpen = '';
+		
         map.on('draw:created', function (e) {
             var type = e.layerType,
                 layer = e.layer;
@@ -724,6 +723,7 @@
                 sidebarSpeech.hide();
                 sidebarLine.hide();
                 sidebarPoint.show();
+				sidebarOpen = 'point';
             }
 
             if (type === 'polyline') {
@@ -736,6 +736,7 @@
                 sidebarSpeech.hide();
                 sidebarPoint.hide();
                 sidebarLine.show();
+				sidebarOpen = 'line';
             }
             //save to db here , you can check the type is it marker or polygon ... then save it to db
             //drawnItems.addLayer(layer);
