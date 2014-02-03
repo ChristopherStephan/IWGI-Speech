@@ -122,7 +122,7 @@
         <textarea id="pointdes" name="pointdescription" style="width: 95%; height: 58%; margin: 0px"></textarea>
         <br>
         <br>
-        <button id="point_submit" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addPointButton();">Submit</button>
+        <button id="point_submit" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addPointButton();">Send Place</button>
         <button id="point_clear" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm();">Clear</button>
     </div>
 
@@ -132,9 +132,9 @@
 		<br>Description:
 		<textarea id="linedes" style="width: 95%; height: 45%;" name="linedescription"></textarea>
 		<br><br>
-		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Planned</label>
+		<input id="main" name="Linetype" type="radio" value="Main"><label for="main">Real</label>
         <input id="alternative" name="Linetype" type="radio" value="Alternative" style="margin-left: 3em;"><label for="alternative">Alternative</label><br><br>
-		<button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Submit</button>
+		<button type="button" alt="Speech: Submit input" style="width: 46%; height: 65px;" onclick="addLineButton()">Send Street</button>
 		<!--<input TYPE="RESET" VALUE="Clear">-->
 		<button type="button" alt="Speech: Clear form" style="width: 46%; height: 65px;" onclick="clearForm()">Clear</button>
 	</div>
@@ -145,7 +145,7 @@
 		Citizen Name: <input type="text" id = "citizenname" name="citizenname" size="37" value=""><br>	
 		User Remark :<br> <textarea id="usercomment" style="width: 380px; height: 150px;" name="description"></textarea><br> 
 		</div>
-		<button type="comment_sumbit" onclick="sendUserComments()">Submit Remark</button>
+		<button type="comment_sumbit" onclick="sendUserComments()">Send Remark</button>
 		<button type="comment_clear" onclick="clearForm()">Clear Form</button>
 		<div id="sidebarCommentsTable"></div>
 	</div>
@@ -204,7 +204,20 @@
 							<tr class="alt"><td>"Enable information"</td><td>"Disable information"</td></tr>
 							<tr><td>"Enable measurement"</td><td>"Disable measurement"</td></tr>
 							<tr class="alt"><td>"Enable minimap"</td><td>"Disable mini map"</td></tr>
-							<tr><td>"Enable xxx map"</td><td>"Disable xxx map"</td></tr>
+							<tr><td>"Enable bicycle map"</td><td>"Disable bicycle map"</td></tr>
+							<tr class="alt"><td>"Enable aerial map"</td><td>"Disable aerial map"</td></tr>
+						</tbody>
+				</table>
+				</div>
+            </ul>
+			
+			<ul style="padding-left: 10px;">
+			Set Focus to Input Fields:
+                <div class="datagrid">
+				<table>
+						<tbody>
+							<tr><td>Set Focus to search</td><td>"focus search"</td></tr>
+							<tr class="alt"><td>Set Focus to Name</td><td>"Name"</td></tr>
 						</tbody>
 				</table>
 				</div>
@@ -384,7 +397,7 @@
             format: 'image/png',
             version: '1.3.0',
             transparent: true,
-            opacity: 0.4
+            opacity: 0.8
         });
         var EsriStreets = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
             options: {

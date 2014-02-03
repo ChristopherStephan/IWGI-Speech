@@ -269,16 +269,16 @@ recognition.onresult = function (event) {
     //////////////////////////////////////////////////////////
 
 
-    if (final_transcript.indexOf("enable noise map") >= 0) {
+    if (final_transcript.indexOf("enable loudness map") >= 0) {
         laerm24.onAdd(map);
-        console.log("enable noise map");
+        console.log("enable loudness map");
         final_transcript = '';
     }
 
 
-    if (final_transcript.indexOf("disable noise map") >= 0) {
+    if (final_transcript.indexOf("disable loudness map") >= 0) {
         laerm24.onRemove(map);
-        console.log("disable noise map");
+        console.log("disable loudness map");
         final_transcript = '';
     }
 	
@@ -297,7 +297,18 @@ recognition.onresult = function (event) {
         final_transcript = '';
     }
 	
+	
+	if (final_transcript.indexOf("enable aerial map") >= 0)	{
+		layerOrtho.onAdd(map);
+		console.log("enable aerial map");
+		final_transcript = '';
+	}
 
+	if (final_transcript.indexOf("disable aerial map") >= 0)	{
+		layerOrtho.onRemove(map);
+		console.log("disable aerial map");
+		final_transcript = '';
+	}
 	
 	// some other layers, which can be used: osmcyle, layerDGK5, layerDTK10, layerOrtho, rain,wind, laerm_24
 
